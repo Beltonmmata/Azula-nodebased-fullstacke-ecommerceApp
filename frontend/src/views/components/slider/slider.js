@@ -9,17 +9,17 @@ const renderSlider = () => {
       description: "This is the first slide.",
     },
     {
-      imageUrl: "../products-images/jacket-2.png",
+      imageUrl: "../products-images/slide-3.png",
       title: "Slide 2 title",
       description: "This is the second slide.",
     },
     {
-      imageUrl: "../products-images/jacket-3.png",
+      imageUrl: "../products-images/slide-1.png",
       title: "Slide 3 title",
-      description: "This is the third slide.",
+      description: "This is the t hird slide.",
     },
     {
-      imageUrl: "../products-images/slider-4.jpg", // Fixed path
+      imageUrl: "../products-images/slide-2.png", // Fixed path
       title: "Slide 4 title",
       description: "This is the fourth slide.",
     },
@@ -29,10 +29,10 @@ const renderSlider = () => {
 
   // Function to display a slide
   function showSlide(index) {
-    const slider = document.querySelector(".slider-container");
+    const slider = document.querySelector(".slide");
     if (slider) {
       slider.innerHTML = `
-        <div class="slide">
+        
           <div class="left-raw">
             <h2>${slides[index].title}</h2>
             <p>${slides[index].description}</p>
@@ -41,7 +41,7 @@ const renderSlider = () => {
           <div class="right-raw">
             <img src="${slides[index].imageUrl}" alt="${slides[index].title} image" />
           </div>
-        </div>
+        
       `;
     }
   }
@@ -77,14 +77,16 @@ const renderSlider = () => {
   return `
   <!-- Slider Container -->
   <div class="section-container">
-    <div class="slider-container container"></div>
-
-    <div class="slide-previous">
-      <ion-icon name="chevron-back-outline"></ion-icon>
+    <div class="slider-container container">
+     <div class="slide"></div>
+     <div class="slide-previous">
+       <ion-icon name="chevron-back-outline"></ion-icon>
+     </div>
+     <div class="slide-next">
+       <ion-icon name="chevron-forward-outline"></ion-icon>
+     </div>
     </div>
-    <div class="slide-next">
-      <ion-icon name="chevron-forward-outline"></ion-icon>
-    </div>
+    
   </div>`;
 };
 

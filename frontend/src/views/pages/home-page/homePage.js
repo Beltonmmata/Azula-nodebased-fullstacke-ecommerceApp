@@ -14,9 +14,9 @@ import "./homePage.css";
 const renderHomePage = () => {
   //document.querySelector("#slider-section").innerHTML = renderSlider();
 
-  return `
+  document.querySelector("#app").innerHTML = `
     <div>
-    ${renderMainHeader()}
+    ${renderMainHeader()} 
     </div>
     <div id='slider-section'>
     ${renderSlider()}

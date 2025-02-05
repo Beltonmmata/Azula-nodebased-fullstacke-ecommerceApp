@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 // Product Model
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,7 +10,7 @@ const productSchema = new mongoose.Schema({
   description: { type: String, required: true },
   imageUrl: { type: String },
   category: { type: String, required: true },
-  stock: { type: Number, required: true, default: 0 },
+  countInStock: { type: Number, required: true, default: 0 },
   rating: { type: Number, default: 0 },
   reviews: [
     {
@@ -38,6 +39,6 @@ const reviewSchema = new mongoose.Schema({
 });
 
 module.exports = {
-  Product: mongoose.model("Product", productSchema),
-  Review: mongoose.model("Review", reviewSchema),
+  Products: mongoose.model("Products", productSchema),
+  Reviews: mongoose.model("Reviews", reviewSchema),
 };

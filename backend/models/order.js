@@ -1,8 +1,9 @@
+const mongoose = require("mongose");
 // Delivery Options Model
 const deliveryOptionSchema = new mongoose.Schema({
   deliveryName: {
     type: String,
-    enum: ["fast", "moderate", "slower"],
+    enum: ["express", "classic", "common"],
     required: true,
   },
   deliveryPrice: { type: Number, required: true },

@@ -1,17 +1,31 @@
+import products from "../../../data/products";
+import renderProductsContainer from "./../../components/products/productsContainer";
+import renderFooter from "../../components/footer/footer";
 import renderMainHeader from "../../components/main-header/mainHeader";
+import renderNewsletter from "../../components/newsletter/newsletter";
 import renderSlider from "../../components/slider/slider";
 import "./homePage.css";
 
 const renderHomePage = () => {
-  innerHTML = renderSlider();
-
   document.querySelector("#app").innerHTML = `
-    <div>
+    <header>
     ${renderMainHeader()} 
-    </div>
-    <div id='slider-section'>
+    </header>
+    <main>
+    <section id='slider-section'>
     ${renderSlider()}
-    </div>
+    </section>
+    <section id='products-section'>
+    ${renderProductsContainer(products)}
+    </section>
+    <section id='newsletter-section'>
+    ${renderNewsletter()}
+    </section>
+    
+    </main>
+    <footer>
+    ${renderFooter()}
+    </footer>
    `;
 };
 

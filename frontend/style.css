@@ -26,13 +26,13 @@
   --border-color: rgb(128, 128, 128);
   --shadow-color: rgba(213, 217, 217, 0.5);
   --cooprate-color: rgb(126, 68, 243);
-  --color-call-to-action: rgb(240, 128, 64);
+  --color-call-to-action: rgb(187, 70, 2);
   --hover-color-call-to-action: rgb(248, 97, 9);
   --color-success: rgb(10, 187, 10);
   --color-danger: red;
   /*========== Font and typography ==========*/
   /* font family */
-  --body-font: "Poppins", sans-serif;
+  --body-font: "Roboto", sans-serif;
   /* unts */
   /* 64px */
   --unit-xxxxxl: 4rem;
@@ -97,7 +97,6 @@ ion-icon {
 }
 a,
 img,
-span,
 data,
 input,
 button {

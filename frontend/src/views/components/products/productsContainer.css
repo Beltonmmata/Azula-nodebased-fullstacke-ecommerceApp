@@ -1,0 +1,38 @@
+/* featured products section */
+.featured-products-container {
+  padding: 10px 10%;
+}
+.featured-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 0;
+}
+/* explore more section */
+.explore-more-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+
+  a {
+    color: var(--color-secondary-10);
+    font-size: var(--unit-l);
+
+    font-weight: var(--fw-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-call-to-action);
+    padding: var(--unit-xs);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.5s all ease;
+
+    &:hover {
+      background-color: var(--hover-color-call-to-action);
+      transform: translateY(-10px);
+    }
+  }
+}

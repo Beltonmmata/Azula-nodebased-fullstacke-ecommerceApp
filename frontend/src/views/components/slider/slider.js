@@ -1,37 +1,38 @@
 import "./slider.css";
 
-const renderSlider = () => {
-  // Array of slide objects
-  const slides = [
-    {
-      imageUrl: "../products-images/jacket-1.png",
-      title: "Slide 1 title",
-      description: "This is the first slide.",
-    },
-    {
-      imageUrl: "../products-images/slide-3.png",
-      title: "Slide 2 title",
-      description: "This is the second slide.",
-    },
-    {
-      imageUrl: "../products-images/slide-1.png",
-      title: "Slide 3 title",
-      description: "This is the t hird slide.",
-    },
-    {
-      imageUrl: "../products-images/slide-2.png", // Fixed path
-      title: "Slide 4 title",
-      description: "This is the fourth slide.",
-    },
-  ];
+const slider = {
+  render() {
+    // Array of slide objects
+    const slides = [
+      {
+        imageUrl: "../products-images/jacket-1.png",
+        title: "Slide 1 title",
+        description: "This is the first slide.",
+      },
+      {
+        imageUrl: "../products-images/slide-3.png",
+        title: "Slide 2 title",
+        description: "This is the second slide.",
+      },
+      {
+        imageUrl: "../products-images/slide-1.png",
+        title: "Slide 3 title",
+        description: "This is the t hird slide.",
+      },
+      {
+        imageUrl: "../products-images/slide-2.png",
+        title: "Slide 4 title",
+        description: "This is the fourth slide.",
+      },
+    ];
 
-  let currentIndex = 0;
+    let currentIndex = 0;
 
-  // Function to display a slide
-  function showSlide(index) {
-    const slider = document.querySelector(".slide");
-    if (slider) {
-      slider.innerHTML = `
+    // Function to display a slide
+    function showSlide(index) {
+      const slider = document.querySelector(".slide");
+      if (slider) {
+        slider.innerHTML = `
         
           <div class="left-raw">
             <h2>${slides[index].title}</h2>
@@ -43,38 +44,40 @@ const renderSlider = () => {
           </div>
         
       `;
+      }
     }
-  }
 
-  // Function to go to the next slide
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  }
+    // Function to go to the next slide
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
 
-  // Function to go to the previous slide
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    showSlide(currentIndex);
-  }
+    // Function to go to the previous slide
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
+    }
 
-  // Auto slide
-  function startSlider() {
-    showSlide(currentIndex);
-    setInterval(nextSlide, 5000);
-  }
+    // Auto slide
+    function startSlider() {
+      showSlide(currentIndex);
+      setInterval(nextSlide, 5000);
+    }
 
-  // Attach event listeners after rendering
-  document.addEventListener("DOMContentLoaded", () => {
-    startSlider();
+    // Attach event listeners after  rendering
+    document.addEventListener("DOMContentLoaded", () => {
+      startSlider();
 
-    document
-      .querySelector(".slide-previous")
-      ?.addEventListener("click", prevSlide);
-    document.querySelector(".slide-next")?.addEventListener("click", nextSlide);
-  });
+      document
+        .querySelector(".slide-previous")
+        ?.addEventListener("click", prevSlide);
+      document
+        .querySelector(".slide-next")
+        ?.addEventListener("click", nextSlide);
+    });
 
-  return `
+    return `
   <!-- Slider Container -->
   <div class="section-container">
     <div class="slider-container container">
@@ -88,6 +91,7 @@ const renderSlider = () => {
     </div>
     
   </div>`;
+  },
 };
 
-export default renderSlider;
+export default slider;

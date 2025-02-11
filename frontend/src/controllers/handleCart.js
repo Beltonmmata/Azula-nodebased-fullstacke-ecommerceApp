@@ -1,6 +1,6 @@
 import cart from "../models/cart";
 
-const addToCartBtn = document.querySelectorAll(".add-to-cart-btn");
+// const addToCartBtn = document.querySelectorAll(".add-to-cart-btn");
 
 export function addToCart(productId, quontity) {
   cart.push({
@@ -8,4 +8,6 @@ export function addToCart(productId, quontity) {
     quontity,
   });
 }
+
+
 console.log(cart);

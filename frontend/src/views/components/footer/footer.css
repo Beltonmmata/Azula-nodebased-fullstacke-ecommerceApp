@@ -24,9 +24,10 @@
     box-shadow: 0 0 var(--unit-xxs) 0 var(--color-primary-10);
     div {
       h3 {
-        margin-bottom: var(--unit-xxs);
-        font-size: var(--unit-xxl);
+        margin-bottom: var(--unit-xxxs);
+        font-size: cal(var(--unit-l) + 1rem);
         font-weight: var(--fw-600);
+        color: var(--cooprate-color);
       }
       flex-direction: column;
       min-width: 300px;
@@ -43,7 +44,10 @@
         flex-direction: column;
         a {
           padding: 5px;
-          color: var(--color-primary-10);
+          font-size: var(--unit-m);
+          color: var(--color-primary-30);
+          &:hover{
+          text-decoration:underline;
         }
       }
     }
@@ -75,4 +79,5 @@
     justify-content: center;
     padding: 20px 10%;
   }
+}
 }

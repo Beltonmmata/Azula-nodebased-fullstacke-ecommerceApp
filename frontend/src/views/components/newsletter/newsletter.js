@@ -1,7 +1,8 @@
 import "./newsletter.css";
 
-const renderNewsletter = () => {
-  return `
+const newsletter = {
+  render() {
+    return `
   <!-- newsletter -->
   <div class="section-container">
   <div class="newsletter-container">
@@ -25,6 +26,7 @@ const renderNewsletter = () => {
   </div>
 </div>
   `;
+  },
 };
 
-export default renderNewsletter;
+export default newsletter;

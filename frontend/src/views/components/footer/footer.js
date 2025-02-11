@@ -1,6 +1,7 @@
 import "./footer.css";
-const renderFooter = () => {
-  return `
+const footer = {
+  render() {
+    return `
      <!-- footer -->
      
      <div class="footer-container">
@@ -58,6 +59,7 @@ const renderFooter = () => {
      </div>
    
   `;
+  },
 };
 
-export default renderFooter;
+export default footer;

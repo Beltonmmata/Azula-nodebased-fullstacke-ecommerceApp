@@ -1,11 +1,12 @@
 import products from "../../../data/products";
 import "./productsCards.css";
-import { eventHandler } from "../../../controllers/handleHomepageEvents";
+//import "./../../../controllers/handleHomepageEvents";
 
-const renderProductsCards = (products) => {
-  let productUi = "";
-  products.forEach((product) => {
-    productUi += `
+const productsCards = {
+  render(products) {
+    let productUi = "";
+    products.forEach((product) => {
+      productUi += `
          <div class="product-card">
               <div class="product-image">
                 <img src="${product.image}" alt=" product image" />
@@ -58,9 +59,12 @@ const renderProductsCards = (products) => {
             </div>
             </div>
          `;
-  });
-  eventHandler(Event);
-  return productUi;
+    });
+
+    console.log("render cards ui");
+
+    return productUi;
+  },
 };
 
-export default renderProductsCards;
+export default productsCards;

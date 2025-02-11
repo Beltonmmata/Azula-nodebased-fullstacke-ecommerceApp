@@ -8,7 +8,7 @@ const getAllProducts = asyncWrapper(async (req, res) => {
 });
 
 const createProduct = asyncWrapper(async (req, res) => {
-  const product = await products.create(req.body.params);
+  const product = await products.create(req.body);
   res.status(201).json({ products });
 });
 

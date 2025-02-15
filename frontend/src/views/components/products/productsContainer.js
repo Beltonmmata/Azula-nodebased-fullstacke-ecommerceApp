@@ -1,15 +1,18 @@
 import products from "./../../../data/products";
 import productsCards from "../productsCards/productsCards";
+import { addToCart } from "../../../controllers/handleCart";
 import "./productsContainer.css";
 const productsContainer = {
   afterRender() {
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
       let productId = button.dataset.productId;
       let quontity = 1;
-      button.addEventListener("click", (productId, quontity) => {
+      
+      button.addEventListener("click", () => {
         addToCart(productId, quontity);
       });
     });
+    
 
     console.log("render btn event");
   },
@@ -29,7 +32,7 @@ const productsContainer = {
           </div>
           </div>
           <div class="explore-more-container">
-            <a class="Explore-more-link" href="/shop">
+            <a class="Explore-more-link" href="/#/shop">
               Explore More Products</a
             >
           </div>

@@ -1,7 +1,7 @@
 import "./mainHeader.css";
 
 const mainHeader = {
-  render() {
+   render() {
     return `
     
     <div class="header-container">
@@ -37,7 +37,7 @@ const mainHeader = {
         <div class="mode-setting">        
           <ion-icon name="moon-outline"></ion-icon>
         </div>
-        <a href="/cart">
+        <a href="/#/cart">
           <div class="cart">
             <ion-icon name="cart-outline"></ion-icon>          
             <span class="cart-qty flex-center-container">10</span>

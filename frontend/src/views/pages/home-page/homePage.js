@@ -29,6 +29,10 @@ const homePage = {
     </footer>
    `;
   },
+  afterRender(){
+    productsContainer.afterRender()
+    slider.afterRender()
+  }
 };
 
 export default homePage;

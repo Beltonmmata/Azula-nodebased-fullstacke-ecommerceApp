@@ -6,21 +6,33 @@ import errorPage from "./src/views/pages/404-Error-page/404-Error";
 import cartPage from "./src/views/pages/cart-page/cartPage";
 // import "./src/controllers/handleHomepageEvents";
 const routes = {
-  "/": homePage,
   "/shop": shopPage,
+  "/": homePage,
+  
   "/cart": cartPage,
 };
 const router = () => {
-  const request = parseRequestUrl;
-  const parseUrl =
-    (request.resource ? `/${request.resource}` : "/") +
-    (request.id ? `/:id${request.id}` : "") +
-    (request.action ? `/${request.action}` : "");
+  const { resource, id, action } = parseRequestUrl(); // Get the request data
+  const parseUrl = 
+    (resource ? `/${resource}` : "/") +
+    (id ? `/${id}` : "") +
+    (action ? `/${action}` : "");
 
   const page = routes[parseUrl] ? routes[parseUrl] : errorPage;
 
-  document.querySelector("#app").innerHTML = page.render();
+  const pageHtml = page.render ? page.render() : page;
+  document.querySelector("#app").innerHTML = pageHtml;
+
+  // document.querySelector("#app").innerHTML = page.render();
+  // document.querySelector("#app").innerHTML = page.render ? page.render() : page;
+  if(page.afterRender){
+    page.afterRender()
+  }
+    
 };
 
 window.addEventListener("load", router);
 window.addEventListener("hashchange", router);
+
+
+

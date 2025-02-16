@@ -1,3 +1,5 @@
+import localStorageObj from "./localstorage";
+
 // import {addToCart} from "./../controllers/handleCart.js"
-const cart = [];
+const cart = localStorageObj.getItem("cart") || [];
 export default cart;

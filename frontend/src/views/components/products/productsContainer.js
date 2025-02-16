@@ -1,18 +1,21 @@
-import products from "./../../../data/products";
 import productsCards from "../productsCards/productsCards";
 import { addToCart } from "../../../controllers/handleCart";
 import "./productsContainer.css";
+import mainHeader from "../main-header/mainHeader";
+import cart from "../../../models/cart";
 const productsContainer = {
   afterRender() {
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
       let productId = button.dataset.productId;
-      let quontity = 1;
-      
+
       button.addEventListener("click", () => {
-        addToCart(productId, quontity);
+        addToCart(productId);
+
+        mainHeader.render();
+
+        console.log(cart);
       });
     });
-    
 
     console.log("render btn event");
   },

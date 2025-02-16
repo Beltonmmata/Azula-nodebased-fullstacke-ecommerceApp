@@ -7,7 +7,8 @@
   --alt-bg-color-fade: rgba(128, 128, 128, 0.3);
   --color-main: rgb(126, 68, 243);
 
-  --color-call-to-action: rgb(240, 128, 64);
+  /* --color-call-to-action: rgb(240, 128, 64); */
+  --color-call-to-action: orangered;
   --hover-color-call-to-action: rgb(248, 97, 9);
 
   --color-success: green;
@@ -89,9 +90,11 @@ input {
   font-size: 1.6rem;
   line-height: 1.75;
 }
-/* #app {
-  max-width: 1280px;
-} */
+#app {
+  /* max-width: 1280px; */
+  position: relative;
+  z-index: 10;
+}
 ion-icon {
   color: var(--color-secondary-60);
 }

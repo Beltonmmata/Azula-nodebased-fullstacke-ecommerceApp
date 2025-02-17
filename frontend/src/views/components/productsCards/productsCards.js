@@ -6,6 +6,8 @@ const productsCards = {
   render(products) {
     let productUi = "";
     products.forEach((product) => {
+      let { priceIs, priceWas } = product;
+      let priceOff = Math.trunc(((priceWas - priceIs) / priceWas) * 100);
       productUi += `
          <div class="product-card">
               <div class="product-image">
@@ -16,7 +18,7 @@ const productsCards = {
                 <div class="product-price">
                   <div class="price-is">ksh<span>${product.priceIs}</span></div>
                   <div class="price-was">ksh<span>${product.priceWas}</span></div>
-                  <div class="price-off">(<span>-22%</span>)</div>
+                  <div class="price-off">(-<span>${priceOff}</span>)</div>
                 </div>
                 <div class="ratting-component l-font">
                   <div class="stars flex-center-container">

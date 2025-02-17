@@ -1,5 +1,5 @@
 import products from "../../../data/products";
-import productsContainer from "./../../components/products/productsContainer";
+import featuredProducts from "../../components/featured-products/featuredProducts";
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
 import newsletter from "../../components/newsletter/newsletter";
@@ -18,7 +18,7 @@ const homePage = {
           ${slider.render()}
       </section>
       <section id='products-section'>
-          ${productsContainer.render(products)}
+          ${featuredProducts.render(products)}
       </section>
       <section id='newsletter-section'>
           ${newsletter.render()}
@@ -29,10 +29,11 @@ const homePage = {
     </footer>
    `;
   },
-  afterRender(){
-    productsContainer.afterRender()
-    slider.afterRender()
-  }
+  afterRender() {
+    featuredProducts.afterRender();
+    // mainHeader.afteRender()
+    slider.afterRender();
+  },
 };
 
 export default homePage;

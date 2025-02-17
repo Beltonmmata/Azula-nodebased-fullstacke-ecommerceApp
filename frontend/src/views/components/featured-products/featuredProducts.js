@@ -1,9 +1,10 @@
 import productsCards from "../productsCards/productsCards";
 import { addToCart } from "../../../controllers/handleCart";
-import "./productsContainer.css";
-import mainHeader from "../main-header/mainHeader";
+import "./featuredProducts.css";
 import cart from "../../../models/cart";
-const productsContainer = {
+import reRender from "../../../utils/reRender";
+import homePage from "../../pages/home-page/homePage";
+const featuredProducts = {
   afterRender() {
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
       let productId = button.dataset.productId;
@@ -11,8 +12,7 @@ const productsContainer = {
       button.addEventListener("click", () => {
         addToCart(productId);
 
-        mainHeader.render();
-
+        reRender(homePage);
         console.log(cart);
       });
     });
@@ -44,4 +44,4 @@ const productsContainer = {
   },
 };
 
-export default productsContainer;
+export default featuredProducts;

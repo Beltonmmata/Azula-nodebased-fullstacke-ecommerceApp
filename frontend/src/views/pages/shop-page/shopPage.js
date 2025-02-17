@@ -1,5 +1,5 @@
 import products from "../../../data/products";
-import productsContainer from "../../components/products/productsContainer";
+import shopProducts from "../../components/shop-products/shopProducts";
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
 import newsletter from "../../components/newsletter/newsletter";
@@ -14,7 +14,7 @@ const shopPage = {
     </header>
     <main>
       <section id='products-section'>
-          ${productsContainer.render(products)}
+          ${shopProducts.render(products)}
       </section>
       <section id='newsletter-section'>
           ${newsletter.render()}
@@ -24,6 +24,9 @@ const shopPage = {
        ${footer.render()}
     </footer>
    `;
+  },
+  afterRender() {
+    shopProducts.afterRender();
   },
 };
 

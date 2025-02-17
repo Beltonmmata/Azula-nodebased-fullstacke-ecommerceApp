@@ -1,0 +1,18 @@
+  
+
+  <p>
+  
+   i have been creating this single page vanillar js
+    application that has routes between pages , it has a single 
+    html page with the app element that the javascript page component is
+     injected to through the main.js file that has the routes, the page component 
+     and other reusable small component that creates the route has are objects with render() and reRender()
+      metjodes........but i have been facing this problem
+       in my application whire by when the user interacts by events
+        eg clicks and submit the components are not rerendered and this 
+        creates a bad user experience. i have created this code   to solve
+         the problem so that i can call it in trhe event listener
+   
+    attached to the element clicked and parse the 
+    component affected as a parssametor but seems not to work
+  <p>

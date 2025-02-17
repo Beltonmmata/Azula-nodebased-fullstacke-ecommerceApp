@@ -1,0 +1,27 @@
+/* featured products section */
+.featured-products-container {
+  padding: 10px 10%;
+}
+.featured-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+/* pagination */
+.pagination-container {
+  .pagination {
+    gap: 3px;
+
+    font-size: var(--unit-xl);
+    .page {
+      width: var(--unit-xxxl);
+      height: var(--unit-xxxl);
+      background-color: var(--color-primary-30);
+      padding: var(--unit-xxs);
+      border-radius: 50%;
+    }
+  }
+}

@@ -136,7 +136,7 @@
 }
 .buy-action {
   margin: 5px 2px;
-  border: 0.5px solid var(--border-color);
+  border: 0.5px solid var(--color-call-to-action);
   border-radius: 20px;
 
   .add-to-cart-btn,

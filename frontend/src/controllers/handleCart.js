@@ -22,7 +22,9 @@ export function addToCart(productId) {
   }
   localStorageObj.setItem("cart", cart);
 }
-
+export function removeFromCart(productId) {
+  let matchingItem = cart.find((productId) => item);
+}
 export function updateCartQuantity(cart) {
   let cartQuantity = 0;
   cart.forEach((item) => {

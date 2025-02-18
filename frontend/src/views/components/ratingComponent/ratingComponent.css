@@ -1,0 +1,11 @@
+.ratting-component {
+  display: flex;
+  align-items: center;
+
+  .stars {
+    margin-right: 0.2rem;
+    ion-icon {
+      color: gold;
+    }
+  }
+}

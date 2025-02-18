@@ -6,7 +6,7 @@ const products = [
     description:
       "This is a brown woolen Athletic Cotton jacket,can be wared during cold seasons - 1 Pair",
     rating: {
-      stars: 4.5,
+      avarageRating: 0.5,
       count: 87,
     },
     reviews: 13,
@@ -22,7 +22,7 @@ const products = [
     description:
       "This is a Black and yellow woolen Athletic Cotton jacket,can be wared during cold seasons - 1 Pair",
     rating: {
-      stars: 3.0,
+      avarageRating: 1.0,
       count: 67,
     },
     reviews: 3,
@@ -38,7 +38,7 @@ const products = [
     description:
       "This is a Black and red hoodie Athletic Cotton jacket,can be wared during cold seasons - 1 Pair",
     rating: {
-      stars: 5.0,
+      avarageRating: 5.0,
       count: 27,
     },
     reviews: 31,
@@ -54,7 +54,7 @@ const products = [
     description:
       "This is a pure yellow fabric Athletic jacket Athletic Cotton jacket,can be wared during cold seasons - 1 Pair",
     rating: {
-      stars: 2.0,
+      avarageRating: 2.0,
       count: 87,
     },
     reviews: 35,
@@ -70,7 +70,7 @@ const products = [
     description:
       "This is a light Sky blue tshirt that can be warn in casual or official- 1 Pair",
     rating: {
-      stars: 1.0,
+      avarageRating: 1.0,
       count: 12,
     },
     reviews: 35,

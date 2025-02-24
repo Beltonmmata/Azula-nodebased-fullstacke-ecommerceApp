@@ -8,7 +8,7 @@ import cart from "../../../models/cart";
 import "./cartPage.css";
 const cartPage = {
   render() {
-    if (cart.length < 1) {
+    if (cart.userCart.length < 1) {
       return `
          <header>
          ${mainHeader.render()} 
@@ -30,8 +30,9 @@ const cartPage = {
     <main>
       <section id='cart-container'>
           <!-- cartPage main content -->
+          
         <h2 class="container cart-page-content">
-        ${cart.length === 1 ? "Your Cart Item" : "Your Cart Items"}
+        ${cart.userCart.length === 1 ? "Your Cart Item" : "Your Cart Items"}
         
         </h2>
         <div class="cart-page-main-container container">
@@ -63,6 +64,8 @@ const cartPage = {
    `;
     }
   },
-  afterRender() {},
+  afterRender() {
+    cartList.afterRender();
+  },
 };
 export default cartPage;

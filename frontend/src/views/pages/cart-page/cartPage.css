@@ -88,9 +88,9 @@
             mar div {
               flex-basis: 50%;
             }
-            .quontity-container {
-              flex-basis: 40%;
+            .quantity-container {
               display: flex;
+              flex: 0 0 40%;
               align-items: center;
               flex-direction: row;
               p {

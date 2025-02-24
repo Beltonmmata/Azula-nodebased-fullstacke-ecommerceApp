@@ -1,9 +1,10 @@
 import productsCards from "../productsCards/productsCards";
-import "./featuredProducts.css";
-import cart from "../../../models/cart";
+
+import "./relatedProducts.css";
 import reRender from "../../../utils/reRender";
-import homePage from "../../pages/home-page/homePage";
-const featuredProducts = {
+import productPage from "../../pages/product-page/productPage";
+import cart from "../../../models/cart";
+const relatedProducts = {
   afterRender() {
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
       let productId = button.dataset.productId;
@@ -11,22 +12,20 @@ const featuredProducts = {
       button.addEventListener("click", () => {
         cart.addToCart(productId);
 
-        reRender(homePage);
-        console.log(cart.userCart);
+        reRender(productPage);
       });
     });
 
     console.log("render btn event");
   },
   render(products) {
+    console.log("its loading related products");
     return `
           <!-- featured products -->
           <div class="featured-products-container">
           <div class="featured-products-header">
-            <h2 class="section-subtitle">Our Featured Products</h2>
-            <p class="section-title">
-              We have prepared for you a selection of hot deals
-            </p>
+            <h2 class="section-subtitle">See Also Related Products</h2>
+            
           </div>
 
           <div class="products-container">
@@ -43,4 +42,4 @@ const featuredProducts = {
   },
 };
 
-export default featuredProducts;
+export default relatedProducts;

@@ -1,4 +1,3 @@
-import { updateCartQuantity } from "../../../controllers/handleCart";
 import cart from "../../../models/cart";
 import "./mainHeader.css";
 
@@ -7,6 +6,7 @@ const mainHeader = {
   //   document.getElementsByClassName("cart-qty").innerHTML = updateCartQuantity()
   // },
   render() {
+    const cartQty = cart.getCartQuantity();
     return `
     
     <div class="header-container">
@@ -45,9 +45,7 @@ const mainHeader = {
         <a href="/#/cart">
           <div class="cart">
             <ion-icon name="cart-outline"></ion-icon>          
-            <span class="cart-qty flex-center-container">${updateCartQuantity(
-              cart
-            )}</span>
+            <span class="cart-qty flex-center-container">${cartQty}</span>
           </div>
         </a>
       </div>

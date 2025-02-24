@@ -1,61 +1,93 @@
 import products from "../../../data/products";
+import localStorageObj from "../../../models/localstorage";
 import cart from "../../../models/cart";
+import reRender from "../../../utils/reRender";
+import cartPage from "../../pages/cart-page/cartPage";
 import "./cartList.css";
 
 const cartList = {
   render() {
-    let cartUi = "";
-    cart.forEach((cartItem) => {
-      let { productId, quantity } = cartItem;
-      let matchingItem = products.find((product) => product.id === productId);
+    const updatedCart = localStorageObj.getItem("cart") || [];
 
-      const { priceIs, image, name, id } = matchingItem;
-      const totalPrice = priceIs * quantity;
-      console.log({ priceIs, image, name });
-      cartUi += `
-            <!-- single cart product begins -->
-            <li>
-              <div class="cart-product-image-container">
-                <img src="${image}" alt="${name} image" />
-              </div>
-              <div class="cart-product-details-container">
-                <div class="top cart-product-name-container">
-                  <p>${name}</p>
-                </div>
-                <div class="bottom">
-                  <div class="quontity-container">
-                    <p>Quontity</p>
+    let cartUi = updatedCart
+      .map((cartItem) => {
+        const { productId, quantity } = cartItem;
+        const matchingProduct = products.find(
+          (product) => product.id === productId
+        );
 
-                    <select name="cart-quontity" id="">
-                      <option value="quontiy 1" selected>1</option>
-                      <option value="quontiy 2">2</option>
-                      <option value="quontiy 3">3</option>
-                      <option value="quontiy 4">4</option>
-                      <option value="quontiy 5">5</option>
-                      <option value="quontiy 6">6</option>
-                      <option value="quontiy 7">7</option>
-                      <option value="quontiy 8">8</option>
-                      <option value="quontiy 9">9</option>
-                      <option value="quontiy 10">10</option>
-                    </select>
-                  </div>
-                  <div class="price">
-                    <span> @ksh.</span>
-                    <span>${priceIs}</span>
-                  </div>
-                  <div class="item-total-price">ksh.${totalPrice}</div>
+        if (!matchingProduct) return ""; // Prevent errors if product is missing
+
+        const { priceIs, image, name, id, countInStock } = matchingProduct;
+        const totalPrice = priceIs * quantity;
+
+        const quantityOptions = [...Array(countInStock).keys()]
+          .map((stockIndex) => {
+            const value = stockIndex + 1;
+            const isSelected = quantity === value ? "selected" : "";
+            return `<option value="${value}" ${isSelected}>${value}</option>`;
+          })
+          .join("");
+
+        return `
+          <li>
+            <div class="cart-product-image-container">
+              <img src="${image}" alt="${name} image" />
+            </div>
+            <div class="cart-product-details-container">
+              <div class="top cart-product-name-container">
+                <p>${name}</p>
+              </div>
+              <div class="bottom">
+                <div class="quantity-container">
+                  <p>Quantity</p>    
+                  <select class="cart-quantity" data-product-id="${id}">
+                    ${quantityOptions}
+                  </select>
                 </div>
+                <div class="price">
+                  <span>@ksh.</span>
+                  <span>${priceIs}</span>
+                </div>
+                <div class="item-total-price">ksh.${totalPrice}</div>
               </div>
-              <div class="remove-from-cart">
-                <button dataset-product-id="${id}">
-                  <ion-icon name="trash-outline"></ion-icon>
-                  <!-- <img src="assets/icons/delete.png" alt=" delete-icon"> -->
-                </button>
-              </div>
-            </li>
-      `;
-    });
+            </div>
+            <div class="remove-from-cart">
+              <button class="remove-from-cart-btn" data-product-id="${id}">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </div>
+          </li>
+        `;
+      })
+      .join("");
+
     return cartUi;
   },
+
+  afterRender() {
+    // handle updating cart quontity
+    document.querySelectorAll(".cart-quantity").forEach((selectElement) => {
+      selectElement.addEventListener("change", async (event) => {
+        const productId = event.target.getAttribute("data-product-id");
+        const newCartQuontity = parseInt(event.target.value, 10);
+        cart.updateCartQuontity(productId, newCartQuontity);
+        console.log(`quontity updated ${productId} , ${newCartQuontity}`);
+        await reRender(cartPage);
+      });
+    });
+    // handle remove from cart
+    document.querySelectorAll(".remove-from-cart-btn").forEach((button) => {
+      const productId = button.getAttribute("data-product-id");
+
+      button.addEventListener("click", async () => {
+        cart.removeFromCart(productId);
+        console.log(`${productId} deleted from cart`);
+        console.log(cart.userCart);
+        await reRender(cartPage);
+      });
+    });
+  },
 };
+
 export default cartList;

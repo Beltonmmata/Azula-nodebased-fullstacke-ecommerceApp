@@ -13,6 +13,7 @@ const products = [
     likes: 15,
     priceWas: 2000,
     priceIs: 1090,
+    countInStock: 5,
     keywords: ["jackets", "cold", "woolen"],
   },
   {
@@ -29,6 +30,7 @@ const products = [
     likes: 5,
     priceWas: 2001,
     priceIs: 1990,
+    countInStock: 7,
     keywords: ["jacket", "sports", "warm"],
   },
   {
@@ -45,6 +47,7 @@ const products = [
     likes: 51,
     priceWas: 2500,
     priceIs: 2300,
+    countInStock: 8,
     keywords: ["jacket", "sports", "warm"],
   },
   {
@@ -61,6 +64,7 @@ const products = [
     likes: 71,
     priceWas: 1500,
     priceIs: 1300,
+    countInStock: 10,
     keywords: ["jacket", "sports", "warm"],
   },
   {
@@ -77,6 +81,7 @@ const products = [
     likes: 71,
     priceWas: 1500,
     priceIs: 1300,
+    countInStock: 7,
     keywords: ["t-shirt", "official", "cassual"],
   },
 ];

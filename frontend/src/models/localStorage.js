@@ -1,16 +1,11 @@
 const localStorageObj = {
-  /**
-   * Get an item from local storage.
-   * @param {string} key - The key of the item to retrieve.
-   * @returns {any} The parsed value of the stored item, or null if not found.
-   */
+  // @param {string} key
   getItem(key) {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null; // Returns parsed value or null if not found
+    return JSON.parse(item);
   },
 
   /**
-   * Set an item in local storage.
    * @param {string} key - The key of the item to store.
    * @param {any} value - The value to store (it will be stringified).
    */
@@ -56,7 +51,7 @@ const localStorageObj = {
       const updatedItem = updateCallback(currentItem);
       this.setItem(key, updatedItem);
     } else {
-      throw new Error(`Item with key "${key}" does not exist`);
+      console.error(`Item with key "${key}" does not exist`);
     }
   },
 

@@ -24,7 +24,8 @@
   --color-secondary-60: rgb(0, 0, 0);
   --color-secondary-30: rgb(34, 36, 41);
   --color-secondary-10: rgb(36, 35, 41);
-  --border-color: rgb(128, 128, 128);
+  /* --border-color: rgb(128, 128, 128); */
+  --border-color: #e3e3e3;
   --shadow-color: rgba(213, 217, 217, 0.5);
   --cooprate-color: rgb(126, 68, 243);
   --color-call-to-action: rgb(187, 70, 2);

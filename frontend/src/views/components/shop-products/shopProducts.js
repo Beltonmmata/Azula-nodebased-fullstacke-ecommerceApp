@@ -1,5 +1,5 @@
 import productsCards from "../productsCards/productsCards";
-import { addToCart } from "../../../controllers/handleCart";
+
 import "./shopProducts.css";
 import cart from "../../../models/cart";
 import reRender from "../../../utils/reRender";
@@ -10,10 +10,10 @@ const shopProducts = {
       let productId = button.dataset.productId;
 
       button.addEventListener("click", () => {
-        addToCart(productId);
+        cart.addToCart(productId);
 
         reRender(shopPage);
-        console.log(cart);
+        console.log(cart.userCart);
       });
     });
 

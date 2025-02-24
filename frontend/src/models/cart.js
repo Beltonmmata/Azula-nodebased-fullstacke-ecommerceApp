@@ -1,13 +1,39 @@
 import localStorageObj from "./localstorage";
 
-const cart = localStorageObj.getItem("cart") || [];
+const cart = {
+  userCart: localStorageObj.getItem("cart") || [],
+
+  addToCart(productId) {
+    const matchingItem = this.userCart.find(
+      (item) => item.productId === productId
+    );
+
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } else {
+      this.userCart.push({ productId, quantity: 1 });
+    }
+
+    localStorageObj.setItem("cart", this.userCart);
+  },
+
+  removeFromCart(productId) {
+    this.userCart = this.userCart.filter(
+      (item) => item.productId !== productId
+    );
+    localStorageObj.setItem("cart", this.userCart);
+  },
+
+  getCartQuantity() {
+    return this.userCart.reduce((total, item) => total + item.quantity, 0);
+  },
+  updateCartQuontity(productId, newCartQuontity) {
+    const item = this.userCart.find((item) => item.productId === productId);
+    if (item) {
+      item.quantity = newCartQuontity;
+      localStorageObj.setItem("cart", this.userCart);
+    }
+  },
+};
+
 export default cart;
-
-// import {addToCart} from "./../controllers/handleCart.js"
-//   { productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c3", quantity: 5 },
-
-//   { productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c2", quantity: 1 },
-
-//   { productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c5", quantity: 1 },
-
-//   { productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c4", quantity: 1 },

@@ -1,13 +1,11 @@
-import products from "../../../data/products";
 import ratingComponent from "../ratingComponent/ratingComponent";
 import "./productsCards.css";
-//import "./../../../controllers/handleHomepageEvents";
 
 const productsCards = {
   render(products) {
     let productUi = "";
     products.forEach((product) => {
-      let { priceIs, priceWas, rating } = product;
+      let { priceIs, priceWas, rating, id } = product;
       let { avarageRating, count } = rating;
       let priceOff = Math.trunc(((priceWas - priceIs) / priceWas) * 100);
       productUi += `
@@ -17,7 +15,7 @@ const productsCards = {
               </div>
               <div class="products-details">
                 <div class="products-name">
-                <a href="/#/product/:${product.id}">
+                <a href="/#/product/${id}">
                 ${product.name}
                </a>             
                 </div>
@@ -35,14 +33,12 @@ const productsCards = {
                 </div>
                 <div class="products-review">
                   <div class="reviews ">
-                  
-                   <ion-icon name="chatbubbles-outline"></ion-icon>
-                    ${product.reviews} reviews
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                      ${product.reviews} reviews
                   </div>
                   <div class="likes ">
-                   <ion-icon name="heart-outline"></ion-icon>
-                    
-                    ${product.likes} likes
+                    <ion-icon name="heart-outline"></ion-icon>                    
+                      ${product.likes} likes
                   </div>
                 
               </div>
@@ -63,9 +59,12 @@ const productsCards = {
          `;
     });
 
-    console.log("render cards ui");
-
-    return productUi;
+    if (!products) {
+      console.error("products Array is not provided");
+      return;
+    } else {
+      return productUi;
+    }
   },
 };
 

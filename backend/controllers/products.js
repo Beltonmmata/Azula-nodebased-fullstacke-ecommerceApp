@@ -4,12 +4,15 @@ const { createCustomError } = require("../errors/custom-error");
 
 const getAllProducts = asyncWrapper(async (req, res) => {
   const products = await products.find({});
+  if (!products) {
+    return next(createCustomError(`No products in the database`, 404));
+  }
   res.status(200).json({ products });
 });
 
 const createProduct = asyncWrapper(async (req, res) => {
   const product = await products.create(req.body);
-  res.status(201).json({ products });
+  res.status(201).json({ product });
 });
 
 const getProduct = asyncWrapper(async (req, res, next) => {

@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Brown woolen Athletic Cotton jacket - 1 Pair",
+    "priceWas": 2000,
+    "priceIs": 1090,
+    "featured": true,
+    "keywords": ["jackets", "cold", "woolen"],
+    "brand": "nike",
+    "description": "This is a brown woolen Athletic Cotton jacket, can be worn during cold seasons - 1 Pair",
+    "imageUrl": "./products-images/jacket-1.png",
+    "category": "men",
+    "countInStock": 5,
+    "rating": {
+      "avarageRating": 0.5,
+      "count": 87
+    },
+    "reviews": []
+  },
+  {
+    "name": "Black and yellow woolen Athletic Cotton jacket - 1 Pair",
+    "priceWas": 2001,
+    "priceIs": 1990,
+    "featured": true,
+    "keywords": ["jacket", "sports", "warm"],
+    "brand": "nike",
+    "description": "This is a Black and yellow woolen Athletic Cotton jacket, can be worn during cold seasons - 1 Pair",
+    "imageUrl": "./products-images/jacket-2.png",
+    "category": "men",
+    "countInStock": 7,
+    "rating": {
+      "avarageRating": 1.0,
+      "count": 67
+    },
+    "reviews": []
+  },
+  {
+    "name": "Black and red hoodie Athletic jacket - 1 Pair",
+    "priceWas": 2500,
+    "priceIs": 2300,
+    "featured": true,
+    "keywords": ["jacket", "sports", "warm"],
+    "brand": "nike",
+    "description": "This is a Black and red hoodie Athletic Cotton jacket, can be worn during cold seasons - 1 Pair",
+    "imageUrl": "./products-images/new-2.png",
+    "category": "men",
+    "countInStock": 8,
+    "rating": {
+      "avarageRating": 5.0,
+      "count": 27
+    },
+    "reviews": []
+  },
+  {
+    "name": "Pure yellow fabric Athletic jacket - 1 Pair",
+    "priceWas": 1500,
+    "priceIs": 1300,
+    "featured": true,
+    "keywords": ["jacket", "sports", "warm"],
+    "brand": "nike",
+    "description": "This is a pure yellow fabric Athletic Cotton jacket, can be worn during cold seasons - 1 Pair",
+    "imageUrl": "./products-images/new-3.png",
+    "category": "men",
+    "countInStock": 10,
+    "rating": {
+      "avarageRating": 2.0,
+      "count": 87
+    },
+    "reviews": []
+  },
+  {
+    "name": "Sky blue light t-shirt - 1 Pair",
+    "priceWas": 1500,
+    "priceIs": 1300,
+    "featured": false,
+    "keywords": ["t-shirt", "official", "casual"],
+    "brand": "nike",
+    "description": "This is a light Sky blue t-shirt that can be worn in casual or official settings - 1 Pair",
+    "imageUrl": "./products-images/t1.png",
+    "category": "men",
+    "countInStock": 7,
+    "rating": {
+      "avarageRating": 1.0,
+      "count": 12
+    },
+    "reviews": []
+  }
+]

@@ -12,7 +12,7 @@ const routes = {
   "/cart": cartPage,
   "/product/:id": productPage,
 };
-const router = () => {
+const router = async () => {
   const { resource, id, action } = parseRequestUrl(); // Get the request data
   const parseUrl =
     (resource ? `/${resource}` : "/") +
@@ -36,7 +36,7 @@ const router = () => {
   // If no match is found, use errorPage
   page = page ? page : errorPage;
 
-  const pageHtml = page.render ? page.render() : page;
+  const pageHtml = page.render ? await page.render() : page;
   document.querySelector("#app").innerHTML = pageHtml;
 
   // document.querySelector("#app").innerHTML = page.render();

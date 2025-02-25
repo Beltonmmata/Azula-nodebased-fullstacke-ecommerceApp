@@ -1,4 +1,4 @@
-import products from "../../../data/products";
+//import products from "../../../data/products";
 import featuredProducts from "../../components/featured-products/featuredProducts";
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
@@ -8,7 +8,7 @@ import slider from "../../components/slider/slider";
 import "./homePage.css";
 
 const homePage = {
-  render() {
+  render: async function () {
     return `
     <header>
        ${mainHeader.render()} 
@@ -18,7 +18,7 @@ const homePage = {
           ${slider.render()}
       </section>
       <section id='products-section'>
-          ${featuredProducts.render(products)}
+          ${await featuredProducts.render()}
       </section>
       <section id='newsletter-section'>
           ${newsletter.render()}

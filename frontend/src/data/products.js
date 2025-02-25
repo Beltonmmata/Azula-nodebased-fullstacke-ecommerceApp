@@ -14,6 +14,8 @@ const products = [
     priceWas: 2000,
     priceIs: 1090,
     countInStock: 5,
+    brand: "nike",
+    featured: true,
     keywords: ["jackets", "cold", "woolen"],
   },
   {
@@ -31,6 +33,8 @@ const products = [
     priceWas: 2001,
     priceIs: 1990,
     countInStock: 7,
+    brand: "nike",
+    featured: true,
     keywords: ["jacket", "sports", "warm"],
   },
   {
@@ -48,6 +52,8 @@ const products = [
     priceWas: 2500,
     priceIs: 2300,
     countInStock: 8,
+    brand: "nike",
+    featured: true,
     keywords: ["jacket", "sports", "warm"],
   },
   {
@@ -65,6 +71,8 @@ const products = [
     priceWas: 1500,
     priceIs: 1300,
     countInStock: 10,
+    brand: "nike",
+    featured: true,
     keywords: ["jacket", "sports", "warm"],
   },
   {
@@ -82,6 +90,8 @@ const products = [
     priceWas: 1500,
     priceIs: 1300,
     countInStock: 7,
+    brand: "nike",
+    featured: false,
     keywords: ["t-shirt", "official", "cassual"],
   },
 ];

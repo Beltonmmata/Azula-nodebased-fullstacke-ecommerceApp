@@ -1,15 +1,17 @@
-import products from "../../../data/products";
+//import products from "../../../data/products";
 import ratingComponent from "../ratingComponent/ratingComponent";
 import "./productsDetails.css";
 import cart from "../../../models/cart";
 import reRender from "../../../utils/reRender";
 import productPage from "../../pages/product-page/productPage";
+import { getProduct } from "../../../models/products";
 const productsDetails = {
-  render(id) {
+  render: async (id) => {
     const productID = id;
-    let itemObj = products.find((product) => productID === product.id);
+    let itemObj = await getProduct(productID);
+    //let itemObj = products.find((product) => productID === product.id);
     let {
-      image,
+      imageUrl,
       rating,
       name,
       description,
@@ -19,6 +21,7 @@ const productsDetails = {
       priceIs,
     } = itemObj;
     let { avarageRating, count } = rating;
+    let noOfReviews = reviews.length;
 
     const productQuontity = (productID) => {
       const item = cart.userCart.find(
@@ -32,7 +35,7 @@ const productsDetails = {
         
       <div class="single-product-container">
         <div class="image-container">
-          <img src="${image}" />
+          <img src="${imageUrl}" />
         </div>
         <!-- details starts -->
         <div class="details-container">
@@ -54,11 +57,11 @@ const productsDetails = {
             <div class="products-review">
               <div class="reviews">
                 <ion-icon name="chatbubbles-outline"></ion-icon>
-                ${reviews} reviews
+                ${noOfReviews} reviews
               </div>
               <div class="likes">
                 <ion-icon name="heart-outline"></ion-icon>
-                ${likes} likes
+                0 likes
               </div>
             </div>
           </div>

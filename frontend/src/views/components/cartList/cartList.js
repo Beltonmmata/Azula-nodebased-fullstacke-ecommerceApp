@@ -1,24 +1,27 @@
-import products from "../../../data/products";
+//import products from "../../../data/products";
 import localStorageObj from "../../../models/localstorage";
 import cart from "../../../models/cart";
 import reRender from "../../../utils/reRender";
 import cartPage from "../../pages/cart-page/cartPage";
 import "./cartList.css";
+import { getProducts } from "../../../models/products";
 
 const cartList = {
-  render() {
+  render: async () => {
     const updatedCart = localStorageObj.getItem("cart") || [];
+    const products = await getProducts();
 
     let cartUi = updatedCart
       .map((cartItem) => {
         const { productId, quantity } = cartItem;
         const matchingProduct = products.find(
-          (product) => product.id === productId
+          (product) => product._id === productId
         );
 
         if (!matchingProduct) return ""; // Prevent errors if product is missing
 
-        const { priceIs, image, name, id, countInStock } = matchingProduct;
+        const { priceIs, imageUrl, name, _id, countInStock } = matchingProduct;
+        let id = _id;
         const totalPrice = priceIs * quantity;
 
         const quantityOptions = [...Array(countInStock).keys()]
@@ -32,7 +35,7 @@ const cartList = {
         return `
           <li>
             <div class="cart-product-image-container">
-              <img src="${image}" alt="${name} image" />
+              <img src="${imageUrl}" alt="${name} image" />
             </div>
             <div class="cart-product-details-container">
               <div class="top cart-product-name-container">

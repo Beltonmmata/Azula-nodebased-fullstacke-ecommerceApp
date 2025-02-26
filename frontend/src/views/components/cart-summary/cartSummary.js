@@ -1,15 +1,17 @@
 import cart from "../../../models/cart";
 import localStorageObj from "../../../models/localstorage";
-import products from "../../../data/products";
+
 import "./cartSummary.css";
+import { getProducts } from "../../../models/products";
 
 const cartSummary = {
-  render() {
+  render: async () => {
+    const products = await getProducts();
     const updatedCart = localStorageObj.getItem("cart");
     let totalCartPrice = 0;
     updatedCart.forEach((cartItem) => {
       let { productId, quantity } = cartItem;
-      let matchingItem = products.find((product) => product.id === productId);
+      let matchingItem = products.find((product) => product._id === productId);
 
       const { priceIs } = matchingItem;
       const totalPrice = priceIs * quantity;

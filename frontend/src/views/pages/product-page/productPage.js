@@ -15,7 +15,7 @@ const productPage = {
     relatedProducts.afterRender();
     productsDetails.afterRender();
   },
-  render() {
+  render: async () => {
     const { id } = parseRequestUrl();
     return `
     <header>
@@ -28,10 +28,10 @@ const productPage = {
       </section>
      
       <section class="container" id='container products-details-section'>
-          ${productsDetails.render(id)}
+          ${await productsDetails.render(id)}
       </section>
       <section class="container" id='container products-details-section'>
-          ${relatedProducts.render(products)}
+          ${await relatedProducts.render(products)}
       </section>
       
 

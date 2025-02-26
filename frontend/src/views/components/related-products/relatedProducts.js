@@ -4,6 +4,7 @@ import "./relatedProducts.css";
 import reRender from "../../../utils/reRender";
 import productPage from "../../pages/product-page/productPage";
 import cart from "../../../models/cart";
+import { getProducts } from "../../../models/products";
 const relatedProducts = {
   afterRender() {
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
@@ -18,7 +19,8 @@ const relatedProducts = {
 
     console.log("render btn event");
   },
-  render(products) {
+  render: async () => {
+    const products = await getProducts();
     console.log("its loading related products");
     return `
           <!-- featured products -->

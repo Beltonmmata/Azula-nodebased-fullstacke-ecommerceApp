@@ -12,3 +12,15 @@ export const getProducts = async () => {
     return [];
   }
 };
+
+export const getProduct = async (id) => {
+  try {
+    const { data } = await axios.get(`${backendUrl}/products/${id}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return data.product;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    return [];
+  }
+};

@@ -7,14 +7,14 @@ import newsletter from "../../components/newsletter/newsletter";
 import "./shopPage.css";
 
 const shopPage = {
-  render() {
+  render: async () => {
     return `
     <header>
        ${mainHeader.render()} 
     </header>
     <main>
       <section id='products-section'>
-          ${shopProducts.render(products)}
+          ${await shopProducts.render(products)}
       </section>
       <section id='newsletter-section'>
           ${newsletter.render()}

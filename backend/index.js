@@ -26,6 +26,14 @@ app.get("/api/v1/products/getAllProducts", async (req, res) => {
   }
   res.status(200).json({ product });
 });
+app.get("/api/v1/products/:id", async (req, res) => {
+  const id = req.params.id;
+  const product = await Products.findById(id);
+  if (!product) {
+    throw Error(`Product  with id ${id}  not found`);
+  }
+  res.status(200).json({ product });
+});
 
 const port = process.env.PORT || 5000;
 

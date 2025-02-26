@@ -4,6 +4,7 @@ import "./shopProducts.css";
 import cart from "../../../models/cart";
 import reRender from "../../../utils/reRender";
 import shopPage from "../../pages/shop-page/shopPage";
+import { getProducts } from "../../../models/products";
 const shopProducts = {
   afterRender() {
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
@@ -19,7 +20,8 @@ const shopProducts = {
 
     console.log("render btn event");
   },
-  render(products) {
+  render: async () => {
+    const products = await getProducts();
     return `
           <!-- featured products -->
           <div class="featured-products-container">

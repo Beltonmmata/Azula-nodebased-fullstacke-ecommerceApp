@@ -7,7 +7,7 @@ import newsletter from "../../components/newsletter/newsletter";
 import cart from "../../../models/cart";
 import "./cartPage.css";
 const cartPage = {
-  render() {
+  render: async () => {
     if (cart.userCart.length < 1) {
       return `
          <header>
@@ -39,7 +39,7 @@ const cartPage = {
           <div class="left-container cart-items-list">
             <ul>
               <!-- render the cart list component -->
-               ${cartList.render()}
+               ${await cartList.render()}
             </ul>
           </div>
           <div class="right-container cart-summary-details">
@@ -49,7 +49,7 @@ const cartPage = {
             </div>
             <div class="container-cart-summary">
               <!-- render the cart summary -->
-              ${cartSummary.render()}
+              ${await cartSummary.render()}
             </div>
           </div>
         </div>

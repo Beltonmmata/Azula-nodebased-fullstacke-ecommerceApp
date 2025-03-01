@@ -7,6 +7,7 @@ import cartPage from "./src/views/pages/cart-page/cartPage";
 import productPage from "./src/views/pages/product-page/productPage";
 import { hideLoading, showLoading } from "./src/controllers/loading";
 import checkoutPage from "./src/views/pages/checkout/checkout";
+import ordersPage from "./src/views/pages/orders/orders";
 // import "./src/controllers/handleHomepageEvents";
 const routes = {
   "/": homePage,
@@ -14,6 +15,7 @@ const routes = {
   "/cart": cartPage,
   "/product/:id": productPage,
   "/checkout/:step": checkoutPage,
+  "/orders": ordersPage,
 };
 const router = async () => {
   showLoading();

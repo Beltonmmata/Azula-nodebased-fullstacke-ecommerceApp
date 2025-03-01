@@ -52,7 +52,7 @@ const cartSummary = {
             </li>
         </ul>
         <div class="procede-to-checkout-btn">
-            <a href="/#/checkout">Procede To Checkout</a>
+            <a href="/#/checkout/signin">Procede To Checkout</a>
         </div>
         `;
   },

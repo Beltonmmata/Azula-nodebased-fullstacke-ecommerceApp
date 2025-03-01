@@ -1,5 +1,5 @@
 import "./productPage.css";
-import { parseRequestUrl } from "../../../utils/browserRouter";
+import { parseRequestUrl } from "../../../controllers/browserRouter";
 import mainHeader from "../../components/main-header/mainHeader";
 import relatedProducts from "../../components/related-products/relatedProducts";
 // import products from "../../../data/products";

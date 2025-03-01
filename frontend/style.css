@@ -215,7 +215,46 @@ img {
   background-size: cover;
   background-position: center;
 }
+/* overlay */
+.overlay {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary-30);
+}
+.overlay.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-secondary-60);
+}
+.loading-icon {
+  text-align: center;
+  padding: var(--unit-xxxs);
+  display: inline-block;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+}
+.loading-icon ion-icon {
+  font-size: var(--unit-xxxxxl);
+  animation: spin-animation 3s infinite;
+  /* animation-timing-function: linear; */
+  display: inline-block;
+}
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
 
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* RESPONSIVE DESIGN */
 @media (max-width: 800px) {
   .newsletter-container {

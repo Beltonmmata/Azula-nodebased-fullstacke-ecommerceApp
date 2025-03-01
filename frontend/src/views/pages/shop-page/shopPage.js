@@ -1,4 +1,3 @@
-import products from "../../../data/products";
 import shopProducts from "../../components/shop-products/shopProducts";
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
@@ -14,7 +13,7 @@ const shopPage = {
     </header>
     <main>
       <section id='products-section'>
-          ${await shopProducts.render(products)}
+          ${await shopProducts.render()}
       </section>
       <section id='newsletter-section'>
           ${newsletter.render()}

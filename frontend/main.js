@@ -1,18 +1,22 @@
 import "./style.css";
 import homePage from "./src/views/pages/home-page/homePage";
 import shopPage from "./src/views/pages/shop-page/shopPage";
-import { parseRequestUrl } from "./src/utils/browserRouter";
+import { parseRequestUrl } from "./src/controllers/browserRouter";
 import errorPage from "./src/views/pages/404-Error-page/404-Error";
 import cartPage from "./src/views/pages/cart-page/cartPage";
 import productPage from "./src/views/pages/product-page/productPage";
+import { hideLoading, showLoading } from "./src/controllers/loading";
+import checkoutPage from "./src/views/pages/checkout/checkout";
 // import "./src/controllers/handleHomepageEvents";
 const routes = {
   "/": homePage,
   "/shop": shopPage,
   "/cart": cartPage,
   "/product/:id": productPage,
+  "/checkout/:step": checkoutPage,
 };
 const router = async () => {
+  showLoading();
   const { resource, id, action } = parseRequestUrl(); // Get the request data
   const parseUrl =
     (resource ? `/${resource}` : "/") +
@@ -44,6 +48,7 @@ const router = async () => {
   if (page.afterRender) {
     page.afterRender();
   }
+  hideLoading();
 };
 
 window.addEventListener("load", router);

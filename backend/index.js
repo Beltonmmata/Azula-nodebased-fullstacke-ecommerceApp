@@ -3,8 +3,8 @@ require("dotenv").config();
 require("express-async-errors");
 const app = express();
 const cors = require("cors");
-//const Product = require("./routes/product");
-const Products = require("./models/product");
+const Product = require("./routes/products");
+//const Product = require("./models/product");
 const connectDB = require("./db/connect");
 // const notFound = require("./middleware/not-found");
 // const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -18,22 +18,7 @@ app.use(cors());
 // routes
 // app.use(notFound);
 // app.use(errorHandlerMiddleware);
-// app.use("/api/v1/products", Product);
-app.get("/api/v1/products/getAllProducts", async (req, res) => {
-  const product = await Products.find({});
-  if (!product) {
-    throw Error("Product not found");
-  }
-  res.status(200).json({ product });
-});
-app.get("/api/v1/products/:id", async (req, res) => {
-  const id = req.params.id;
-  const product = await Products.findById(id);
-  if (!product) {
-    throw Error(`Product  with id ${id}  not found`);
-  }
-  res.status(200).json({ product });
-});
+app.use("/api/v1/products", Product);
 
 const port = process.env.PORT || 5000;
 

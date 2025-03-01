@@ -2,8 +2,8 @@ const pageNav = {
   render() {
     return `
         <div class="page-navigation">
-        <a href="index.html">home</a>/
-        <a href="shop.html">shop</a>
+        <a href="/">home</a>/
+        <a href="#/shop">shop</a>
         / product name
       </div>
         `;

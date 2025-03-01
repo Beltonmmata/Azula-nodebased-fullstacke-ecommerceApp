@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getProducts = async () => {
   try {
-    const { data } = await axios.get(`${backendUrl}/products/getAllProducts`, {
+    const { data } = await axios.get(`${backendUrl}/products`, {
       headers: { "Content-Type": "application/json" },
     });
     return data.product;

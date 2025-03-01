@@ -2,11 +2,21 @@
 import productsCards from "../productsCards/productsCards";
 import "./featuredProducts.css";
 import cart from "../../../models/cart";
-import reRender from "../../../utils/reRender";
+import reRender from "../../../controllers/reRender";
 import homePage from "../../pages/home-page/homePage";
 import { getProducts } from "../../../models/products";
 const featuredProducts = {
   afterRender() {
+    document.querySelectorAll(".buy-now-btn").forEach((button) => {
+      let productId = button.dataset.productId;
+
+      button.addEventListener("click", () => {
+        cart.addToCart(productId);
+        console.log("btuy now clicked");
+
+        document.location.hash = "/cart";
+      });
+    });
     document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
       let productId = button.dataset.productId;
 

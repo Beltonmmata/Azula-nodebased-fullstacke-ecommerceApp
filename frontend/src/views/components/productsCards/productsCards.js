@@ -47,7 +47,9 @@ const productsCards = {
                 <button class="add-to-cart-btn flex-center-container" data-product-id="${id}">
                   Add To Cart
                 </button>
-                <button class="buy-now-btn">Buy Now</button>
+                <button class="buy-now-btn" data-product-id="${id}" >
+                Buy Now
+                </button>
               </div>
             </div>
           </div>

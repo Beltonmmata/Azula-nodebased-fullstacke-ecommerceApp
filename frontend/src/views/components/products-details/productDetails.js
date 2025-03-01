@@ -2,7 +2,7 @@
 import ratingComponent from "../ratingComponent/ratingComponent";
 import "./productsDetails.css";
 import cart from "../../../models/cart";
-import reRender from "../../../utils/reRender";
+import reRender from "../../../controllers/reRender";
 import productPage from "../../pages/product-page/productPage";
 import { getProduct } from "../../../models/products";
 const productsDetails = {

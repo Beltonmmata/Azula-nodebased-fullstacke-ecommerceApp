@@ -7,25 +7,27 @@ const slider = {
       imageUrl: "../slider-images/faster-delivery.png",
       title: "Enjoy Faster Delivery",
       description:
-        "We have the express delivery option that will ensure order delivered in 24hrs",
+        "We offer express delivery options to ensure your order arrives within 24 hours!",
     },
     {
-      imageUrl: "../products-images/slide-3.png",
-      title: "Slide 2 title",
-      description: "This is the second slide.",
+      imageUrl: "../slider-images/best-deals.png",
+      title: "Exclusive Discounts & Offers",
+      description:
+        "Grab the best deals with huge discounts and limited-time offers every day.",
     },
     {
-      imageUrl: "../products-images/slide-1.png",
-      title: "Slide 3 title",
-      description: "This is the third slide.",
+      imageUrl: "../slider-images/premium-quality.png",
+      title: "Shop Premium Quality Products",
+      description:
+        "We source only high-quality products to give you the best shopping experience.",
     },
     {
-      imageUrl: "../products-images/slide-2.png",
-      title: "Slide 4 title",
-      description: "This is the fourth slide.",
+      imageUrl: "../slider-images/customer-support.png",
+      title: "24/7 Customer Support",
+      description:
+        "Got questions? Our dedicated support team is here to assist you anytime, anywhere.",
     },
   ],
-
   currentIndex: 0, // Track the current slide index
   intervalId: null, // Store the interval ID for auto-sliding
 
@@ -38,7 +40,8 @@ const slider = {
         <div class="left-raw">
           <h2>${title}</h2>
           <p>${description}</p>
-          <button class="go-to-shop-btn">Go To Shop</button>
+           <a class="go-to-shop-btn" href="#/shop">Go to shop</a>
+          
         </div>
         <div class="right-raw">
           <img src="${imageUrl}" alt="${title} image" />

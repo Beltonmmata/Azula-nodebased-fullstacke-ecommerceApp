@@ -4,6 +4,7 @@ require("express-async-errors");
 const app = express();
 const cors = require("cors");
 const Product = require("./routes/products");
+const Authantication = require("./routes/authentication");
 //const Product = require("./models/product");
 const connectDB = require("./db/connect");
 // const notFound = require("./middleware/not-found");
@@ -19,6 +20,7 @@ app.use(cors());
 // app.use(notFound);
 // app.use(errorHandlerMiddleware);
 app.use("/api/v1/products", Product);
+app.use("/api/v1/authentication", Authantication);
 
 const port = process.env.PORT || 5000;
 

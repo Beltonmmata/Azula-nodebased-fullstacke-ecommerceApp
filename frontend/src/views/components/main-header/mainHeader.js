@@ -1,10 +1,14 @@
+import {
+  hideUserMenu,
+  showUserMenu,
+} from "../../../controllers/userMenuOverlay";
 import cart from "../../../models/cart";
+import localStorageObj from "../../../models/localstorage";
+
+import userProfilePreview from "../user-profile-preview/userProfilePreview";
 import "./mainHeader.css";
 
 const mainHeader = {
-  // afteRender(){
-  //   document.getElementsByClassName("cart-qty").innerHTML = updateCartQuantity()
-  // },
   render() {
     const cartQty = cart.getCartQuantity();
     return `
@@ -30,14 +34,13 @@ const mainHeader = {
           placeholder="search here"
           id="search-bar-input"
         />
-        <button id="searchbar-btn">
-         
+        <button id="searchbar-btn">   
           <ion-icon name="search-outline"></ion-icon>
         </button>
       </form>
       <div class="header-end-container">
-        <div class="profile">
-          <ion-icon name="person-outline"></ion-icon>
+        <div class="profile" id="profile-icon">
+        <ion-icon name="person-outline"></ion-icon>  
         </div>
         <div class="mode-setting">        
           <ion-icon name="moon-outline"></ion-icon>
@@ -50,7 +53,30 @@ const mainHeader = {
         </a>
       </div>
     </div>
+  </div>
+  
+  <div class="overlay " id="user-menu-overlayer">
+    <div class="user-menu">
+      <div class="close-user-menu" id="close-user-menu">
+        <ion-icon name="close-outline"></ion-icon>
+      </div>
+      <div class="user-profile-preview">       
+    
+       ${userProfilePreview.render()}
+      </div>
+    </div>
   </div>`;
+  },
+  afterRender() {
+    const isLoggedIn = localStorageObj.getItem("user");
+    document.getElementById("profile-icon").addEventListener("click", () => {
+      isLoggedIn ? showUserMenu() : (document.location.hash = "/signin");
+    });
+    document.getElementById("close-user-menu").addEventListener("click", () => {
+      hideUserMenu();
+    });
+
+    userProfilePreview.afterRender();
   },
 };
 

@@ -24,21 +24,7 @@ const localStorageObj = {
     localStorage.removeItem(key);
   },
 
-  /**
-   * Clear all items from local storage.
-   */
-  clear() {
-    localStorage.clear();
-  },
-
-  /**
-   * Check if an item exists in local storage.
-   * @param {string} key - The key of the item to check.
-   * @returns {boolean} True if the item exists, otherwise false.
-   */
-  hasItem(key) {
-    return localStorage.getItem(key) !== null;
-  },
+  
 
   /**
    * Update an existing item in local storage by modifying it.

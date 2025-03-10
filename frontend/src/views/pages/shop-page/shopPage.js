@@ -25,6 +25,7 @@ const shopPage = {
    `;
   },
   afterRender() {
+    mainHeader.afterRender();
     shopProducts.afterRender();
   },
 };

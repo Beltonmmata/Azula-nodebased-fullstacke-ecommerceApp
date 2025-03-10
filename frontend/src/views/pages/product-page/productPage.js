@@ -8,10 +8,10 @@ import productsDetails from "../../components/products-details/productDetails";
 import newsletter from "../../components/newsletter/newsletter";
 import footer from "../../components/footer/footer";
 
-import products from "../../../data/products";
 const productPage = {
   afterRender() {
     // relatedProducts.afterRender();
+    mainHeader.afterRender();
     relatedProducts.afterRender();
     productsDetails.afterRender();
   },

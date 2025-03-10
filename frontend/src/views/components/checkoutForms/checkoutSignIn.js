@@ -1,3 +1,6 @@
+import localStorageObj from "../../../models/localstorage";
+import { login } from "../../../models/user";
+
 const checkoutSignIn = {
   render() {
     return `
@@ -25,25 +28,26 @@ const checkoutSignIn = {
     <div class="main-content-container container flex-center-container">
       <!-- sign In -->
       <div class="checkout-form-container flex-center-container">
-        <form id="sign-up-form">
+        <form id="sign-in-form">
           <h2>Sign In</h2>
+           <label for="email-sign-in">Email</label>
           <input
             type="email"
             name="email"
             id="email-sign-in"
-            placeholder="Enter your Email"
+            placeholder="eg.Rashan"
           />
+           <label for="password-sign-in">Password</label>
           <input
             type="password"
             name="password"
             id="password-sign-in"
-            placeholder="Input Password"
+            placeholder="eg. G%20Rashan"
           />
           <button id="login-btn" class="btn w-full primary-btn">Login</button>
           <div class="or flex-center-container">Or dont have an accont?</div>
-          <button id="sign-up-redirect" class="btn w-full secondary-btn">
-          Create Account
-          </button>
+          
+          <a href="/#/checkout/signup" id="sign-up-redirect" class="button-link btn w-full secondary-btn"> Create Account<a>
         </form>
       </div>
       </div>
@@ -51,15 +55,30 @@ const checkoutSignIn = {
     `;
   },
   afterRender() {
-    document.getElementById("login-btn").addEventListener("click", (e) => {
-      e.preventDefault();
-      document.location.hash = "/checkout/shipping";
-    });
     document
-      .getElementById("sign-up-redirect")
-      .addEventListener("click", (e) => {
+      .getElementById("sign-in-form")
+      .addEventListener("submit", async (e) => {
         e.preventDefault();
-        document.location.hash = "/checkout/signup";
+
+        const email = document.getElementById("email-sign-in").value;
+        const password = document.getElementById("password-sign-in").value;
+
+        if (!email || !password) {
+          alert("all fields should e filled");
+          return;
+        }
+
+        console.log(email, password);
+        try {
+          await login(email, password);
+        } catch (error) {
+          console.log("Login failed:" + error);
+        }
+        if (localStorageObj.getItem("user")) {
+          document.location.hash = "/checkout/shipping";
+        } else {
+          alert("Registration failed. please try again later");
+        }
       });
   },
 };

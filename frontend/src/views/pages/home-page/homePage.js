@@ -30,6 +30,7 @@ const homePage = {
    `;
   },
   afterRender() {
+    mainHeader.afterRender();
     featuredProducts.afterRender();
     // mainHeader.afteRender()
     slider.afterRender();

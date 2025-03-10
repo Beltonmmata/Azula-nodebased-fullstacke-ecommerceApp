@@ -8,6 +8,8 @@ import productPage from "./src/views/pages/product-page/productPage";
 import { hideLoading, showLoading } from "./src/controllers/loading";
 import checkoutPage from "./src/views/pages/checkout/checkout";
 import ordersPage from "./src/views/pages/orders/orders";
+import signin from "./src/views/pages/authentication/signin";
+import register from "./src/views/pages/authentication/signup";
 // import "./src/controllers/handleHomepageEvents";
 const routes = {
   "/": homePage,
@@ -16,6 +18,8 @@ const routes = {
   "/product/:id": productPage,
   "/checkout/:step": checkoutPage,
   "/orders": ordersPage,
+  "/signin": signin,
+  "/register": register,
 };
 const router = async () => {
   showLoading();

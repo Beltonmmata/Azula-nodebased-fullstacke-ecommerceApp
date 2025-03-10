@@ -21,11 +21,11 @@ const checkoutPage = {
     const stepPage = this.steps[id];
     return `${stepPage.render()}`;
   },
-  afterRender() {
+  afterRender: async () => {
     const { id } = parseRequestUrl();
-    const stepPage = this.steps[id];
+    const stepPage = checkoutPage.steps[id];
     if (stepPage.afterRender) {
-      stepPage.afterRender();
+      await stepPage.afterRender();
     }
   },
 };

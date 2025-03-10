@@ -1,32 +1,16 @@
-import localStorageObj from "../../../models/localstorage";
-import { signup } from "../../../models/user";
+import "./authenticator.css";
 
-const checkoutSignUp = {
+import homePage from "../home-page/homePage";
+
+import localStorageObj from "../../../models/localStorage";
+import { signup } from "../../../models/user";
+import reRender from "../../../controllers/reRender";
+const register = {
   render() {
-    return ` <!-- navigator -->
-    <div class="container flex-center-container">
-      <div class="navigator-container flex-center-container">
-        <div
-          class="navigator-item navigator-item-active sign-in flex-center-container"
-        >
-        <a href="/#/checkout/signup">Sign up</a>
-          
-        </div>
-        <div class="navigator-item shipping flex-center-container">
-          Shipping
-        </div>
-        <div class="navigator-item delivery flex-center-container">
-          Delivery
-        </div>
-        <div class="navigator-item payment flex-center-container">Payment</div>
-        <div class="navigator-item place-order flex-center-container">
-          Order
-        </div>
-      </div>
-    </div> 
-      <div class="main-content-container container flex-center-container">
-     <!-- sign Up-->
-      <div class="checkout-form-container flex-center-container">
+    return `
+
+    <div class="auth-container flex-center-container">
+    <div class="w-full flex-center-container">
         <form id="sign-up-form">
           <h2>Sign up</h2>
            <label for="username-sign-up">Username</label>
@@ -61,12 +45,11 @@ const checkoutSignUp = {
             Create Account
           </button>
           <div class="or flex-center-container">Or already have an accont?</div>
-          <a href="/#/checkout/signin" id="sign-in-redirect" class="button-link btn w-full secondary-btn">Login<a>
+          <a href="/signin" id="sign-in-redirect" class="button-link btn w-full secondary-btn">Login<a>
         </form>
-      </div>
-      </div>
-
-    `;
+        </div>
+        </div>
+        `;
   },
   afterRender() {
     document
@@ -89,18 +72,18 @@ const checkoutSignUp = {
           alert("password and confirm password doesnot match");
           return;
         }
-        console.log(name, email, password);
         try {
           await signup(name, email, password);
         } catch (error) {
           console.log("SignUp failed:" + error);
         }
         if (localStorageObj.getItem("user")) {
-          document.location.hash = "/checkout/shipping";
+          // document.location.hash = "/";
+          reRender(homePage);
         } else {
           alert("Registration failed. please try again later");
         }
       });
   },
 };
-export default checkoutSignUp;
+export default register;

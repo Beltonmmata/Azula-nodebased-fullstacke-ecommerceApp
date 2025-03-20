@@ -1,6 +1,7 @@
 import axios from "axios";
 import localStorageObj from "./localstorage";
 import backendUrl from "./backendUrl";
+import { showMessage } from "../controllers/showMessage";
 
 export const signup = async (name, email, password) => {
   try {
@@ -27,11 +28,10 @@ export const login = async (email, password) => {
     );
     localStorageObj.setItem("token", data.token);
     localStorageObj.setItem("user", data.user);
-    console.log("login sucessfully");
 
     return data;
   } catch (err) {
-    alert(err.message);
+    showMessage("Loggin failed", "error");
   }
 };
 export const logout = () => {

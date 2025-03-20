@@ -3,6 +3,7 @@ import homePage from "../../pages/home-page/homePage";
 import { hideUserMenu } from "../../../controllers/userMenuOverlay";
 import localStorageObj from "../../../models/localstorage";
 import { logout } from "../../../models/user";
+import { showMessage } from "../../../controllers/showMessage";
 
 const userProfilePreview = {
   render() {
@@ -22,8 +23,9 @@ const userProfilePreview = {
   afterRender() {
     document.getElementById("logout-btn").addEventListener("click", () => {
       logout();
+      showMessage("logged out succesfully", "success");
       hideUserMenu();
-      this.render();
+      reRender(homePage);
     });
   },
 };

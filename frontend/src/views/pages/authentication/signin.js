@@ -2,6 +2,7 @@ import "./authenticator.css";
 import { hideUserMenu } from "../../../controllers/userMenuOverlay";
 import localStorageObj from "../../../models/localStorage";
 import { login } from "../../../models/user";
+import { showMessage } from "../../../controllers/showMessage";
 
 const signin = {
   render() {
@@ -43,19 +44,18 @@ const signin = {
         const password = document.getElementById("password-sign-in").value;
 
         if (!email || !password) {
-          alert("all fields should e filled");
+          showMessage("all fields should e filled", "error");
+
           return;
         }
         try {
           await login(email, password);
+          if (localStorageObj.getItem("user")) {
+            showMessage("Loggin susessfully", "success");
+            document.location.hash = "/";
+          }
         } catch (error) {
-          console.log("Login failed:" + error);
-        }
-        if (localStorageObj.getItem("user")) {
-          hideUserMenu();
-          this.render();
-        } else {
-          alert("Registration failed. please try again later");
+          showMessage(`Login failed:${error}`, "error");
         }
       });
   },

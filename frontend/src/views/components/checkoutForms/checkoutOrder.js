@@ -40,8 +40,8 @@ const checkoutOrder = {
     `;
   },
 
-  afterRender() {
-    placeOrderSummary.afterRender();
+  afterRender: async () => {
+    await placeOrderSummary.afterRender();
   },
 };
 

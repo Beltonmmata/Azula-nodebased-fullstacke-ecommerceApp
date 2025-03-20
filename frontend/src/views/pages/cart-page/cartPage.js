@@ -66,6 +66,7 @@ const cartPage = {
   },
   afterRender() {
     cartList.afterRender();
+    cartSummary.afterRender();
   },
 };
 export default cartPage;

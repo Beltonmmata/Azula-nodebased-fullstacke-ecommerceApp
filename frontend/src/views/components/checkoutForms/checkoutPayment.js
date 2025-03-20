@@ -92,7 +92,9 @@ const checkoutPayment = {
         e.preventDefault();
 
         console.log("pay on delivery clicked");
-        localStorageObj.setItem("paymentMethode", "Pay on Delivery");
+        localStorageObj.setItem("payment", {
+          paymentMethod: "Pay on Delivery",
+        });
         document.location.hash = "/checkout/placeorder";
       });
   },

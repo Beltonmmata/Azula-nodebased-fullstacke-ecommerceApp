@@ -4,8 +4,6 @@ import backendUrl from "./backendUrl";
 import { showMessage } from "../controllers/showMessage";
 
 export const createOrder = async (
-  token,
-  userId,
   orderItems,
   deliveryOption,
   shipping,
@@ -18,7 +16,7 @@ export const createOrder = async (
   const userId = id;
   try {
     const { data } = await axios.post(
-      `${backendUrl}/order`,
+      `${backendUrl}/orders`,
       {
         userId,
         orderItems,
@@ -40,6 +38,6 @@ export const createOrder = async (
 
     return data;
   } catch (err) {
-    showMessage(err.message, "error");
+    showMessage(err.response?.data?.message || err.message, "error");
   }
 };

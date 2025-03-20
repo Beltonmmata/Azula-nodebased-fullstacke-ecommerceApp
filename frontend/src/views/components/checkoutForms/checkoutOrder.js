@@ -1,5 +1,9 @@
+import placeOrderOverview from "../place-order/placeOrderOverview";
+import placeOrderSummary from "../place-order/placeOrderSummary";
+import "./../place-order/placeOrder.css";
+
 const checkoutOrder = {
-  render() {
+  render: async () => {
     return `
       <!-- navigator -->
       <div class="container flex-center-container">
@@ -22,32 +26,22 @@ const checkoutOrder = {
         </div>
       </div>
 
-      <div class="main-content-container container flex-center-container">
+     
         <!-- place order-->
-        <div class="checkout-form-container flex-center-container">
-          <form id="place-order-form">
-            <h2>Place Order</h2>
-            <button id="place-order-btn" class="btn w-full primary-btn">
-              Place Order
-            </button>
-          </form>  
+       <div class="container placeorder-container w-full">
+        <div class="placeorder-left w-full">
+         ${await placeOrderOverview.render()}
         </div>
-      </div>  
+        <div class="placeorder-right w-full">
+        ${placeOrderSummary.render()}
+        </div>
+       </div>
+       
     `;
   },
 
   afterRender() {
-    const placeOrderBtn = document.getElementById("place-order-btn");
-
-    if (placeOrderBtn) {
-      placeOrderBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        console.log("Order placed successfully!");
-        document.location.hash = "/orders";
-      });
-    } else {
-      console.warn("place-order-btn not found in checkoutOrder afterRender()");
-    }
+    placeOrderSummary.afterRender();
   },
 };
 

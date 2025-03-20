@@ -52,9 +52,31 @@ const cartSummary = {
             </li>
         </ul>
         <div class="procede-to-checkout-btn">
-            <a href="/#/checkout/signin">Procede To Checkout</a>
+          <button id="procede-to-checkout-btn">Procede To Checkout</button>
+             <a href="/#/checkout/signin">Procede To Checkout</a>
+          
+          
         </div>
         `;
+  },
+  afterRender() {
+    document
+      .getElementById("procede-to-checkout-btn")
+      .addEventListener("click", () => {
+        const userDetails = localStorageObj.getItem("user");
+        const shippingDetails = localStorageObj.getItem("shipping");
+        const deliveryDetails = localStorageObj.getItem("delivery");
+
+        if (userDetails) {
+          document.location.hash = "/checkout/shipping";
+        } else if (shippingDetails) {
+          document.location.hash = "/checkout/delivery";
+        } else if (deliveryDetails) {
+          document.location.hash = "/checkout/payment";
+        } else {
+          document.location.hash = "/checkout/signin";
+        }
+      });
   },
 };
 export default cartSummary;

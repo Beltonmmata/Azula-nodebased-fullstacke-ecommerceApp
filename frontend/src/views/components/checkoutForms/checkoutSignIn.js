@@ -75,7 +75,16 @@ const checkoutSignIn = {
           console.log("Login failed:" + error);
         }
         if (localStorageObj.getItem("user")) {
-          document.location.hash = "/checkout/shipping";
+          const shippingDetails = localStorageObj.getItem("shipping");
+          const deliveryDetails = localStorageObj.getItem("delivery");
+
+          if (shippingDetails) {
+            document.location.hash = "/checkout/delivery";
+          } else if (deliveryDetails) {
+            document.location.hash = "/checkout/payment";
+          } else {
+            document.location.hash = "/checkout/shipping";
+          }
         } else {
           alert("Registration failed. please try again later");
         }

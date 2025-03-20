@@ -16,11 +16,17 @@ const checkoutPage = {
     payment: checkoutPayment,
     placeorder: checkoutOrder,
   },
-  render() {
+  render: async () => {
     const { id } = parseRequestUrl();
-    const stepPage = this.steps[id];
-    return `${stepPage.render()}`;
+    const stepPage = checkoutPage.steps[id]; // Use 'checkoutPage' instead of 'this'
+
+    if (!stepPage) {
+      return `<h2>Invalid Checkout Step</h2>`;
+    }
+
+    return stepPage.render ? await stepPage.render() : "";
   },
+
   afterRender: async () => {
     const { id } = parseRequestUrl();
     const stepPage = checkoutPage.steps[id];

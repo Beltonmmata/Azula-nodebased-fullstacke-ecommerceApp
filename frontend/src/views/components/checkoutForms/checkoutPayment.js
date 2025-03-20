@@ -1,3 +1,4 @@
+import localStorageObj from "../../../models/localStorage";
 const checkoutPayment = {
   render() {
     return `
@@ -70,7 +71,7 @@ const checkoutPayment = {
             Pay Now
           </button>
           <div class="or flex-center-container">Or</div>
-          <button id="pay-on-delivery-btn">Pay on Delivery</button>
+          <button id="pay-on-delivery-btn" class="btn w-full secondary-btn" >Pay on Delivery</button>
         </form>
       </div>
       
@@ -89,8 +90,9 @@ const checkoutPayment = {
       .getElementById("pay-on-delivery-btn")
       .addEventListener("click", (e) => {
         e.preventDefault();
-        console.log("pay on delivery clicked");
 
+        console.log("pay on delivery clicked");
+        localStorageObj.setItem("paymentMethode", "Pay on Delivery");
         document.location.hash = "/checkout/placeorder";
       });
   },

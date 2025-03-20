@@ -121,7 +121,13 @@ const checkoutShipping = {
           phoneNumber,
         });
         if (localStorageObj.getItem("shipping")) {
-          document.location.hash = "/checkout/delivery";
+          const deliveryDetails = localStorageObj.getItem("delivery");
+
+          if (deliveryDetails) {
+            document.location.hash = "/checkout/payment";
+          } else {
+            document.location.hash = "/checkout/delivery";
+          }
         } else {
           alert("Error saving shipping details. Please try again.");
         }

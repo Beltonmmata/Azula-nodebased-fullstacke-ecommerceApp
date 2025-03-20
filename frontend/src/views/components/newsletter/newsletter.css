@@ -10,7 +10,6 @@
     var(--cooprate-color)
   );
   padding: 30px 10%;
-  border-radius: var(--unit-m);
 
   div {
     display: flex;

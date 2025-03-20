@@ -1,26 +1,37 @@
 const express = require("express");
 require("dotenv").config();
 require("express-async-errors");
+
 const app = express();
 const cors = require("cors");
+
+//importing routes
 const Product = require("./routes/products");
-const Authantication = require("./routes/authentication");
-//const Product = require("./models/product");
+const Authentication = require("./routes/authentication");
+const Users = require("./routes/user");
+const Order = require("./routes/orderRouter");
+//import dbConnecting
 const connectDB = require("./db/connect");
-// const notFound = require("./middleware/not-found");
-// const errorHandlerMiddleware = require("./middleware/error-handler");
+//importing middleware
+const notFound = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
 
-// middleware
-
+// using middleware
 app.use(express.static("./public"));
 app.use(express.json());
 app.use(cors());
-
-// routes
-// app.use(notFound);
-// app.use(errorHandlerMiddleware);
+//using routes
 app.use("/api/v1/products", Product);
-app.use("/api/v1/authentication", Authantication);
+app.use("/api/v1/authentication", Authentication);
+app.use("/api/v1/users", Users);
+app.use("/api/v1/orders", Order);
+//error
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+app.use((err, req, res, next) => {
+  console.error("Error Stack:", err.stack);
+  res.status(err.statusCode || 500).json({ message: err.message });
+});
 
 const port = process.env.PORT || 5000;
 

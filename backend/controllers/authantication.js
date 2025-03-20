@@ -21,8 +21,9 @@ const registerUser = async (req, res) => {
 
   res.status(201).json({
     message: "User registered successfully",
-    token,
+    token: `Bearer ${token}`,
     user: {
+      id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
@@ -43,8 +44,9 @@ const loginUser = async (req, res) => {
   const token = generateToken(user._id);
   res.json({
     message: "Login successful",
-    token,
+    token: `Bearer ${token}`,
     user: {
+      id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,

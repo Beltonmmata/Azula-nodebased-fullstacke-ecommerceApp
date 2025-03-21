@@ -10,7 +10,11 @@ const {
   deleteOrder,
 } = require("../controllers/orderController");
 
-router.route("/").get(getAllOrders).post(isAuth, createOrder);
-router.route("/:id").get(getOrder).patch(updateOrder).delete(deleteOrder);
+router.route("/").get(isAuth, getAllOrders).post(isAuth, createOrder);
+router
+  .route("/:id")
+  .get(isAuth, getOrder)
+  .patch(isAuth, updateOrder)
+  .delete(isAuth, deleteOrder);
 
 module.exports = router;

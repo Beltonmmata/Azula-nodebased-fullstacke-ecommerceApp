@@ -7,7 +7,7 @@ import cartPage from "./src/views/pages/cart-page/cartPage";
 import productPage from "./src/views/pages/product-page/productPage";
 import { hideLoading, showLoading } from "./src/controllers/loading";
 import checkoutPage from "./src/views/pages/checkout/checkout";
-import ordersPage from "./src/views/pages/orders/orders";
+import ordersPage from "./src/views/pages/my-orders/myOrders";
 import signin from "./src/views/pages/authentication/signin";
 import register from "./src/views/pages/authentication/signup";
 // import "./src/controllers/handleHomepageEvents";

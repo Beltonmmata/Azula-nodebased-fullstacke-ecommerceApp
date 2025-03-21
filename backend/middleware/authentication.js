@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user"); // Import User model
-const { UnauthenticatedError } = require("../errors");
+const { UnauthenticatedError, UnauthorizedError } = require("../errors");
 
 const isAuth = async (req, res, next) => {
   const authHeader = req.header("Authorization");
@@ -30,4 +30,11 @@ const isAuth = async (req, res, next) => {
   }
 };
 
-module.exports = { isAuth };
+const isAdmin = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    throw new UnauthorizedError("Access denied. Admins only.");
+  }
+  next();
+};
+
+module.exports = { isAuth, isAdmin };

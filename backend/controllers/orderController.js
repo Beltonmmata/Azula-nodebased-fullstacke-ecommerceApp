@@ -9,7 +9,13 @@ const {
 
 const { sendEmail } = require("../utils/emailServices");
 const getAllOrders = async (req, res) => {
-  const orders = await Order.find({});
+  let orders;
+  if (req.user.isAdmin) {
+    orders = await Order.find({}).sort({ createdAt: -1 });
+  } else {
+    orders = await Order.find({ userId: req.user.id }).sort({ createdAt: -1 });
+  }
+
   if (orders.length === 0) {
     throw new NotFoundError("No orders found");
   }

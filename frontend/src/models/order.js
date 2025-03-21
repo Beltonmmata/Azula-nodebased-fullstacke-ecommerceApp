@@ -41,3 +41,34 @@ export const createOrder = async (
     showMessage(err.response?.data?.message || err.message, "error");
   }
 };
+
+export const getAllOrders = async () => {
+  try {
+    const token = localStorageObj.getItem("token");
+    const { data } = await axios.get(`${backendUrl}/orders`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    });
+    return data.orders;
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    return [];
+  }
+};
+export const getOrders = async (id) => {
+  try {
+    const token = localStorageObj.getItem("token");
+    const { data } = await axios.get(`${backendUrl}/orders/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    });
+    return data.orders;
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    return [];
+  }
+};

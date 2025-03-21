@@ -1,0 +1,132 @@
+.main {
+  max-width: 900px;
+  margin: 90px auto 100px;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 40px;
+}
+
+.order-container {
+  border: 1px solid rgb(213, 217, 217);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.order-header {
+  background-color: rgb(240, 242, 242);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px;
+  flex-wrap: wrap;
+}
+
+.order-header-left-section,
+.order-header-right-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-header-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.order-date,
+.order-total,
+.order-status {
+  margin-bottom: 10px;
+}
+
+.order-status {
+  font-weight: 600;
+  color: #007600;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 575px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+}
+
+/* Order Details Section */
+.order-details-grid {
+  padding: 20px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.product-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+}
+
+.product-quantity,
+.product-price {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 800px) {
+  .order-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .order-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Action Buttons */
+.order-actions {
+  text-align: center;
+  padding: 15px;
+}
+
+.track-package-button {
+  width: 180px;
+  padding: 10px;
+  background-color: var(--color-call-to-action);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.track-package-button:hover {
+  background-color: var(--hover-color-call-to-action);
+}
+
+/* Responsive button sizing */
+@media (max-width: 450px) {
+  .track-package-button {
+    width: 100%;
+  }
+}

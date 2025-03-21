@@ -23,7 +23,9 @@ const routes = {
 };
 const router = async () => {
   showLoading();
-  const { resource, id, action } = parseRequestUrl(); // Get the request data
+  const { resource, id, action, query } = parseRequestUrl(); // ✅ Extract query parameters
+
+  // ✅ Construct base path (ignoring query parameters)
   const parseUrl =
     (resource ? `/${resource}` : "/") +
     (id ? `/${id}` : "") +
@@ -31,11 +33,11 @@ const router = async () => {
 
   let page = routes[parseUrl];
 
-  // If no exact match is found, check for dynamic routes
+  // ✅ If no exact match, check for dynamic routes (e.g., `/shop/:id`)
   if (!page) {
     Object.keys(routes).forEach((route) => {
       if (route.includes(":")) {
-        const baseRoute = route.split("/:")[0]; // Extract "/product" from "/product/:id"
+        const baseRoute = route.split("/:")[0]; // Extract "/shop" from "/shop/:id"
         if (parseUrl.startsWith(baseRoute)) {
           page = routes[route]; // Assign the correct page
         }
@@ -43,17 +45,22 @@ const router = async () => {
     });
   }
 
-  // If no match is found, use errorPage
-  page = page ? page : errorPage;
-
-  const pageHtml = page.render ? await page.render() : page;
-  document.querySelector("#app").innerHTML = pageHtml;
-
-  // document.querySelector("#app").innerHTML = page.render();
-  // document.querySelector("#app").innerHTML = page.render ? page.render() : page;
-  if (page.afterRender) {
-    page.afterRender();
+  // ✅ Ensure base path works even with query parameters
+  if (!page && routes[`/${resource}`]) {
+    page = routes[`/${resource}`]; // ✅ Fixes `/shop?category=all`
   }
+
+  // ✅ Pass query parameters to the matched page
+  if (page) {
+    const pageHtml = page.render ? await page.render(query) : page;
+    document.querySelector("#app").innerHTML = pageHtml;
+    if (page.afterRender) {
+      page.afterRender();
+    }
+  } else {
+    document.querySelector("#app").innerHTML = errorPage.render();
+  }
+
   hideLoading();
 };
 

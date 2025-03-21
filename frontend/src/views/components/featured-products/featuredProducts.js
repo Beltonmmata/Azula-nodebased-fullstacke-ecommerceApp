@@ -12,7 +12,7 @@ const featuredProducts = {
 
       button.addEventListener("click", () => {
         cart.addToCart(productId);
-        console.log("btuy now clicked");
+        //console.log("btuy now clicked");
 
         document.location.hash = "/cart";
       });
@@ -24,15 +24,15 @@ const featuredProducts = {
         cart.addToCart(productId);
 
         reRender(homePage);
-        console.log(cart.userCart);
+        // console.log(cart.userCart);
       });
     });
 
-    console.log("render btn event");
+    //console.log("render btn event");
   },
   render: async () => {
     const products = await getProducts();
-    console.log(products);
+    //console.log(products);
     return `
           <!-- featured products -->
           <div class="featured-products-container">

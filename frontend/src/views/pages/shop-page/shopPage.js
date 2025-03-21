@@ -6,14 +6,16 @@ import newsletter from "../../components/newsletter/newsletter";
 import "./shopPage.css";
 
 const shopPage = {
-  render: async () => {
+  render: async (query) => {
+    const category = query?.category || null;
+
     return `
     <header>
        ${mainHeader.render()} 
     </header>
     <main>
       <section id='products-section'>
-          ${await shopProducts.render()}
+          ${await shopProducts.render(category)}
       </section>
       <section id='newsletter-section'>
           ${newsletter.render()}

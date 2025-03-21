@@ -30,13 +30,14 @@ const shopProducts = {
 
     console.log("render btn event");
   },
-  render: async () => {
+  render: async (category) => {
+    console.log("category:", category);
     const products = await getProducts();
     return `
           <!-- featured products -->
           <div class="featured-products-container">
           <div class="featured-products-header">
-            <h2 class="section-subtitle">All categories</h2>
+            <h2 class="section-subtitle">${category} category</h2>
            
           </div>
 

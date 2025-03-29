@@ -48,6 +48,7 @@ const slider = {
         </div>
       `;
     }
+    this.updateActiveDot();
   },
 
   // Function to start auto-sliding
@@ -71,22 +72,47 @@ const slider = {
 
   // Attach event listeners after rendering
   afterRender() {
-    document
-      .querySelector(".slide-previous")
-      ?.addEventListener("click", () => this.prevSlide());
-    document
-      .querySelector(".slide-next")
-      ?.addEventListener("click", () => this.nextSlide());
+    const dotsContainer = document.querySelector(".slider-dots");
+    dotsContainer.innerHTML = this.slides
+      .map((_, index) => `<span class="dot" data-index="${index}"></span>`)
+      .join("");
 
-    this.startSlider(); // Start auto-sliding after rendering
+    this.updateActiveDot();
+
+    document.querySelectorAll(".dot").forEach((dot) => {
+      dot.addEventListener("click", (e) => {
+        this.currentIndex = parseInt(e.target.dataset.index);
+        this.showSlide(this.currentIndex);
+        this.updateActiveDot();
+      });
+    });
+
+    document.querySelector(".slide-previous")?.addEventListener("click", () => {
+      this.prevSlide();
+      this.updateActiveDot();
+    });
+
+    document.querySelector(".slide-next")?.addEventListener("click", () => {
+      this.nextSlide();
+      this.updateActiveDot();
+    });
+
+    this.startSlider();
+  },
+
+  updateActiveDot() {
+    document.querySelectorAll(".dot").forEach((dot, index) => {
+      dot.classList.toggle("active", index === this.currentIndex);
+    });
   },
 
   // Render the slider component
   render() {
     return `
-      <div class="section-container">
-        <div class="slider-container container">
+      
+        <div class="slider-container">
           <div class="slide"></div>
+          <div class="slider-dots"></div>
           <div class="slide-previous">
             <ion-icon name="chevron-back-outline"></ion-icon>
           </div>
@@ -94,7 +120,7 @@ const slider = {
             <ion-icon name="chevron-forward-outline"></ion-icon>
           </div>
         </div>
-      </div>
+      
     `;
   },
 };

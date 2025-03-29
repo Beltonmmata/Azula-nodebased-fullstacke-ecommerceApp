@@ -1,15 +1,24 @@
 import backendUrl from "./backendUrl";
 import axios from "axios";
 
-export const getProducts = async () => {
+export const getProducts = async (queryParams = {}) => {
   try {
-    const { data } = await axios.get(`${backendUrl}/products`, {
+    // Convert queryParams object into a URL query string
+    const queryString = new URLSearchParams(queryParams).toString();
+
+    // Construct full URL (append query only if it exists)
+    const url = queryString
+      ? `${backendUrl}/products?${queryString}`
+      : `${backendUrl}/products`;
+
+    const { data } = await axios.get(url, {
       headers: { "Content-Type": "application/json" },
     });
-    return data.product;
+
+    return data.products;
   } catch (err) {
     console.error("Error fetching products:", err);
-    return [];
+    return { products: [] }; // ✅ Ensure consistent return structure
   }
 };
 

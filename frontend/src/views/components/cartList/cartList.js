@@ -5,6 +5,7 @@ import reRender from "../../../controllers/reRender";
 import cartPage from "../../pages/cart-page/cartPage";
 import "./cartList.css";
 import { getProducts } from "../../../models/products";
+import { showMessage } from "../../../controllers/showMessage";
 
 const cartList = {
   render: async () => {
@@ -75,7 +76,7 @@ const cartList = {
         const productId = event.target.getAttribute("data-product-id");
         const newCartQuontity = parseInt(event.target.value, 10);
         cart.updateCartQuontity(productId, newCartQuontity);
-        console.log(`quontity updated ${productId} , ${newCartQuontity}`);
+        showMessage(`quontity updated ${newCartQuontity}`, "success");
         await reRender(cartPage);
       });
     });
@@ -85,8 +86,9 @@ const cartList = {
 
       button.addEventListener("click", async () => {
         cart.removeFromCart(productId);
-        console.log(`${productId} deleted from cart`);
-        console.log(cart.userCart);
+        showMessage(`${productId} deleted from cart`, "success");
+        //console.log(`${productId} deleted from cart`);
+        //console.log(cart.userCart);
         await reRender(cartPage);
       });
     });

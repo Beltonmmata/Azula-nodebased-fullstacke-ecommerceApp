@@ -66,7 +66,7 @@ export const getOrders = async (id) => {
         Authorization: `${token}`,
       },
     });
-    return data.orders;
+    return data.order;
   } catch (err) {
     console.error("Error fetching orders:", err);
     return [];

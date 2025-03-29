@@ -52,9 +52,7 @@ const cartSummary = {
             </li>
         </ul>
         <div class="procede-to-checkout-btn">
-          <button id="procede-to-checkout-btn">Procede To Checkout</button>
-             <a href="/#/checkout/signin">Procede To Checkout</a>
-          
+          <button id="procede-to-checkout-btn">Procede To Checkout</button>      
           
         </div>
         `;

@@ -58,15 +58,7 @@ const checkoutPayment = {
               <div class="radio-input-label">Stripe</div>
               <div class="radio-input-text font-danger">Not availlable now</div>
             </div>
-          </div>
-
-          <input
-            type="number"
-            name="phone-number"
-            id="phone-number-shipping-address"
-            placeholder="Enter your Mpesa phone number"
-          />
-
+          </div>     
           <button id="payment-btn" class="btn w-full primary-btn" >
             Pay Now
           </button>

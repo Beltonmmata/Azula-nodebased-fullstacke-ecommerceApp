@@ -1,4 +1,3 @@
-import { showMessage } from "../../../controllers/showMessage";
 import {
   hideUserMenu,
   showUserMenu,
@@ -10,7 +9,7 @@ import searchBar from "../search-bar/searchbar";
 import userProfilePreview from "../user-profile-preview/userProfilePreview";
 import "./mainHeader.css";
 
-const mainHeader = {
+const shopPageHeader = {
   afterRender() {
     searchBar.afterRender();
   },
@@ -33,11 +32,8 @@ const mainHeader = {
           zula
         </div>
       </a> 
-       
-      <div class="header-end-container">
-        <div class="search-small-screens" id="search-small-screens">
-        <ion-icon name="search-outline"></ion-icon>  
-        </div>
+         
+      <div class="header-end-container">        
         <div class="profile" id="profile-icon">
         <ion-icon name="person-outline"></ion-icon>  
         </div>
@@ -51,6 +47,7 @@ const mainHeader = {
           </div>
         </a>
       </div>
+        
     </div>
   </div>
   
@@ -64,6 +61,7 @@ const mainHeader = {
        ${userProfilePreview.render()}
       </div>
     </div>
+
   </div>`;
   },
   afterRender() {
@@ -74,12 +72,9 @@ const mainHeader = {
     document.getElementById("close-user-menu").addEventListener("click", () => {
       hideUserMenu();
     });
-    document
-      .getElementById("search-small-screens")
-      .addEventListener("click", () => {});
 
     userProfilePreview.afterRender();
   },
 };
 
-export default mainHeader;
+export default shopPageHeader;

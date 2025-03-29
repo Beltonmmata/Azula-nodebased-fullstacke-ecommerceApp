@@ -10,6 +10,7 @@ import checkoutPage from "./src/views/pages/checkout/checkout";
 import ordersPage from "./src/views/pages/my-orders/myOrders";
 import signin from "./src/views/pages/authentication/signin";
 import register from "./src/views/pages/authentication/signup";
+import trackOrder from "./src/views/pages/track-order/trackOrder";
 // import "./src/controllers/handleHomepageEvents";
 const routes = {
   "/": homePage,
@@ -20,6 +21,7 @@ const routes = {
   "/orders": ordersPage,
   "/signin": signin,
   "/register": register,
+  "/trackorder": trackOrder,
 };
 const router = async () => {
   showLoading();

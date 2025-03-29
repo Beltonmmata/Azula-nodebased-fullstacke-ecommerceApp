@@ -1,88 +1,171 @@
-/* slider container */
+/* Clean Hero Section Styles */
 .slider-container {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 50vh;
-
-  background-image: linear-gradient(
+  height: 84vh;
+  background: linear-gradient(
     120deg,
     var(--cooprate-color),
     var(--color-primary-30)
   );
   position: relative;
+  overflow: hidden;
+  padding: 10px 10%;
 }
+
 .slide {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
-  height: 50vh;
-
-  .left-raw,
-  .right-raw {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
-    flex-basis: 50%;
-  }
-  .left-raw {
-    flex-direction: column;
-    align-items: flex-start;
-    h2 {
-      margin-bottom: 10px;
-      font-size: var(--unit-xl);
-      color: var(--color-secondary-30);
-    }
-
-    p {
-      margin-bottom: 10px;
-      font-size: 22px;
-      color: var(--color-secondary-10);
-      font-size: var(--unit-m);
-    }
-    .go-to-shop-btn {
-      background-color: var(--color-call-to-action);
-      padding: 10px;
-      color: var(--color-secondary-60);
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: var(--fw-600);
-      transition: 1s all ease;
-      border: none;
-      outline: none;
-
-      &:hover {
-        background-color: var(--hover-color-call-to-action);
-        transform: translateX(10px);
-      }
-    }
-  }
-  .right-raw {
-    width: 50%;
-    height: 50vh;
-    padding: 20px;
-    img {
-      object-fit: contain;
-      position: center;
-    }
-  }
+  max-width: 1200px;
+  height: 84vh;
+  gap: 40px;
 }
 
+.left-raw {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+}
+
+.left-raw h2 {
+  font-size: 2.5rem;
+  color: var(--color-secondary-30);
+  margin-bottom: 15px;
+}
+
+.left-raw p {
+  font-size: 1.2rem;
+  color: var(--color-secondary-10);
+  margin-bottom: 20px;
+}
+
+.go-to-shop-btn {
+  background-color: var(--color-call-to-action);
+  padding: 10px;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.go-to-shop-btn:hover {
+  background-color: var(--hover-color-call-to-action);
+  transform: translateY(-3px);
+}
+
+.right-raw {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-raw img {
+  width: 100%;
+  max-width: 500px;
+  object-fit: contain;
+}
+
+/* Navigation Arrows */
 .slide-previous,
 .slide-next {
-  width: 30px;
-  height: 30px;
-  font-size: 30px;
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
+.slide-previous:hover,
+.slide-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
 .slide-previous {
-  left: 0;
+  left: 15px;
 }
+
 .slide-next {
-  right: 0;
+  right: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .slide {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .left-raw {
+    align-items: center;
+    padding: 0;
+  }
+  .right-raw {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    height: auto;
+    padding: 40px 20px;
+  }
+  .left-raw h2 {
+    font-size: 2rem;
+  }
+  .left-raw p {
+    font-size: 1rem;
+  }
+  .right-raw img {
+    max-width: 100%;
+  }
+  .slide-previous,
+  .slide-next {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+}
+
+/* Dots Container */
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+/* Dots */
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Active Dot */
+.dot.active {
+  background-color: white;
+  transform: scale(1.2);
 }

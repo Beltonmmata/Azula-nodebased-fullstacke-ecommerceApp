@@ -1,0 +1,74 @@
+.sarch-box-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+}
+#sarch-box-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.category-search-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  overflow: hidden; /* Prevents content from overflowing */
+}
+
+.category-filter {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  border-right: 1px solid var(--border-color); /* Add separation between dropdown and input */
+}
+
+.category-filter select {
+  border: none;
+  background-color: var(--bg-color);
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+#search-bar-input {
+  flex: 1; /* Take remaining space */
+  padding: 10px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  background-color: var(--bg-color);
+}
+
+#searchbar-btn {
+  background-color: var(--color-call-to-action);
+  height: 100%;
+  width: 40px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+#searchbar-btn:hover {
+  background-color: var(--hover-color-call-to-action);
+}
+
+#sort-selector {
+  display: flex;
+
+  border: none;
+  background-color: var(--bg-color);
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}

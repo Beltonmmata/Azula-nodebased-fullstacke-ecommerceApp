@@ -11,7 +11,7 @@ export const parseRequestUrl = () => {
       query[key] = value;
     });
   }
-
+  console.log("Parsed URL:", { resource: request[1], query });
   return {
     resource: request[1],
     id: request[2],

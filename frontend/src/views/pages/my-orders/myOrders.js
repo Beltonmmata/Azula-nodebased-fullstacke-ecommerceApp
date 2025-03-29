@@ -30,7 +30,7 @@ const ordersPage = {
                         <div class="product-name">Product: ${name}</div>
                         <div class="product-quantity">Quantity: ${item.quantity}</div>
                         <div class="product-price">KES ${item.priceAtOrder}</div>
-                      </div>
+                    </div>
                     </div>
                   `;
                 })
@@ -64,9 +64,8 @@ const ordersPage = {
                 </div>
 
                 <div class="order-actions">
-                  <button class="track-package-button btn secondary-btn">
-                    Track package
-                  </button>
+      
+                   <a class="track-package-button btn secondary-btn" href="/#/trackorder?orderId=${_id}">Track package</a>  
                 </div>
               </div>
             `;

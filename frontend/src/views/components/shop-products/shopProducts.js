@@ -27,17 +27,33 @@ const shopProducts = {
         console.log(cart.userCart);
       });
     });
+    // Pagination event listeners
+    document.querySelector(".previous-page").addEventListener("click", () => {
+      let urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
+      let currentPage = parseInt(urlParams.get("page")) || 1;
+      if (currentPage > 1) {
+        urlParams.set("page", currentPage - 1);
+        document.location.hash = `/shop?${urlParams.toString()}`;
+      }
+    });
 
-    console.log("render btn event");
+    document.querySelector(".next-page").addEventListener("click", () => {
+      let urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
+      let currentPage = parseInt(urlParams.get("page")) || 1;
+      urlParams.set("page", currentPage + 1);
+      document.location.hash = `/shop?${urlParams.toString()}`;
+    });
   },
-  render: async (category) => {
-    console.log("category:", category);
-    const products = await getProducts();
+  render: async (query) => {
+    const products = await getProducts(query);
+    const currentPage = query.page;
     return `
           <!-- featured products -->
           <div class="featured-products-container">
           <div class="featured-products-header">
-            <h2 class="section-subtitle">${category} category</h2>
+            <h2 class="section-subtitle">${
+              query.category || "All"
+            } category</h2>
            
           </div>
 
@@ -52,7 +68,7 @@ const shopProducts = {
                     <ion-icon name="arrow-back-circle-outline"></ion-icon>
                   </div>
                   <div class="page flex-center-container">
-                    <p>4</p>
+                    <p>${currentPage || "1"}</p>
                   </div>
                   <div class="next-page flex-center-container">
                     <ion-icon name="arrow-forward-circle-outline"></ion-icon>

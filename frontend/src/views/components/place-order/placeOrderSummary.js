@@ -33,12 +33,12 @@ const placeOrderSummary = {
               <div class="figure">ksh.300</div>
             </li>
           </ul>
-          <div class="procede-to-checkout-btn">
+          <div class="place-order-btn">
              <button id="place-order-btn" class="btn w-full primary-btn">
               Place Order
             </button>
           </div>
-          <!-- <button class="procede-to-checkout-btn">Procede To Checkout</button> -->
+          
         </div>
     `;
   },

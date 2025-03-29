@@ -235,6 +235,8 @@
           border-radius: var(--unit-xxs);
           padding: var(--unit-xxs);
           width: 100%;
+          border: none;
+          overflow: none;
           font-weight: var(--fw-600);
           font-size: var(--unit-l);
           background-color: var(--color-call-to-action);

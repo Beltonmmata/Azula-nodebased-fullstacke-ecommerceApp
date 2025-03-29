@@ -1,20 +1,54 @@
 const Product = require("../models/product");
-
-// const { createCustomError } = require("../errors/custom-error");
-
+const { NotFoundError, BadRequestError } = require("../errors");
 const getAllProducts = async (req, res) => {
-  const product = await Product.find({});
-  if (!product) {
-    throw Error("Product not found");
+  const { featured, category, limit, page, sort, search } = req.query;
+  let queryStrings = {};
+  if (featured) {
+    queryStrings.featured = featured === "true";
   }
-  res.status(200).json({ product });
+  if (category && category !== "all") {
+    queryStrings.category = category;
+  }
+  if (search) {
+    searchRegex = { $regex: search.replace(/\+/g, " "), $options: "i" };
+
+    queryStrings.$or = [
+      { name: searchRegex },
+      { description: searchRegex },
+      { brand: searchRegex },
+      { keywords: searchRegex },
+    ];
+  }
+  console.log("Query Filters:", queryStrings); //debagger
+
+  let results = Product.find(queryStrings);
+
+  if (sort) {
+    const sortList = sort.split(",").join(" ");
+    results = results.sort(sortList);
+  } else {
+    results = results.sort("createdAt");
+  }
+
+  let limitValue = Number(limit) || 5;
+  let pageValue = Number(page) || 1;
+
+  let skip = (pageValue - 1) * limitValue;
+
+  results = results.skip(skip).limit(limitValue);
+  const products = await results;
+
+  if (!products.length) {
+    throw new NotFoundError("Products not found");
+  }
+  res.status(200).json({ products });
 };
 
 const getProduct = async (req, res) => {
   const id = req.params.id;
   const product = await Product.findById(id);
   if (!product) {
-    throw Error(`Product  with id ${id}  not found`);
+    throw new NotFoundError(`Product  with id ${id}  not found`);
   }
   res.status(200).json({ product });
 };
@@ -27,7 +61,7 @@ const deleteProduct = async (req, res) => {
   const { id: productID } = req.params;
   const product = await Product.findOneAndDelete({ _id: productID });
   if (!product) {
-    throw Error(`Product  with id ${id}  not found`);
+    throw new NotFoundError(`Product  with id ${id}  not found`);
   }
   res.status(200).json({ product });
 };
@@ -40,7 +74,7 @@ const updateProduct = async (req, res) => {
   });
 
   if (!product) {
-    throw Error(`No product with id : ${productID}`, 404);
+    throw new NotFoundError(`No product with id : ${productID}`);
   }
 
   res.status(200).json({ product });

@@ -1,5 +1,10 @@
 const Product = require("../models/product");
-const { NotFoundError, BadRequestError } = require("../errors");
+const {
+  NotFoundError,
+  BadRequestError,
+  UnauthenticatedError,
+  UnauthorizedError,
+} = require("../errors");
 const getAllProducts = async (req, res) => {
   const { featured, category, limit, page, sort, search } = req.query;
   let queryStrings = {};
@@ -53,11 +58,23 @@ const getProduct = async (req, res) => {
   res.status(200).json({ product });
 };
 const createProduct = async (req, res) => {
+  if (!req.user) {
+    throw new UnauthenticatedError("Your not authenticated");
+  }
+  if (!req.user.isAdmin) {
+    throw new UnauthorizedError("Route protected to admins only");
+  }
   const product = await Product.create(req.body);
   res.status(201).json({ product });
 };
 
 const deleteProduct = async (req, res) => {
+  if (!req.user) {
+    throw new UnauthenticatedError("Your not authenticated");
+  }
+  if (!req.user.isAdmin) {
+    throw new UnauthorizedError("Route protected to admins only");
+  }
   const { id: productID } = req.params;
   const product = await Product.findOneAndDelete({ _id: productID });
   if (!product) {
@@ -66,6 +83,12 @@ const deleteProduct = async (req, res) => {
   res.status(200).json({ product });
 };
 const updateProduct = async (req, res) => {
+  if (!req.user) {
+    throw new UnauthenticatedError("Your not authenticated");
+  }
+  if (!req.user.isAdmin) {
+    throw new UnauthorizedError("Route protected to admins only");
+  }
   const { id: productID } = req.params;
 
   const product = await Product.findOneAndUpdate({ _id: productID }, req.body, {

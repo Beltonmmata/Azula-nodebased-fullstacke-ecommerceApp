@@ -1,7 +1,6 @@
 import cart from "../../../models/cart";
 import localStorageObj from "../../../models/localstorage";
 
-import "./cartSummary.css";
 import { getProducts } from "../../../models/products";
 
 const cartSummary = {

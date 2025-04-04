@@ -29,7 +29,7 @@ const shopPage = {
   },
   afterRender() {
     shopPageHeader.afterRender();
-    searchBar.afterRender(page);
+    searchBar.afterRender();
     shopProducts.afterRender();
   },
 };

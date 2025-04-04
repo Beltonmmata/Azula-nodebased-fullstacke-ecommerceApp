@@ -91,7 +91,9 @@ const placeOrderOverview = {
           </li>
           <!--cart list-->
           <li>
+          <ul>
           ${await cartList.render()}
+          </ul>
           </li>
         </ul>
         `;

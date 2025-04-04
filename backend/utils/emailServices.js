@@ -5,10 +5,15 @@ const sendEmail = async ({ to, subject, text, html }) => {
     console.log("📧 Preparing to send email to:", to);
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // TLS requires `secure: false`
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false, // Avoid SSL certificate issues
       },
     });
 

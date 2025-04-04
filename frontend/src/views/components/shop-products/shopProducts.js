@@ -65,13 +65,13 @@ const shopProducts = {
               <div class="pagination-container container flex-center-container">
                 <div class="pagination flex-center-container">
                   <div class="previous-page flex-center-container">
-                    <ion-icon name="arrow-back-circle-outline"></ion-icon>
+                   <ion-icon name="chevron-back-outline"></ion-icon>
                   </div>
                   <div class="page flex-center-container">
                     <p>${currentPage || "1"}</p>
                   </div>
                   <div class="next-page flex-center-container">
-                    <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
                   </div>
                 </div>
               </div>

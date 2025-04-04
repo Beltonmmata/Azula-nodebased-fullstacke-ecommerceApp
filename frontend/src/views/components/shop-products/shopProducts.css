@@ -14,14 +14,13 @@
 .pagination-container {
   .pagination {
     gap: 3px;
-
-    font-size: var(--unit-xl);
+    font-size: var(--unit-l);
     .page {
       width: var(--unit-xxxl);
       height: var(--unit-xxxl);
-      background-color: var(--color-primary-30);
-      padding: var(--unit-xxs);
-      border-radius: 50%;
+      background-color: var(--color-call-to-action);
+      padding: var(--unit-xs);
+      border-radius: var(--unit-xxxs);
     }
   }
 }

@@ -13,6 +13,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   border: 1px solid #e3e3e3;
+  max-width: 300px;
   background-color: var(--color-primary-30);
   /* border: 0.5px solid var(--border-color); */
   min-width: 20rem;
@@ -20,12 +21,6 @@
   &:hover {
     box-shadow: 0 2px 5px var(--shadow-color);
   }
-  /* box-shadow:  var(--alt-bg-color); */
-  /*   
-        &:hover{
-          /* box-shadow: 0  0 15 var(--alt-bg-color); 
-          box-shadow:1px 5px 1px 5px var(--shadow-color);
-        } */
 }
 .product-image {
   width: 100%;

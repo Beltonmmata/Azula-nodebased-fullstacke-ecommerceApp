@@ -28,19 +28,19 @@ const cartPage = {
        ${mainHeader.render()} 
     </header>
     <main>
-      <section id='cart-container'>
+      <section id='cart-container '>
           <!-- cartPage main content -->
           
         <h2 class="container cart-page-content">
         ${cart.userCart.length === 1 ? "Your Cart Item" : "Your Cart Items"}
         
         </h2>
-        <div class="cart-page-main-container container">
+        <div class="cart-page-main-container">
           <div class="left-container cart-items-list">
-            <ul>
+            
               <!-- render the cart list component -->
                ${await cartList.render()}
-            </ul>
+           
           </div>
           <div class="right-container cart-summary-details">
             <div class="apply-copun-container">

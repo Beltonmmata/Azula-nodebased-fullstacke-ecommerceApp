@@ -3,7 +3,7 @@ import localStorageObj from "../../../models/localstorage";
 import cart from "../../../models/cart";
 import reRender from "../../../controllers/reRender";
 import cartPage from "../../pages/cart-page/cartPage";
-import "./cartList.css";
+
 import { getProducts } from "../../../models/products";
 import { showMessage } from "../../../controllers/showMessage";
 
@@ -34,6 +34,7 @@ const cartList = {
           .join("");
 
         return `
+        <ul>
           <li>
             <div class="cart-product-image-container">
               <img src="${imageUrl}" alt="${name} image" />
@@ -44,17 +45,18 @@ const cartList = {
               </div>
               <div class="bottom">
                 <div class="quantity-container">
-                  <p>Quantity</p>    
+                  <p><strong>Quantity:</strong></p>    
                   <select class="cart-quantity" data-product-id="${id}">
                     ${quantityOptions}
                   </select>
                 </div>
                 <div class="price">
-                  <span>@ksh.</span>
+                  <span><strong>Price:</strong> ksh.</span>
                   <span>${priceIs}</span>
                 </div>
-                <div class="item-total-price">ksh.${totalPrice}</div>
+                
               </div>
+              <div class="item-total-price"><strong>Total:</strong> ksh.${totalPrice}</div>
             </div>
             <div class="remove-from-cart">
               <button class="remove-from-cart-btn" data-product-id="${id}">
@@ -62,6 +64,7 @@ const cartList = {
               </button>
             </div>
           </li>
+           </ul>
         `;
       })
       .join("");

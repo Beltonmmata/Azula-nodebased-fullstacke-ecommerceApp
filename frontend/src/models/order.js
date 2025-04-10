@@ -38,7 +38,11 @@ export const createOrder = async (
 
     return data;
   } catch (err) {
-    showMessage(err.response?.data?.message || err.message, "error");
+    const msg =
+      err?.response?.data?.msg ||
+      err?.response?.data?.message ||
+      "Unexpected error occurred.";
+    showMessage(msg, "error");
   }
 };
 
@@ -53,6 +57,11 @@ export const getAllOrders = async () => {
     });
     return data.orders;
   } catch (err) {
+    const msg =
+      err?.response?.data?.msg ||
+      err?.response?.data?.message ||
+      "Unexpected error occurred.";
+    showMessage(msg, "error");
     console.error("Error fetching orders:", err);
     return [];
   }
@@ -68,6 +77,11 @@ export const getOrders = async (id) => {
     });
     return data.order;
   } catch (err) {
+    const msg =
+      err?.response?.data?.msg ||
+      err?.response?.data?.message ||
+      "Unexpected error occurred.";
+    showMessage(msg, "error");
     console.error("Error fetching orders:", err);
     return [];
   }

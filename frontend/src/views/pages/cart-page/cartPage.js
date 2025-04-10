@@ -31,7 +31,7 @@ const cartPage = {
       <section id='cart-container '>
           <!-- cartPage main content -->
           
-        <h2 class="container cart-page-content">
+        <h2 class="container cart-page-header cart-page-content">
         ${cart.userCart.length === 1 ? "Your Cart Item" : "Your Cart Items"}
         
         </h2>

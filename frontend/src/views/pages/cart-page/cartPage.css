@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-primary-10);
+  background-color: var(--color-primary-30);
   border-radius: var(--unit-xxs);
   padding: var(--unit-xxs);
   margin-right: 5px;
@@ -59,7 +59,7 @@
   flex-direction: column;
 }
 .left-container ul li .cart-product-details-container .top p {
-  font-size: var(--unit-l);
+  font-size: 1.8rem;
   color: var(--color-secondary-60);
   line-height: 1;
   font-weight: var(--fw-600);
@@ -75,9 +75,7 @@
   align-items: center;
   flex-direction: row;
   font-size: var(--unit-l);
-  strong {
-    color: var(--color-secondary-10);
-  }
+  color: var(--color-secondary-30);
 }
 .left-container
   ul
@@ -85,7 +83,7 @@
   .cart-product-details-container
   .bottom
   .quantity-container {
-  color: var(--color-secondary-10);
+  color: var(--color-secondary-30);
   display: flex;
   flex: 0 0 40%;
   align-items: center;
@@ -114,14 +112,9 @@
   flex-direction: row;
   flex-basis: 40%;
 }
-.left-container
-  ul
-  li
-  .cart-product-details-container
-  .bottom
-  .item-total-price {
-  line-height: 0.8;
-  font-size: var(--unit-m);
+.left-container ul li .cart-product-details-container .item-total-price {
+  line-height: 1;
+  font-size: 1.6rem;
   color: var(--color-secondary-30);
 }
 .left-container ul li .remove-from-cart {
@@ -201,11 +194,9 @@
   background-color: var(--color-primary-30);
   border-radius: 10px;
 }
-.container-cart-summary h2 {
+.cart-page-header {
   font-size: var(--unit-xl);
   padding: var(--unit-xxxs);
-  background-color: var(--color-primary-30);
-  border-radius: 10px 10px 0 0;
 }
 .container-cart-summary ul li {
   list-style: none;
@@ -218,19 +209,20 @@
 .container-cart-summary ul li:last-child {
   border-top: 2px solid var(--border-color);
   padding-top: 3px;
+  border-bottom: none;
 }
-.container-cart-summary ul li .label,
-.container-cart-summary ul li .figure {
+.label,
+.figure {
   display: flex;
   flex-basis: 50%;
   justify-content: center;
   flex-direction: column;
 }
-.container-cart-summary ul li .label {
+.label {
   font-size: 18px;
   font-weight: var(--fw-600);
 }
-.container-cart-summary .cart-subtotal {
+.cart-subtotal {
   border-bottom: none;
   font-size: 20px;
   font-weight: var(--fw-600);
@@ -249,9 +241,9 @@
   color: var(--font-color);
   border: none;
   outline: none;
-}
-.procede-to-checkout-btn button:hover {
-  background-color: var(--hover-color-call-to-action);
+  &:hover {
+    background-color: var(--hover-color-call-to-action);
+  }
 }
 
 @media (max-width: 600px) {

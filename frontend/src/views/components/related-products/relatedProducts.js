@@ -12,7 +12,7 @@ const relatedProducts = {
 
       button.addEventListener("click", () => {
         cart.addToCart(productId);
-        console.log("btuy now clicked");
+        console.log("buy now clicked");
 
         document.location.hash = "/cart";
       });

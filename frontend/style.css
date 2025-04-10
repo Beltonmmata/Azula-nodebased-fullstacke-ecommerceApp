@@ -4,8 +4,8 @@
   --color-primary-10: rgb(248, 247, 253);
   --color-primary-10-transparent: rgba(248, 247, 253, 0.9);
   --color-secondary-60: rgb(0, 0, 0);
-  --color-secondary-30: rgb(34, 36, 41);
-  --color-secondary-10: rgb(36, 35, 41);
+  --color-secondary-30: #666;
+  --color-secondary-10: rgb(34, 36, 41);
   /* --border-color: rgb(128, 128, 128); */
   --border-color: #e3e3e3;
   --shadow-color: rgba(213, 217, 217, 0.5);

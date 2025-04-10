@@ -31,7 +31,7 @@ const productPage = {
           ${await productsDetails.render(id)}
       </section>
       <section class="container" id='container products-details-section'>
-          ${await relatedProducts.render(products)}
+          ${relatedProducts.render()}
       </section>
       
 

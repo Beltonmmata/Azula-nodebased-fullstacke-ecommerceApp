@@ -3,26 +3,34 @@ const User = require("../models/user"); // Import User model
 const { UnauthenticatedError, UnauthorizedError } = require("../errors");
 
 const isAuth = async (req, res, next) => {
-  const authHeader = req.header("Authorization");
+  let token;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  // Check Authorization header
+  if (req.headers.authorization?.startsWith("Bearer ")) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
+  // OR check cookies
+  if (!token && req.cookies?.token) {
+    token = req.cookies.token;
+  }
+
+  if (!token) {
     throw new UnauthenticatedError("Not authorized, no token provided");
   }
 
-  const token = authHeader.replace("Bearer ", "");
-  console.log("Received Token:", token);
+  //console.log("Received Token:", token);
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Fetch the user from the database
     const user = await User.findById(decoded.id).select("-password");
-    if (!user) {
-      throw new UnauthenticatedError("User not found");
-    }
+    if (!user) throw new UnauthenticatedError("User not found");
 
     req.user = user; // Now req.user includes name & email
-    console.log("Authenticated User:", req.user);
+    //console.log("Authenticated User:", req.user);
+    console.log("authenticated user");
 
     next();
   } catch (error) {

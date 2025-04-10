@@ -10,6 +10,9 @@ const Product = require("./routes/products");
 const Authentication = require("./routes/authentication");
 const Users = require("./routes/user");
 const Order = require("./routes/orderRouter");
+const Reviews = require("./routes/reviewsRouter");
+const Likes = require("./routes/likesRouter");
+
 //import dbConnecting
 const connectDB = require("./db/connect");
 //importing middleware
@@ -25,6 +28,8 @@ app.use("/api/v1/products", Product);
 app.use("/api/v1/authentication", Authentication);
 app.use("/api/v1/users", Users);
 app.use("/api/v1/orders", Order);
+app.use("/api/v1/reviews", Reviews);
+app.use("/api/v1/likes", Likes);
 //error
 app.use(notFound);
 app.use(errorHandlerMiddleware);

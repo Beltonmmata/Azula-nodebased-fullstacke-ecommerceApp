@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-
-const reviewSchema = new mongoose.Schema({
-  reviewerId: {
+const likeSchema = new mongoose.Schema({
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
@@ -11,11 +10,9 @@ const reviewSchema = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
-  rating: { type: Number, required: true },
-  comment: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 
-reviewSchema.index({ reviewerId: 1, productId: 1 }, { unique: true });
+likeSchema.index({ userId: 1, productId: 1 }, { unique: true });
 
-module.exports = mongoose.model("Review", reviewSchema);
+module.exports = mongoose.model("Like", likeSchema);

@@ -4,7 +4,6 @@ const User = require("../models/user");
 const {
   UnauthenticatedError,
   NotFoundError,
-
   UnauthorizedError,
 } = require("../errors");
 const getAllUsers = async (req, res) => {
@@ -14,7 +13,15 @@ const getAllUsers = async (req, res) => {
   if (!req.user.isAdmin) {
     throw new UnauthorizedError("Route protected to admins only");
   }
-  const users = await User.find({}).select("-password"); // Exclude password field
+  const users = await User.find({})
+    .select("-password") // Exclude password field
+    .populate({
+      path: "wishlist", // from the virtual field in User schema
+      populate: {
+        path: "productId", // populate the actual product info from likes
+        model: "Product",
+      },
+    });
 
   if (user.length === 0) {
     throw new NotFoundError("No users found");
@@ -25,6 +32,7 @@ const getAllUsers = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      wishlist: user.wishlist.map((like) => like.productId), // Return product data
       createdAt: user.createdAt,
     })),
   });
@@ -36,7 +44,13 @@ const getUser = async (req, res) => {
   }
 
   const id = req.params.id;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate({
+    path: "wishlist", // from the virtual field in User schema
+    populate: {
+      path: "productId", // populate the actual product info from likes
+      model: "Product",
+    },
+  });
   if (!user) {
     throw new CustomError.NotFoundError(`user with id ${id}  not found`);
   }
@@ -45,6 +59,7 @@ const getUser = async (req, res) => {
     name: user.name,
     email: user.email,
     isAdmin: user.isAdmin,
+    wishlist: user.wishlist.map((like) => like.productId), // Return product data
     createdAt: user.createdAt,
   });
 };

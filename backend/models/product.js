@@ -23,18 +23,20 @@ const productSchema = new mongoose.Schema({
     avarageRating: { type: Number, default: 0 },
     count: { type: Number, default: 0 },
   },
-  reviews: [
-    {
-      reviewerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      rating: { type: Number, required: true },
-      comment: { type: String, required: true },
-      createdAt: { type: Date, default: Date.now },
-    },
-  ],
 });
+
+productSchema.virtual("likes", {
+  ref: "Like",
+  localField: "_id",
+  foreignField: "productId",
+});
+
+productSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "productId",
+});
+
+productSchema.set("toJSON", { virtuals: true });
 
 module.exports = mongoose.model("Product", productSchema);

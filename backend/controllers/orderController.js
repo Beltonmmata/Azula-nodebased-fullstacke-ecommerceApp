@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const Order = require("../models/order");
+
 const {
   UnauthenticatedError,
   NotFoundError,
@@ -9,6 +10,7 @@ const {
 } = require("../errors");
 
 const sendEmail = require("../utils/emailServices");
+const validateObjectId = require("../utils/validateObjectId");
 const getAllOrders = async (req, res) => {
   let orders;
   if (req.user.isAdmin) {
@@ -24,10 +26,9 @@ const getAllOrders = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
+  validateObjectId(req.params.id, "order");
   const id = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new BadRequestError(`Invalid order ID: ${id}`);
-  }
+
   const order = await Order.findById(id);
   if (!order) {
     throw new NotFoundError(`Order  with id ${id}  not found`);
@@ -83,7 +84,13 @@ const createOrder = async (req, res, next) => {
 
       const generateOrderEmail = (order, user) => {
         return `
-        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; background:hsl(36, 33%, 94%);  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5)">
+         <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>Order Confirmation</title>
+          </head>
+        <body style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; background:hsl(36, 33%, 94%);  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5)">
             <header style=" background:rgb(126, 68, 243); color: #fff; padding: 30px 10px ; text-align: center; font-size: 20px; border-radius:5px 5px 0 0;">
             Order Confirmation - Thank You for Your Purchase!
             </header>
@@ -122,25 +129,25 @@ const createOrder = async (req, res, next) => {
               order.deliveryOption.durationInDays
             } days</p>
             </section>
-            <section style="display: flex; align-items: center; flex-direction:column; padding: 10px; background: #f9f9f9; border-radius: 10px; margin: 10px;">
+            <section style="padding: 10px; background: #f9f9f9; border-radius: 10px; margin: 10px;">
             <h3 style="color:rgb(126, 68, 243); margin:0; padding:0; font-size:18px">Order Items</h3>
-            <div style="gap:15px; width:100%;">
-               <div style="display: grid; grid-template-columns: 2fr 1fr 1fr">
-                 <p style="font-size:13px"><strong style="font-size:15px">Product ID </strong></p>
-                    <p style="font-size:13px"><strong style="font-size:15px">Quantity </strong></p>
-                    <p style="font-size:13px"><strong style="font-size:15px">Price</strong> </p>
-               </div>
-                  
+          
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr">
+              <p style="font-size:13px"><strong style="font-size:15px">Product ID </strong></p>
+              <p style="font-size:13px"><strong style="font-size:15px">Quantity </strong></p>
+              <p style="font-size:13px"><strong style="font-size:15px">Price</strong> </p>
+            </div>
+            <div style="gap:15px; width:100%;"> 
                 ${order.orderItems
                   .map(
                     (item) => `
-                <div style="background: #fff; padding:2px 5px; border-radius: 8px; box-shadow: 0px 2px 5px rgba(0,0,0,0.1); margin-bottom:5px;">
+              <div style="background: #fff; padding:2px 5px; border-radius: 8px; box-shadow: 0px 2px 5px rgba(0,0,0,0.1); margin-bottom:5px;">
                     <div style=" display: grid; grid-template-columns: 2fr 1fr 1fr;">
                     <p style="font-size:13px"> ${item.productId}</p>
-                    <p style="font-size:13px; align-text:center;">${item.quantity}</p>
+                    <p style="font-size:13px; text-align:center;">${item.quantity}</p>
                     <p style="font-size:13px"> Ksh ${item.priceAtOrder}</p>
                     </div>
-                </div>
+            </div>
                 `
                   )
                   .join("")}
@@ -189,7 +196,8 @@ const createOrder = async (req, res, next) => {
             ">
             <p>&copy; 2025 Developer Belton. All Rights Reserved.</p>
           </div>            
-        </div>
+        </body>
+         </html>
         `;
       };
       const user = req.user;
@@ -214,6 +222,7 @@ const createOrder = async (req, res, next) => {
 };
 
 const deleteOrder = async (req, res) => {
+  validateObjectId(req.params.id, "order");
   const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new BadRequestError(`Invalid order ID: ${id}`);
@@ -225,11 +234,8 @@ const deleteOrder = async (req, res) => {
   res.status(200).json({ message: `order deleted successfully`, order });
 };
 const updateOrder = async (req, res) => {
+  validateObjectId(req.params.id, "order");
   const id = req.params.id;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new BadRequestError(`Invalid order ID: ${id}`);
-  }
 
   const order = await Order.findOneAndUpdate({ _id: id }, req.body, {
     new: true,

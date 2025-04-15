@@ -17,7 +17,8 @@ header {
   align-items: center;
   justify-content: end;
   background-color: var(--color-primary-60);
-  padding: 5px 10%;
+  padding: 3px 10%;
+
   width: 100%;
 }
 .header-container-top p,
@@ -25,6 +26,7 @@ a {
   display: inline-block;
   text-decoration: none;
   padding-right: 10px;
+  font-size: 1.2rem;
 }
 .header-container-top a {
   color: var(--color-call-to-action);
@@ -33,15 +35,13 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border-top: 0.1px solid var(--border-color);
-    border-bottom: 0.1px solid var(--border-color); */
   box-shadow: 20px 0 20px 0 var(--shadow-color);
   background-color: var(--color-primary-30);
   width: 100%;
-  padding: var(--unit-xxxs) 10%;
+  padding: 5px 10%;
 }
 .logo {
-  font-size: var(--unit-xxxl);
+  font-size: 2.5rem;
   span {
     display: inline-block;
     color: var(--color-call-to-action);
@@ -60,9 +60,9 @@ a {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  padding: 5px;
+  padding: 3px;
   margin-right: 5px;
-  font-size: var(--unit-xxl);
+  font-size: 2rem;
 
   &:hover {
     background-color: var(--color-primary-10);

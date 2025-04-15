@@ -41,29 +41,20 @@ const checkoutPayment = {
               name="delivery-option-1"
             />
             <div class="radio-input-text">
-              <div class="radio-input-label">Lipa na Mpesa</div>
-              <div class="radio-input-text font-success">Available</div>
+              <div class="radio-input-label font-success">Pay On Delivery</div>
+              <div class="radio-input-text ">Once your order is marked as delivered you will receive an email to be able to make payments</div>
             </div>
           </div>
           <div class="form-radio-container">
             <input type="radio" class="radio-input" name="delivery-option-1" />
             <div>
-              <div class="radio-input-label">Paypal</div>
-              <div class="radio-input-text font-danger">Not availlable now</div>
+              <div class="radio-input-label font-success">Pay On Order</div>
+              <div class="radio-input-text">Once your order is placed  you will be able to make online payment in the order summary screen</div>
             </div>
           </div>
-          <div class="form-radio-container">
-            <input type="radio" class="radio-input" name="delivery-option-1" />
-            <div>
-              <div class="radio-input-label">Stripe</div>
-              <div class="radio-input-text font-danger">Not availlable now</div>
-            </div>
-          </div>     
-          <button id="payment-btn" class="btn w-full primary-btn" >
-            Pay Now
-          </button>
-          <div class="or flex-center-container">Or</div>
-          <button id="pay-on-delivery-btn" class="btn w-full secondary-btn" >Pay on Delivery</button>
+        
+         
+          <button id="pay-on-delivery-btn" class="btn w-full w-full primary-btn" >Save and Continue</button>
         </form>
       </div>
       

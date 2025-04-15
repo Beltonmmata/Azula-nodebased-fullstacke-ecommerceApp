@@ -3,6 +3,7 @@ import featuredProducts from "../../components/featured-products/featuredProduct
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
 import newsletter from "../../components/newsletter/newsletter";
+import promiseComponent from "../../components/promise/promise";
 import slider from "../../components/slider/slider";
 
 import "./homePage.css";
@@ -20,9 +21,13 @@ const homePage = {
       <section id='products-section'>
           ${await featuredProducts.render()}
       </section>
+      <section class="promise-section" >
+      ${promiseComponent.render()}
+      </section>
       <section id='newsletter-section'>
           ${newsletter.render()}
       </section>
+      
     </main>
     <footer>
        ${footer.render()}

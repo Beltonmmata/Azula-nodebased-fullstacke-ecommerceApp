@@ -1,0 +1,37 @@
+/* promise section starts */
+
+.promise-section {
+  background-color: var(--color-primary-30);
+  padding: 10px 10%;
+}
+.promise-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.promise-section-container li {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .data {
+    font-weight: var(--fw-600);
+    font-size: 3rem;
+    span {
+      font-size: 2rem;
+    }
+  }
+  .label {
+    font-weight: var(--fw-400);
+  }
+}
+@media (max-width: 800px) {
+  .promise-section-container {
+    flex-direction: column;
+  }
+}
+
+/* promise section ends */

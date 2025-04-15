@@ -3,10 +3,10 @@
   --color-primary-30: rgb(255, 255, 255);
   --color-primary-10: rgb(248, 247, 253);
   --color-primary-10-transparent: rgba(248, 247, 253, 0.9);
-  --color-secondary-60: rgb(0, 0, 0);
-  --color-secondary-30: #666;
-  --color-secondary-10: rgb(34, 36, 41);
-  /* --border-color: rgb(128, 128, 128); */
+  --color-secondary-60: #202124;
+  --color-secondary-30: #5f6368;
+  --color-secondary-10: #9aa0a6;
+
   --border-color: #e3e3e3;
   --shadow-color: rgba(213, 217, 217, 0.5);
   --cooprate-color: rgb(126, 68, 243);

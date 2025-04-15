@@ -16,12 +16,12 @@ export const getProducts = async (queryParams = {}) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    return data.products;
+    return data.data;
   } catch (err) {
     const msg =
       err?.response?.data?.msg ||
       err?.response?.data?.message ||
-      "Unexpected error occurred.";
+      "Unexpected error occurred loading Products";
     showMessage(msg, "error");
     console.error("Error fetching products:", err);
     return { products: [] }; // ✅ Ensure consistent return structure
@@ -33,7 +33,7 @@ export const getProduct = async (id) => {
     const { data } = await axios.get(`${backendUrl}/products/${id}`, {
       headers: { "Content-Type": "application/json" },
     });
-    return data.product;
+    return data.data;
   } catch (err) {
     const msg =
       err?.response?.data?.msg ||

@@ -85,7 +85,6 @@
 }
 
 .radio-input-label {
-  color: var(--color-secondary-30);
   font-weight: var(--fw-500);
   font-size: var(--unit-l);
   margin-bottom: 0;

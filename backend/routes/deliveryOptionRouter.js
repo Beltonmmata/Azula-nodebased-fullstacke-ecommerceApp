@@ -8,7 +8,7 @@ const {
   getDeliveryOption,
   updateDeliveryOption,
   deleteDeliveryOption,
-} = require("../controllers/DeliveryOptions");
+} = require("../controllers/deliveryOptionController");
 
 router
   .route("/")

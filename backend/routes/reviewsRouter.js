@@ -12,9 +12,9 @@ const {
 router.post("/", isAuth, createReview);
 
 // ✏️ Update review (by user)
-router.put("/:reviewId", isAuth, updateReview);
+router.patch("/:id", isAuth, updateReview);
 
 // 🗑 Delete review (by user)
-router.delete("/:reviewId", isAuth, deleteReview);
+router.delete("/:id", isAuth, deleteReview);
 
 module.exports = router;

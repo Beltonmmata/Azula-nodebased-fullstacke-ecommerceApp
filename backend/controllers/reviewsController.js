@@ -2,6 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const Reviews = require("../models/reviews");
 const Order = require("../models/order");
+const { StatusCodes } = require("http-status-codes");
 
 const {
   UnauthenticatedError,
@@ -12,21 +13,18 @@ const {
 
 const validateObjectId = require("../utils/validateObjectId");
 
-// 2️⃣ ----------------- Reviews Controllers ------------------
-
 // Create Reviews (must have purchased the product — assume check already done)
 const createReview = async (req, res) => {
-  if (!req.user._id) {
+  if (!req.user._id)
     throw new UnauthenticatedError("You are not authenticated");
-  }
-  const { productId, rating, comment } = req.body;
 
+  const { productId, rating, comment } = req.body;
   const reviewerId = req.user._id;
 
   const hasPurchased = await Order.exists({
-    userId,
-    "products.productId": productId,
-    status: "completed",
+    userId: reviewerId,
+    "orderItems.productId": productId,
+    orderStatus: "Completed",
   });
 
   if (!hasPurchased) {
@@ -42,39 +40,56 @@ const createReview = async (req, res) => {
     comment,
   });
 
-  // Optionally update product rating info here...
-
-  res.status(201).json({ message: "Reviews created", review });
+  res.status(StatusCodes.CREATED).json({
+    success: true,
+    message: "Review created successfully",
+    data: review,
+  });
 };
 
-// Update Reviews
+// 🧼 Update Review
 const updateReview = async (req, res) => {
-  validateObjectId(req.params.id, "reviewer");
+  validateObjectId(req.params.id, "review");
 
-  if (!req.user._id) {
-    throw new UnauthenticatedError("You are not authenticated");
-  }
+  const reviewerId = req.user._id;
+  const reviewId = req.params.id;
   const { rating, comment } = req.body;
-  const { reviewId } = req.params;
 
   const review = await Reviews.findOneAndUpdate(
-    { _id: reviewId, reviewerId: req.user._id },
+    { _id: reviewId, reviewerId },
     { rating, comment },
-    { new: true }
+    { new: true, runValidators: true }
   );
 
-  res.status(200).json({ message: "Reviews updated", review });
+  if (!review) {
+    throw new NotFoundError("Review not found or not authorized to update");
+  }
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Review updated successfully",
+    data: review,
+  });
 };
 
-// Delete Reviews
+// 🧼 Delete Review
 const deleteReview = async (req, res) => {
-  validateObjectId(req.params.id, "reviewer");
-  if (!req.user._id) {
-    throw new UnauthenticatedError("You are not authenticated");
+  validateObjectId(req.params.id, "review");
+
+  const reviewerId = req.user._id;
+  const reviewId = req.params.id;
+
+  const review = await Reviews.findOneAndDelete({ _id: reviewId, reviewerId });
+
+  if (!review) {
+    throw new NotFoundError("Review not found or not authorized to delete");
   }
-  const { reviewId } = req.params;
-  await Reviews.findOneAndDelete({ _id: reviewId, reviewerId: req.user._id });
-  res.status(200).json({ message: "Reviews deleted" });
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Review deleted successfully",
+    data: {},
+  });
 };
 
 module.exports = {

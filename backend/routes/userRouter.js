@@ -7,6 +7,8 @@ const {
   getUser,
   deleteUser,
   updateUser,
+  updateMyAccount,
+  deleteMyAccount,
 } = require("../controllers/user");
 
 router.route("/").get(isAuth, isAdmin, getAllUsers);
@@ -15,5 +17,6 @@ router
   .get(isAuth, getUser)
   .delete(isAuth, isAdmin, deleteUser)
   .patch(isAuth, isAdmin, updateUser);
-
+router.route("/me/update").patch(isAuth, updateMyAccount);
+router.route("/me/delete").delete(isAuth, deleteMyAccount);
 module.exports = router;

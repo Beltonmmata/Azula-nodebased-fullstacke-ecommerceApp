@@ -6,19 +6,17 @@ const {
   UnauthenticatedError,
   UnauthorizedError,
 } = require("../errors");
+const { StatusCodes } = require("http-status-codes");
 const validateObjectId = require("../utils/validateObjectId");
+
 const getAllProducts = async (req, res) => {
   const { featured, category, limit, page, sort, search } = req.query;
   let queryStrings = {};
-  if (featured) {
-    queryStrings.featured = featured === "true";
-  }
-  if (category && category !== "all") {
-    queryStrings.category = category;
-  }
-  if (search) {
-    searchRegex = { $regex: search.replace(/\+/g, " "), $options: "i" };
 
+  if (featured) queryStrings.featured = featured === "true";
+  if (category && category !== "all") queryStrings.category = category;
+  if (search) {
+    const searchRegex = { $regex: search.replace(/\+/g, " "), $options: "i" };
     queryStrings.$or = [
       { name: searchRegex },
       { description: searchRegex },
@@ -26,10 +24,8 @@ const getAllProducts = async (req, res) => {
       { keywords: searchRegex },
     ];
   }
-  //console.log("Query Filters:", queryStrings); //debagger
 
   let results = Product.find(queryStrings);
-
   if (sort) {
     const sortList = sort.split(",").join(" ");
     results = results.sort(sortList);
@@ -37,39 +33,44 @@ const getAllProducts = async (req, res) => {
     results = results.sort("createdAt");
   }
 
-  let limitValue = Number(limit) || 6;
-  let pageValue = Number(page) || 1;
-
-  let skip = (pageValue - 1) * limitValue;
+  const limitValue = Number(limit) || 6;
+  const pageValue = Number(page) || 1;
+  const skip = (pageValue - 1) * limitValue;
 
   results = results.skip(skip).limit(limitValue);
-  const products = await results
-    .populate("reviews") // gets reviews from Review model
-    .populate("likes"); // gets likes from Like model
+
+  const products = await results.populate("reviews").populate("likes");
   if (!products.length) {
     throw new NotFoundError("Products not found");
   }
-  res.status(200).json({ products });
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Products retrieved successfully",
+    nbHits: products.length,
+    data: products,
+  });
 };
 
 const getProduct = async (req, res) => {
   validateObjectId(req.params.id, "product");
-  const id = req.params.id;
-  const product = await Product.findById(id)
-    .populate("reviews") // gets reviews from Review model
-    .populate("likes"); // gets likes from Like model
+  const product = await Product.findById(req.params.id)
+    .populate("reviews")
+    .populate("likes");
   if (!product) {
-    throw new NotFoundError(`Product  with id ${id}  not found`);
+    throw new NotFoundError(`Product with id ${req.params.id} not found`);
   }
-  res.status(200).json({ product });
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Product retrieved successfully",
+    data: product,
+  });
 };
+
 const createProduct = async (req, res) => {
-  if (!req.user) {
-    throw new UnauthenticatedError("You're not authenticated");
-  }
-  if (!req.user.isAdmin) {
-    throw new UnauthorizedError("Route protected to admins only");
-  }
+  if (!req.user) throw new UnauthenticatedError("You're not authenticated");
+  if (!req.user.isAdmin) throw new UnauthorizedError("Admin access only");
 
   const {
     name,
@@ -86,34 +87,27 @@ const createProduct = async (req, res) => {
   } = req.body;
 
   const keywordsArray = keywords
-    ? keywords.split(",").map((keyword) => keyword.trim())
+    ? keywords.split(",").map((k) => k.trim())
     : [];
 
   const imageUrl = req.file ? req.file.path : null;
   if (!imageUrl) throw new BadRequestError("Product image is required");
 
-  // 🔍 Validate numeric fields
-  if (isNaN(Number(priceIs)) || isNaN(Number(priceWas))) {
-    throw new BadRequestError("Prices must be numbers");
-  }
-  if (isNaN(Number(count))) {
-    throw new BadRequestError("Count must be a number");
-  }
-  if (isNaN(Number(avarageRating))) {
-    throw new BadRequestError("Average rating must be a number");
-  }
-  if (isNaN(Number(countInStock))) {
-    throw new BadRequestError("Count in stock must be a number");
+  if (
+    isNaN(Number(priceIs)) ||
+    isNaN(Number(priceWas)) ||
+    isNaN(Number(count)) ||
+    isNaN(Number(avarageRating)) ||
+    isNaN(Number(countInStock))
+  ) {
+    throw new BadRequestError("Invalid number format in one or more fields");
   }
 
   const productData = {
     name,
     priceWas: Number(priceWas),
     priceIs: Number(priceIs),
-    featured:
-      req.body.featured !== undefined
-        ? req.body.featured === "true"
-        : undefined,
+    featured: req.body.featured === "true",
     keywords: keywordsArray,
     brand,
     description,
@@ -127,74 +121,67 @@ const createProduct = async (req, res) => {
     imageUrl,
   };
 
-  // 🔥 Remove undefined featured so Mongoose can use default
-  if (productData.featured === undefined) {
-    delete productData.featured;
-  }
-
   const product = await Product.create(productData);
-  console.log("✅ Product created:", product);
 
-  res.status(201).json({ product });
+  res.status(StatusCodes.CREATED).json({
+    success: true,
+    message: "Product created successfully",
+    data: product,
+  });
 };
 
 const deleteProduct = async (req, res) => {
-  if (!req.user) {
-    throw new UnauthenticatedError("Your not authenticated");
-  }
-  if (!req.user.isAdmin) {
-    throw new UnauthorizedError("Route protected to admins only");
-  }
+  if (!req.user) throw new UnauthenticatedError("You're not authenticated");
+  if (!req.user.isAdmin) throw new UnauthorizedError("Admin access only");
+
   validateObjectId(req.params.id, "product");
-  const { id: productID } = req.params;
-
-  const product = await Product.findById(productID);
+  const product = await Product.findById(req.params.id);
   if (!product) {
-    throw new NotFoundError(`Product  with id ${productID}  not found`);
+    throw new NotFoundError(`Product with id ${req.params.id} not found`);
   }
 
-  const productImageUrl = product.imageUrl;
-  const segments = productImageUrl.split("/");
-  const publicIdWithExtension = segments.slice(-1)[0];
-  const publicId = `Azula-app/products/${publicIdWithExtension.split(".")[0]}`;
+  const segments = product.imageUrl.split("/");
+  const publicId = `Azula-app/products/${segments.slice(-1)[0].split(".")[0]}`;
 
   try {
     await cloudinary.uploader.destroy(publicId);
-    console.console.log(`Image deleated successfully, publicId:${publicId}`);
   } catch (error) {
-    console.error("image deletion failes", error);
+    console.error("Cloudinary image deletion failed", error);
   }
-  await Product.findByIdAndDelete(productID);
-  res.status(200).json({ message: "product deleated completly" });
+
+  await Product.findByIdAndDelete(req.params.id);
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Product deleted successfully",
+    data: product,
+  });
 };
+
 const updateProduct = async (req, res) => {
-  if (!req.user) {
-    throw new UnauthenticatedError("Your not authenticated");
-  }
-  if (!req.user.isAdmin) {
-    throw new UnauthorizedError("Route protected to admins only");
-  }
+  if (!req.user) throw new UnauthenticatedError("You're not authenticated");
+  if (!req.user.isAdmin) throw new UnauthorizedError("Admin access only");
+
   validateObjectId(req.params.id, "product");
-  const { id: productID } = req.params;
-  let updatingData = req.body;
+  const updateData = req.body;
   if (req.file) {
-    updatingData.imageUrl = req.file.path; // If a new image is uploaded, update it
+    updateData.imageUrl = req.file.path;
   }
 
   const product = await Product.findOneAndUpdate(
-    { _id: productID },
-    updatingData,
-    {
-      new: true,
-      runValidators: true,
-    }
+    { _id: req.params.id },
+    updateData,
+    { new: true, runValidators: true }
   );
 
   if (!product) {
-    throw new NotFoundError(`No product with id : ${productID}`);
+    throw new NotFoundError(`No product with id: ${req.params.id}`);
   }
 
-  res.status(200).json({ product });
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Product updated successfully",
+    data: product,
+  });
 };
 
 module.exports = {

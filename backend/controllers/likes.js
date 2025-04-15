@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const Likes = require("../models/likes");
+const { StatusCodes } = require("http-status-codes");
 
 const {
   UnauthenticatedError,
@@ -16,13 +17,17 @@ const validateObjectId = require("../utils/validateObjectId");
 // Create Like
 const likeProduct = async (req, res) => {
   if (!req.user) {
-    throw new UnauthenticatedError("Your not authenticated");
+    throw new UnauthenticatedError("You're not authenticated");
   }
   const userId = req.user._id;
-  const { productId } = req.body;
+  const { productId } = req.params;
 
   const like = await Likes.create({ userId, productId });
-  res.status(201).json({ message: "Product liked", like });
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Product liked successfully",
+    data: like,
+  });
 };
 
 // Remove Like
@@ -31,7 +36,11 @@ const unlikeProduct = async (req, res) => {
   const { productId } = req.params;
 
   await Likes.findOneAndDelete({ userId, productId });
-  res.status(200).json({ message: "Product unliked" });
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Product unliked successfully",
+    data: {},
+  });
 };
 
 module.exports = {

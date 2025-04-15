@@ -5,9 +5,9 @@ const { isAuth } = require("../middleware/authentication");
 const { unlikeProduct, likeProduct } = require("../controllers/likes");
 
 // ✅ Like a product
-router.post("/", isAuth, likeProduct);
-
-// ❌ Unlike a product
-router.delete("/:productId", isAuth, unlikeProduct);
+router
+  .route("/:productId")
+  .post(isAuth, likeProduct)
+  .delete(isAuth, unlikeProduct);
 
 module.exports = router;

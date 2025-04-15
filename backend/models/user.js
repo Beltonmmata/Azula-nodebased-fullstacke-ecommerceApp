@@ -3,11 +3,28 @@ const mongoose = require("mongoose");
 // User Model
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    match: [
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+      "Please enter a valid email address",
+    ],
+  },
   password: { type: String, required: true },
   resetOtp: { type: String },
   resetOtpExpiry: { type: Date },
   isAdmin: { type: Boolean, default: false },
+  promoCode: { type: String, unique: true },
+  referredOrders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
+  role: {
+    type: String,
+    enums: ["user", "admin", "superAdmin"],
+    default: "user",
+  },
   createdAt: { type: Date, default: Date.now },
 });
 

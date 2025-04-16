@@ -49,6 +49,9 @@ app.use(
 );
 app.use(morgan("dev")); // or "combined" for production logging
 app.use(compression());
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to Azula Ecomerce");
+});
 
 //using routes
 app.use("/api/v1/products", Product);

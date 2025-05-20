@@ -128,6 +128,22 @@ const resetPassword = async (req, res) => {
 
   sendTokenResponse(res, user, "Password reset successful");
 };
+const getCurrentUser = async (req, res) => {
+  const user = req.user;
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: "Current user fetched",
+    data: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      promoCode: user.promoCode,
+      createdAt: user.createdAt,
+    },
+  });
+};
 
 module.exports = {
   registerUser,
@@ -135,4 +151,5 @@ module.exports = {
   logoutUser,
   forgotPassword,
   resetPassword,
+  getCurrentUser,
 };

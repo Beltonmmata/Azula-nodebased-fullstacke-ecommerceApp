@@ -10,7 +10,6 @@ const {
   resetPassword,
   getCurrentUser,
 } = require("../controllers/full-auth");
-const { isAuth } = require("../middleware/authentication");
 
 router.post("/signup", registerUser);
 router.post("/login", loginUser);

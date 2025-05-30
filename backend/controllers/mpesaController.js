@@ -94,7 +94,7 @@ const handleCallback = async (req, res) => {
   });
 
   await sendEmail({
-    to: order.userId.email, // if your user schema has email
+    to: order.userId.email,
     subject: "Payment Confirmation – Azula Ecomerce",
     html,
   });
@@ -185,7 +185,7 @@ function generateReceiptEmail({
           </tr>
         </table>
 
-        <!-- Call To Action -->
+        <!-- Track Order Call To Action -->
         <div style="margin-top: 30px; text-align: center">
           <a
             href="https://yourstore.com/orders/${orderId}"

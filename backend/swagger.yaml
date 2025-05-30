@@ -1,0 +1,511 @@
+openapi: 3.0.0
+info:
+  title: Azula API
+  version: 1.0.0
+  description: This is the OpenAPI documentation converted from Postman collection.
+servers:
+- url: https://your-live-api-url.com
+paths:
+  /products:
+    get:
+      summary: getting all products
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: create a product
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /products/67bd9babe8dc7733b4d2aaab:
+    get:
+      summary: get a single product
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful response
+  /products?category=men&search=jacket&sort=price-desc:
+    get:
+      summary: search,sort and filter products
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful response
+  /products/67fdaa16f34c145afad5a5e1:
+    patch:
+      summary: update product
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+    delete:
+      summary: delete product
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /authentication/signup:
+    post:
+      summary: signup user
+      tags:
+      - authentication
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: yourusername
+              email: youremail@gmail.com
+              password: password
+  /authentication/login:
+    post:
+      summary: login admin user
+      tags:
+      - authentication
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: youremail@gmail.com
+              password: '12345'
+  /authentication/resetpassword:
+    post:
+      summary: reset password
+      tags:
+      - authentication
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              otp: '453915'
+              password: ojoxkznjio
+  /authentication/forgetpassword:
+    post:
+      summary: forget password
+      tags:
+      - authentication
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: youremail@gmail.com
+  /authentication/logout:
+    post:
+      summary: logout
+      tags:
+      - authentication
+      responses:
+        '200':
+          description: Successful response
+  /users:
+    get:
+      summary: getAllUsers
+      tags:
+      - users
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /users/67c699503b405da1ad1b09f7:
+    get:
+      summary: getSingleUser
+      tags:
+      - users
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /users/67fd9b86c532bd7b719b471e:
+    delete:
+      summary: deleteUser
+      tags:
+      - users
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /users/me/delete:
+    delete:
+      summary: delete own account
+      tags:
+      - users
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /users/me/update:
+    patch:
+      summary: UpdateOwnAccount
+      tags:
+      - users
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              promocode: 'update '
+      security:
+      - bearerAuth: []
+  /orders:
+    post:
+      summary: createOrder
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              orderItems:
+              - productId: 67bd9babe8dc7733b4d2aaab
+                quantity: 1
+              deliveryOption: 67fb9d49e6e3eba6795057ab
+              shipping:
+                city: Nairobi
+                state: Western
+                country: Kenya
+                postalAddress: P.O. Box 150-50200
+                zipCode: '00100'
+                houseAddress: Kibabii Apartments
+                phoneNumber: 0708152289
+              paymentMethod: Pay On Delivery
+              promoCode: testpromocreation1
+      security:
+      - bearerAuth: []
+    get:
+      summary: getAllOrders
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /orders/67fd820cc3e999aaf0d0b8a0:
+    get:
+      summary: getSingleOrder
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /orders/67e7cc9b58719e6c08dadbd8:
+    delete:
+      summary: deleteOrder
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /orders/67fd758229ac2dfa73640269:
+    patch:
+      summary: update an order
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              isCancelled: false
+      security:
+      - bearerAuth: []
+  /orders/67fd820cc3e999aaf0d0b8a0/status:
+    patch:
+      summary: update order status
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              orderStatus: Completed
+      security:
+      - bearerAuth: []
+  /orders/67fd758229ac2dfa73640269/cancel:
+    patch:
+      summary: cancel an order
+      tags:
+      - orders
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /deliveryOption:
+    get:
+      summary: getAllDeliveryOptions
+      tags:
+      - deliveryOptions
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: createDeliveryOption
+      tags:
+      - deliveryOptions
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              deliveryName: Error
+              deliveryPrice: 500
+              deliveryDays: 7
+      security:
+      - bearerAuth: []
+  /deliveryOption/67fb9d49e6e3eba6795057ab:
+    get:
+      summary: getSingleDeliveryOption
+      tags:
+      - deliveryOptions
+      responses:
+        '200':
+          description: Successful response
+  /deliveryOption/67fda08c6a7a9284c2547944:
+    patch:
+      summary: update delivery option
+      tags:
+      - deliveryOptions
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              deliveryPrice: 1000
+      security:
+      - bearerAuth: []
+    delete:
+      summary: delete delivery option
+      tags:
+      - deliveryOptions
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /reviews:
+    post:
+      summary: ' createReview'
+      tags:
+      - reviews
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              productId: 67c32765a565aa87df3bcb19
+              rating: 4
+              comment: This awesome!testing the product reviewing route
+      security:
+      - bearerAuth: []
+  /reviews/67f4e3a9e34696db5e21deba:
+    patch:
+      summary: update review
+      tags:
+      - reviews
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              rating: 2
+              comment: testing updating review
+      security:
+      - bearerAuth: []
+    delete:
+      summary: delete a review
+      tags:
+      - reviews
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /orderpayment/lipanampesa:
+    post:
+      summary: lipanampesa
+      tags:
+      - lipa na mpesa
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              orderId: 67ec1effbea36fd6ce574da1
+              phone: '254708374149'
+              amount: 1
+  /orderpayment/lipanampesa/callback:
+    post:
+      summary: lipanampesa callback
+      tags:
+      - lipa na mpesa
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              Body:
+                stkCallback:
+                  MerchantRequestID: 5fbd-4f1c-b3c1-b463d28d74d2135410
+                  CheckoutRequestID: ws_CO_13042025230420846708374149
+                  ResultCode: 0
+                  ResultDesc: The service request is processed successfully.
+                  CallbackMetadata:
+                    Item:
+                    - Name: Amount
+                      Value: 1
+                    - Name: MpesaReceiptNumber
+                      Value: NLJ7RT61SV
+                    - Name: PhoneNumber
+                      Value: 254708374149
+  /validate-promocode/testpromocreation1:
+    get:
+      summary: Validating Promocode
+      tags:
+      - promotion code
+      responses:
+        '200':
+          description: Successful response
+  /likes/67bd9babe8dc7733b4d2aaab:
+    post:
+      summary: like a product
+      tags:
+      - likes
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+    delete:
+      summary: dislike a product
+      tags:
+      - likes
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /newsletter:
+    post:
+      summary: subscribe to newsletter
+      tags:
+      - newsletter
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: user@example.com
+    get:
+      summary: get all subscribers
+      tags:
+      - newsletter
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+  /contact:
+    post:
+      summary: contact us
+      tags:
+      - contactUs
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              fullName: Jane Doe
+              email: jane@example.com
+              subject: Order Inquiry
+              message: Hi, I want to ask about my order status.
+    get:
+      summary: get all contact messages
+      tags:
+      - contactUs
+      responses:
+        '200':
+          description: Successful response
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

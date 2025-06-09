@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Enhanced OpenAPI documentation for Azula eCommerce API
 servers:
-  - url: https://azula-api.onrender.com
+  - url: https://azula-api.onrender.com/api/v1
 paths:
   /products:
     get:

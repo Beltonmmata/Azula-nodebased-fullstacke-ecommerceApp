@@ -4,20 +4,21 @@ require("express-async-errors");
 
 const app = express();
 
-// Importing middlewares
+// Core middlewares
 const cors = require("cors");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const compression = require("compression");
+const cookieParser = require("cookie-parser");
 
 // Swagger setup
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
 
-// Importing routes
+// Routes
 const Product = require("./routes/productsRouter");
 const Authentication = require("./routes/authenticationRouter");
 const Users = require("./routes/userRouter");
@@ -33,19 +34,28 @@ const Contact = require("./routes/contactRouter");
 // Database connection
 const connectDB = require("./db/connect");
 
-// Error handlers
+// Error middlewares
 const notFound = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
-// Using middlewares
+// Serve static files
 app.use(express.static("./public"));
+
+// Body parser
 app.use(express.json());
+
+// Cookie parser (critical for reading cookies)
+app.use(cookieParser(process.env.JWT_SECRET));
+
+// CORS config (allow frontend to send cookies)
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
   })
 );
+
+// Security middlewares
 app.use(helmet());
 app.use(xss());
 app.use(
@@ -55,10 +65,12 @@ app.use(
     message: "Too many requests, try again later",
   })
 );
+
+// Dev and performance middlewares
 app.use(morgan("dev"));
 app.use(compression());
 
-// Root route
+// Home route
 app.get("/", (req, res) => {
   res.status(200).send(`
     <h1>Welcome to Azula E-commerce</h1>
@@ -66,7 +78,7 @@ app.get("/", (req, res) => {
   `);
 });
 
-// Swagger docs route
+// Swagger docs
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // API routes
@@ -85,6 +97,8 @@ app.use("/api/v1/contact", Contact);
 // Error handling
 app.use(notFound);
 app.use(errorHandlerMiddleware);
+
+// Catch-all error logger
 app.use((err, req, res, next) => {
   console.error("Error Stack:", err.stack);
   res.status(err.statusCode || 500).json({
@@ -94,8 +108,8 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Start server
 const port = process.env.PORT || 5000;
-
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
@@ -103,7 +117,7 @@ const start = async () => {
       console.log(`Server is listening on port ${port}...`)
     );
   } catch (error) {
-    console.log("Error seeding database:", error);
+    console.log("Error starting server:", error);
   }
 };
 

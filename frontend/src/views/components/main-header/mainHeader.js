@@ -22,8 +22,8 @@ const mainHeader = {
     <div class="header-container-top">
       <div>
         <p>Wish to talk to us?</p>
-        <a href="/contact-us">Contact Us</a>
-        <a href="/about-us">About Us</a>
+        <a href="/#/contact-us">Contact Us</a>
+        <a href="/#/about-us">About Us</a>
       </div>
     </div>
     <div class="header-container-bottom">

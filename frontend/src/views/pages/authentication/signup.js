@@ -1,10 +1,7 @@
 import "./authenticator.css";
-
-import homePage from "../home-page/homePage";
-
 import localStorageObj from "../../../models/localStorage";
 import { signup } from "../../../models/user";
-import reRender from "../../../controllers/reRender";
+import { showMessage } from "../../../controllers/showMessage";
 const register = {
   render() {
     return `
@@ -18,28 +15,28 @@ const register = {
             type="text"
             name="username"
             id="username-sign-up"
-            placeholder="eg. Rashan"
+            placeholder="eg.example"
           />
           <label for="email-sign-up">Email</label>
           <input
             type="email"
             name="email"
             id="email-sign-up"
-            placeholder="eg. example@gmail.com"
+            placeholder="eg.example@gmail.com"
           />
            <label for="password-sign-up">Password</label>
           <input
             type="password"
             name="password"
             id="password-sign-up"
-            placeholder="eg. G%20Rashan"
+            placeholder="eg.20hashan"
           />
           <label for="confirm-password-sign-up">Confirm Password</label>
           <input
             type="password"
             name="confirm-password"
             id="confirm-password-sign-up"
-            placeholder="eg. G%20Rashan"
+            placeholder="eg.20Rashan"
           />
           <button id="signin-btn" class=" btn w-full primary-btn" type="submit">
             Create Account
@@ -64,24 +61,18 @@ const register = {
         ).value;
 
         if (!name || !email || !password || !confirmPassword) {
-          alert("all fields should e filled");
+          showMessage("all fields should filled", "error");
           return;
         }
 
         if (password !== confirmPassword) {
-          alert("password and confirm password doesnot match");
+          showMessage("Password and confirm password does not match", "error");
           return;
         }
-        try {
-          await signup(name, email, password);
-        } catch (error) {
-          console.log("SignUp failed:" + error);
-        }
+
+        await signup(name, email, password);
         if (localStorageObj.getItem("user")) {
-          // document.location.hash = "/";
-          reRender(homePage);
-        } else {
-          alert("Registration failed. please try again later");
+          document.location.hash = "/";
         }
       });
   },

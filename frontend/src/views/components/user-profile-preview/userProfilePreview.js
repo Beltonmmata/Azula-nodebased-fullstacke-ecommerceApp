@@ -1,9 +1,10 @@
 import reRender from "../../../controllers/reRender";
 import homePage from "../../pages/home-page/homePage";
 import { hideUserMenu } from "../../../controllers/userMenuOverlay";
-import localStorageObj from "../../../models/localstorage";
+import localStorageObj from "../../../models/localStorage";
 import { logout } from "../../../models/user";
 import { showMessage } from "../../../controllers/showMessage";
+import { hideLoading, showLoading } from "../../../controllers/loading";
 
 const userProfilePreview = {
   render() {
@@ -21,12 +22,18 @@ const userProfilePreview = {
         `;
   },
   afterRender() {
-    document.getElementById("logout-btn").addEventListener("click", () => {
-      logout();
-      showMessage("logged out succesfully", "success");
-      hideUserMenu();
-      reRender(homePage);
-    });
+    document
+      .getElementById("logout-btn")
+      .addEventListener("click", async () => {
+        showLoading();
+        const success = await logout();
+        if (success) {
+          showMessage("Logged out successfully", "success");
+          hideLoading();
+          hideUserMenu();
+          reRender(homePage);
+        }
+      });
   },
 };
 export default userProfilePreview;

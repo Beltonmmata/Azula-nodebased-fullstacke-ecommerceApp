@@ -4,17 +4,12 @@ import axios from "axios";
 
 export const getProducts = async (queryParams = {}) => {
   try {
-    // Convert queryParams object into a URL query string
     const queryString = new URLSearchParams(queryParams).toString();
-
-    // Construct full URL (append query only if it exists)
     const url = queryString
       ? `${backendUrl}/products?${queryString}`
       : `${backendUrl}/products`;
 
-    const { data } = await axios.get(url, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const { data } = await axios.get(url);
 
     return data.data;
   } catch (err) {
@@ -30,9 +25,7 @@ export const getProducts = async (queryParams = {}) => {
 
 export const getProduct = async (id) => {
   try {
-    const { data } = await axios.get(`${backendUrl}/products/${id}`, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const { data } = await axios.get(`${backendUrl}/products/${id}`);
     return data.data;
   } catch (err) {
     const msg =

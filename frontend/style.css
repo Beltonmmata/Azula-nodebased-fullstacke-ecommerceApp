@@ -3,9 +3,9 @@
   --color-primary-30: rgb(255, 255, 255);
   --color-primary-10: rgb(248, 247, 253);
   --color-primary-10-transparent: rgba(248, 247, 253, 0.9);
-  --color-secondary-60: #202124;
-  --color-secondary-30: #5f6368;
-  --color-secondary-10: #9aa0a6;
+  --color-secondary-60: #222;
+  --color-secondary-30: #555;
+  --color-secondary-10: rgb(49, 48, 48);
 
   --border-color: #e3e3e3;
   --shadow-color: rgba(213, 217, 217, 0.5);
@@ -257,7 +257,7 @@ img {
   left: 0;
   background-color: #eafaf1;
   border-left: 6px solid var(--border-color);
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 6px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -267,7 +267,6 @@ img {
 }
 .message-container.active {
   display: flex;
-
   justify-content: center;
   align-items: center;
   margin-top: 120px;

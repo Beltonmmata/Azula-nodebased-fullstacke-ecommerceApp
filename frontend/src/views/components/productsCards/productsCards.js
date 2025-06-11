@@ -1,3 +1,4 @@
+import { likeProduct } from "../../../models/likes";
 import ratingComponent from "../ratingComponent/ratingComponent";
 import "./productsCards.css";
 
@@ -10,9 +11,12 @@ const productsCards = {
 
     return products
       .map((product) => {
-        let { priceIs, priceWas, rating, _id, imageUrl, reviews } = product;
+        let { priceIs, priceWas, rating, _id, imageUrl, reviews, likes } =
+          product;
         let id = _id;
         let { avarageRating, count } = rating;
+
+        let noOfLikes = likes.length;
         let noOfReviews = reviews.length;
         let priceOff = Math.trunc(((priceWas - priceIs) / priceWas) * 100);
 
@@ -35,12 +39,16 @@ const productsCards = {
               </div>
               <div class="products-review">
                 <div class="reviews">
+                <button id="review-product-btn" class="product-review-btn" data-product-id="${id}">
                   <ion-icon name="chatbubbles-outline"></ion-icon>
                   ${noOfReviews} reviews
+                  </button>
                 </div>
                 <div class="likes">
-                  <ion-icon name="heart-outline"></ion-icon>                    
-                  0 likes
+                  <button id="like-product-btn" class="product-review-btn" data-product-id="${id}">
+                    <ion-icon name="heart-outline"></ion-icon>                    
+                    ${noOfLikes} likes
+                  </button>
                 </div>
               </div>
               <div class="buy-action flex-center-container">
@@ -48,7 +56,7 @@ const productsCards = {
                   Add To Cart
                 </button>
                 <button class="buy-now-btn" data-product-id="${id}" >
-                Buy Now
+                  Buy Now
                 </button>
               </div>
             </div>

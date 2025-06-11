@@ -7,8 +7,7 @@ export const createOrder = async (
   deliveryOption,
   shipping,
   paymentMethod,
-  totalPrice,
-  shippingPrice
+  promoCode
 ) => {
   try {
     const { data } = await axios.post(
@@ -18,8 +17,7 @@ export const createOrder = async (
         deliveryOption,
         shipping,
         paymentMethod,
-        totalPrice,
-        shippingPrice,
+        promoCode,
       },
       {
         headers: {

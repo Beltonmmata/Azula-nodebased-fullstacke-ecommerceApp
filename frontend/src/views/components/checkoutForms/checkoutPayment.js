@@ -1,29 +1,25 @@
 import localStorageObj from "../../../models/localStorage";
+import checkoutNav from "../../pages/checkout/checkoutNav";
 const checkoutPayment = {
   render() {
+    const paymentMethods = [
+      {
+        id: "1",
+        option: "payment-method",
+        label: "Pay On Delivery",
+        text: "Once your order is marked as delivered you will receive an email to be able to make payments",
+      },
+      {
+        id: "2",
+        option: "pay-on-order",
+        label: "Pay On Order",
+        text: "Once your order is placed  you will be able to make online payment in the order summary screen",
+      },
+    ];
     return `
      <!-- navigator -->
     <div class="container flex-center-container">
-      <div class="navigator-container flex-center-container">
-        <div
-          class="navigator-item navigator-item-active sign-in flex-center-container"
-        >
-          <a href="/#/checkout/signin">Sign in</a>
-        </div>
-        <div class="navigator-item navigator-item-active shipping flex-center-container">
-         <a href="/#/checkout/shipping">Shipping</a>
-        </div>
-        <div class="navigator-item navigator-item-active delivery flex-center-container">
-          <a href="/#/checkout/delivery"> Delivery</a>  
-       
-        </div>
-        <div class="navigator-item navigator-item-active payment flex-center-container">
-         <a href="/#/checkout/payment">Payment</a> 
-        </div>
-        <div class="navigator-item place-order flex-center-container">
-          Order
-        </div>
-      </div>
+        ${checkoutNav(["signin", "shipping", "delivery", "payment"])}
     </div>
 
     <div class="main-content-container container flex-center-container">
@@ -33,27 +29,27 @@ const checkoutPayment = {
         <form id="payment-methods-form">
           <h2>Payment Methods</h2>
 
-          <div class="form-radio-container">
-            <input
-              type="radio"
-              checked
-              class="radio-input"
-              name="delivery-option-1"
-            />
-            <div class="radio-input-text">
-              <div class="radio-input-label font-success">Pay On Delivery</div>
-              <div class="radio-input-text ">Once your order is marked as delivered you will receive an email to be able to make payments</div>
+        ${paymentMethods
+          .map((paymentMethod) => {
+            const { id, option, text, label } = paymentMethod;
+            return `
+            <div class="form-radio-container">
+              <input 
+                type="radio"
+                ${id === "1" ? "checked" : ""}
+                class="radio-input"
+                name = "payment-method"
+                value=${option}
+                />
+              <div>
+                <div class="radio-input-label font-success">${label}</div>
+                <div class="radio-input-text">${text}</div>
+              </div>
             </div>
-          </div>
-          <div class="form-radio-container">
-            <input type="radio" class="radio-input" name="delivery-option-1" />
-            <div>
-              <div class="radio-input-label font-success">Pay On Order</div>
-              <div class="radio-input-text">Once your order is placed  you will be able to make online payment in the order summary screen</div>
-            </div>
-          </div>
+            `;
+          })
+          .join(" ")}       
         
-         
           <button id="pay-on-delivery-btn" class="btn w-full w-full primary-btn" >Save and Continue</button>
         </form>
       </div>
@@ -63,21 +59,17 @@ const checkoutPayment = {
     `;
   },
   afterRender() {
-    document.getElementById("payment-btn").addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log("pay btn clicked");
-
-      document.location.hash = "/checkout/placeorder";
-    });
     document
-      .getElementById("pay-on-delivery-btn")
-      .addEventListener("click", (e) => {
+      .getElementById("payment-methods-form")
+      .addEventListener("submit", (e) => {
         e.preventDefault();
-
-        console.log("pay on delivery clicked");
-        localStorageObj.setItem("payment", {
-          paymentMethod: "Pay on Delivery",
-        });
+        const selectedPaymentMethod = document.querySelector(
+          'input[name="payment-method"]:checked'
+        ).value;
+        // const selectedOption = deliveryOptions.find(
+        //   (option) => option.id == selectedOptionId
+        // );
+        localStorageObj.setItem("paymentMethod", selectedPaymentMethod);
         document.location.hash = "/checkout/placeorder";
       });
   },

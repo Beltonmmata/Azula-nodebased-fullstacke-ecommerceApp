@@ -1,10 +1,7 @@
 import axios from "axios";
 import backendUrl from "./backendUrl";
-import createUserModel from "../models/userModel";
+import localStorageObj from "../models/localStorage";
 import { showMessage } from "../controllers/showMessage";
-
-// Setup global axios config for cookie usage
-axios.defaults.withCredentials = true;
 
 // ✅ SIGNUP
 export const signup = async (name, email, password) => {
@@ -15,8 +12,8 @@ export const signup = async (name, email, password) => {
       { headers: { "Content-Type": "application/json" } }
     );
 
-    const user = createUserModel(data.data);
-    localStorage.setItem("user", JSON.stringify(user));
+    const user = data.data;
+    localStorageObj.setItem("user", user);
     showMessage("Signup successful", "success");
     return user;
   } catch (err) {
@@ -31,11 +28,11 @@ export const login = async (email, password) => {
     const { data } = await axios.post(
       `${backendUrl}/authentication/login`,
       { email, password },
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" }, withCredentials: true }
     );
 
-    const user = createUserModel(data.data);
-    localStorage.setItem("user", JSON.stringify(user));
+    const user = data.data;
+    localStorageObj.setItem("user", user);
     showMessage("Login successful", "success");
     return user;
   } catch (err) {
@@ -44,14 +41,23 @@ export const login = async (email, password) => {
   }
 };
 
-// ✅ LOGOUT
 export const logout = async () => {
   try {
-    await axios.post(`${backendUrl}/authentication/logout`);
-    localStorage.removeItem("user");
-    showMessage("Logged out", "success");
+    await axios.post(
+      `${backendUrl}/authentication/logout`,
+      {},
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    localStorageObj.removeItem("user");
+    localStorageObj.removeItem("promoCode");
+    localStorageObj.removeItem("cart");
+    return true;
   } catch (err) {
     showMessage("Logout failed", "error");
+    return false;
   }
 };
 
@@ -81,8 +87,8 @@ export const resetPassword = async (otp, password) => {
       { headers: { "Content-Type": "application/json" } }
     );
 
-    const user = createUserModel(data.data);
-    localStorage.setItem("user", JSON.stringify(user));
+    const user = data.data;
+    localStorageObj.setItem("user", user);
     showMessage("Password reset successful", "success");
     return user;
   } catch (err) {
@@ -91,14 +97,13 @@ export const resetPassword = async (otp, password) => {
   }
 };
 
-// ✅ Get current user (optional but smart on page reload)
 export const getCurrentUser = async () => {
   try {
     const { data } = await axios.get(
       `${backendUrl}/authentication/current-user`
     );
-    const user = createUserModel(data.data);
-    localStorage.setItem("user", JSON.stringify(user));
+    const user = data.data;
+    localStorageObj.setItem("user", user);
     return user;
   } catch (err) {
     return null; // not logged in

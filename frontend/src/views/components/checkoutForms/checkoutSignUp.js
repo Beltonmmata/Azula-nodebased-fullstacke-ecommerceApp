@@ -1,4 +1,5 @@
-import localStorageObj from "../../../models/localstorage";
+import { showMessage } from "../../../controllers/showMessage";
+import localStorageObj from "../../../models/localStorage";
 import { signup } from "../../../models/user";
 
 const checkoutSignUp = {
@@ -81,20 +82,18 @@ const checkoutSignUp = {
         ).value;
 
         if (!name || !email || !password || !confirmPassword) {
-          alert("all fields should e filled");
+          showMessage("all fields should be filled", "error");
           return;
         }
 
         if (password !== confirmPassword) {
-          alert("password and confirm password doesnot match");
+          showMessage("password and confirm password should match", "error");
           return;
         }
         console.log(name, email, password);
-        try {
-          await signup(name, email, password);
-        } catch (error) {
-          console.log("SignUp failed:" + error);
-        }
+
+        await signup(name, email, password);
+
         if (localStorageObj.getItem("user")) {
           const shippingDetails = localStorageObj.getItem("shipping");
           const deliveryDetails = localStorageObj.getItem("delivery");
@@ -106,8 +105,6 @@ const checkoutSignUp = {
           } else {
             document.location.hash = "/checkout/shipping";
           }
-        } else {
-          alert("Registration failed. please try again later");
         }
       });
   },

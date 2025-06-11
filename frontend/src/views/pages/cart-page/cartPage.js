@@ -6,6 +6,7 @@ import mainHeader from "../../components/main-header/mainHeader";
 import newsletter from "../../components/newsletter/newsletter";
 import cart from "../../../models/cart";
 import "./cartPage.css";
+import { hideLoading } from "../../../controllers/loading";
 const cartPage = {
   render: async () => {
     if (cart.userCart.length < 1) {
@@ -65,8 +66,10 @@ const cartPage = {
     }
   },
   afterRender() {
+    mainHeader.afterRender();
     cartList.afterRender();
     cartSummary.afterRender();
+    applyCoupon.afterRender();
   },
 };
 export default cartPage;

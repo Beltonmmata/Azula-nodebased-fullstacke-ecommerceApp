@@ -1,28 +1,14 @@
-import localStorageObj from "../../../models/localstorage";
+import { showMessage } from "../../../controllers/showMessage";
+import localStorageObj from "../../../models/localStorage";
 import { login } from "../../../models/user";
+import checkoutNav from "../../pages/checkout/checkoutNav";
 
 const checkoutSignIn = {
   render() {
     return `
     <!-- navigator -->
     <div class="container flex-center-container">
-      <div class="navigator-container flex-center-container">
-        <div
-          class="navigator-item navigator-item-active sign-in flex-center-container"
-        >
-           <a href="/#/checkout/signup">Sign in</a>
-        </div>
-        <div class="navigator-item shipping flex-center-container">
-          Shipping
-        </div>
-        <div class="navigator-item delivery flex-center-container">
-          Delivery
-        </div>
-        <div class="navigator-item payment flex-center-container">Payment</div>
-        <div class="navigator-item place-order flex-center-container">
-          Order
-        </div>
-      </div>
+      ${checkoutNav(["signin"])}
     </div>
 
     <div class="main-content-container container flex-center-container">
@@ -42,12 +28,17 @@ const checkoutSignIn = {
             type="password"
             name="password"
             id="password-sign-in"
-            placeholder="eg. G%20Rashan"
+            placeholder="eg.20Rashan"
           />
+
+          <div class="or flex-center-container">
+          <a href="/#/reset-password" id="sign-up-redirect"> forgot password?<a>
+          </div>
           <button id="login-btn" class="btn w-full primary-btn">Login</button>
-          <div class="or flex-center-container">Or dont have an accont?</div>
           
-          <a href="/#/checkout/signup" id="sign-up-redirect" class="button-link btn w-full secondary-btn"> Create Account<a>
+          <div class="or flex-center-container">Or don't have an accont?</div>
+          
+          <a href="/#/checkout/signup" id="sign-up-redirect" class="button-link btn w-full secondary-btn"> Create Account</a>
         </form>
       </div>
       </div>
@@ -64,16 +55,11 @@ const checkoutSignIn = {
         const password = document.getElementById("password-sign-in").value;
 
         if (!email || !password) {
-          alert("all fields should e filled");
+          showMessage("all fields should be filled", "error");
           return;
         }
+        await login(email, password);
 
-        console.log(email, password);
-        try {
-          await login(email, password);
-        } catch (error) {
-          console.log("Login failed:" + error);
-        }
         if (localStorageObj.getItem("user")) {
           const shippingDetails = localStorageObj.getItem("shipping");
           const deliveryDetails = localStorageObj.getItem("delivery");
@@ -85,8 +71,6 @@ const checkoutSignIn = {
           } else {
             document.location.hash = "/checkout/shipping";
           }
-        } else {
-          alert("Registration failed. please try again later");
         }
       });
   },

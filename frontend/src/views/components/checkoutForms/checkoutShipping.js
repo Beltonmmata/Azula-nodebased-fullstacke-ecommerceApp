@@ -1,27 +1,12 @@
 import localStorageObj from "../../../models/localstorage";
+import checkoutNav from "../../pages/checkout/checkoutNav";
 
 const checkoutShipping = {
   render() {
     return `
      <!-- navigator -->
     <div class="container flex-center-container">
-      <div class="navigator-container flex-center-container">
-        <div
-          class="navigator-item navigator-item-active sign-in flex-center-container"
-        >
-          <a href="/#/checkout/signin">Sign in</a>
-        </div>
-        <div class="navigator-item navigator-item-active shipping flex-center-container">
-         <a href="/#/checkout/shipping">Shipping</a>
-        </div>
-        <div class="navigator-item delivery flex-center-container">
-          Delivery
-        </div>
-        <div class="navigator-item payment flex-center-container">Payment</div>
-        <div class="navigator-item place-order flex-center-container">
-          Order
-        </div>
-      </div>
+    ${checkoutNav(["signin", "shipping"])}
     </div>
 
     <div class="main-content-container container flex-center-container">

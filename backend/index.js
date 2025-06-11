@@ -71,15 +71,15 @@ app.use(morgan("dev"));
 app.use(compression());
 
 // Home route
-app.get("/", (req, res) => {
+app.get("/api/v1/", (req, res) => {
   res.status(200).send(`
     <h1>Welcome to Azula E-commerce</h1>
-    <p><a href="/api-docs" style="display:inline-block;padding:10px 20px;background:#007bff;color:#fff;border:none;border-radius:5px;text-decoration:none;font-weight:bold;">View API Documentation</a></p>
+    <p><a href="/api/v1/api-docs" style="display:inline-block;padding:10px 20px;background:#007bff;color:#fff;border:none;border-radius:5px;text-decoration:none;font-weight:bold;">View API Documentation</a></p>
   `);
 });
 
 // Swagger docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/v1/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // API routes
 app.use("/api/v1/products", Product);

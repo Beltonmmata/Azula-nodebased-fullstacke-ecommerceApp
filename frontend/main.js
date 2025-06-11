@@ -11,6 +11,10 @@ import ordersPage from "./src/views/pages/my-orders/myOrders";
 import signin from "./src/views/pages/authentication/signin";
 import register from "./src/views/pages/authentication/signup";
 import trackOrder from "./src/views/pages/track-order/trackOrder";
+import { showConversationOverlay } from "./src/views/components/conversation-overlay/conversationOverlay";
+import resetPassword from "./src/views/pages/authentication/resetPassword";
+import userProfile from "./src/views/pages/user-profile/userProfile";
+import contactUs from "./src/views/pages/contact-us/contactUs";
 // import "./src/controllers/handleHomepageEvents";
 const routes = {
   "/": homePage,
@@ -22,7 +26,41 @@ const routes = {
   "/signin": signin,
   "/register": register,
   "/trackorder": trackOrder,
+  "/reset-password": resetPassword,
+  "/user-profile": userProfile,
+  "/contact-us": contactUs,
 };
+// showConversationOverlay(`
+//
+//         <span class="message-text">Are you sure you want to delete your account?</span>
+//         <div class="call-to-action">
+//             <button class="call-to-action-btn cancel-btn" onclick="hideConversationOverlay()">Cancel</button>
+//             <button class="call-to-action-btn ok-btn" onclick="hideConversationOverlay()">OK</button>
+//         </div>
+//
+//   `);
+
+// showConversationOverlay(
+//   `
+//   <form>
+//         <!-- Phone Number -->
+//         <label for="phone-number-shipping-address">Mpesa Number</label>
+//         <input
+//           type="tel"
+//           id="phone-number-shipping-address"
+//           placeholder="e.g. 0712334587"
+//           pattern="\\d{10}"
+//           title="Enter a valid 10-digit phone number"
+//           required
+//         />
+//         <div class="call-to-action">
+//             <button class="call-to-action-btn cancel-btn" onclick="hideConversationOverlay()">Cancel</button>
+//             <button class="call-to-action-btn ok-btn" onclick="hideConversationOverlay()">OK</button>
+//         </div>
+//       </form>
+//   `
+// );
+
 const router = async () => {
   showLoading();
   const { resource, id, action, query } = parseRequestUrl(); // ✅ Extract query parameters

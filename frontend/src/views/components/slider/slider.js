@@ -4,7 +4,7 @@ const slider = {
   // Array of slides
   slides: [
     {
-      imageUrl: "../slider-images/faster-delivery.png",
+      imageUrl: "../slider-images/faster-delivery.jpg",
       title: "Enjoy Faster Delivery",
       description:
         "We offer express delivery options to ensure your order arrives within 24 hours!",

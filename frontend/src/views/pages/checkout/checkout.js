@@ -18,7 +18,7 @@ const checkoutPage = {
   },
   render: async () => {
     const { id } = parseRequestUrl();
-    const stepPage = checkoutPage.steps[id]; // Use 'checkoutPage' instead of 'this'
+    const stepPage = checkoutPage.steps[id];
 
     if (!stepPage) {
       return `<h2>Invalid Checkout Step</h2>`;

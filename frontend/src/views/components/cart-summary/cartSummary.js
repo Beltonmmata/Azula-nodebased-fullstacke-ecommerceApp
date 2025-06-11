@@ -6,7 +6,7 @@ import { getProducts } from "../../../models/products";
 const cartSummary = {
   render: async () => {
     const products = await getProducts();
-    const updatedCart = localStorageObj.getItem("cart");
+    const updatedCart = localStorageObj.getItem("cart") || [];
     let totalCartPrice = 0;
     updatedCart.forEach((cartItem) => {
       let { productId, quantity } = cartItem;
@@ -19,7 +19,12 @@ const cartSummary = {
     });
     const taxPercentage = 10;
     const taxedPrice = (taxPercentage / 100) * totalCartPrice;
-    const promotianalDiscount = 0;
+    let promotianalDiscount = 0;
+    const promoCode = localStorageObj.getItem("promoCode");
+    if (promoCode) {
+      promotianalDiscount = 0.1 * totalCartPrice;
+    }
+
     const subtotal = totalCartPrice - (taxedPrice + promotianalDiscount);
 
     return `
@@ -43,11 +48,11 @@ const cartSummary = {
             </li>
             <li class="taxed-price">
             <div class="label">Taxed price</div>
-            <div class="figure">ksh.${taxedPrice}</div>
+            <div class="figure">ksh.${taxedPrice.toFixed(2)}</div>
             </li>
             <li class="cart-subtotal">
             <div class="label">Subtotal</div>
-            <div class="figure">ksh.${subtotal}</div>
+            <div class="figure">ksh.${subtotal.toFixed(2)}</div>
             </li>
         </ul>
         <div class="procede-to-checkout-btn">

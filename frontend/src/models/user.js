@@ -1,4 +1,4 @@
-import localStorageObj from "../models/localStorage";
+import localStorageObj from "./local-storage";
 import { showMessage } from "../controllers/showMessage";
 import api from "./api";
 

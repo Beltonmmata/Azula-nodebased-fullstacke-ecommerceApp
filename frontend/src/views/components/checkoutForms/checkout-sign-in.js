@@ -1,5 +1,5 @@
 import { showMessage } from "../../../controllers/showMessage";
-import localStorageObj from "../../../models/localStorage";
+import localStorageObj from "../../../models/local-storage";
 import { login } from "../../../models/user";
 import checkoutNav from "../../pages/checkout/checkoutNav";
 

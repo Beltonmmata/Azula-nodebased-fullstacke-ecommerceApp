@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { getAllDeliveryOptions } from "../../../models/deliveryOptions";
-import localStorageObj from "../../../models/localstorage";
+import localStorageObj from "../../../models/local-storage";
 import checkoutNav from "../../pages/checkout/checkoutNav";
 
 // Shared variable for delivery options

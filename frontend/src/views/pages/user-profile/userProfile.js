@@ -1,4 +1,4 @@
-import localStorageObj from "../../../models/localStorage";
+import localStorageObj from "../../../models/local-storage";
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
 import newsletter from "../../components/newsletter/newsletter";

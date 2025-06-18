@@ -1,12 +1,12 @@
-import checkoutShipping from "../../components/checkoutForms/checkoutShipping";
+import checkoutShipping from "../../components/checkoutForms/checkout-shipping";
 
-import checkoutSignUp from "../../components/checkoutForms/checkoutSignUp";
+import checkoutSignUp from "../../components/checkoutForms/checkout-sign-up";
 import "./checkout.css";
 import { parseRequestUrl } from "../../../controllers/browserRouter";
-import checkoutDelivery from "../../components/checkoutForms/checkoutDelivery";
-import checkoutPayment from "../../components/checkoutForms/checkoutPayment";
-import checkoutOrder from "../../components/checkoutForms/checkoutOrder";
-import checkoutSignIn from "../../components/checkoutForms/checkoutSignIn";
+import checkoutDelivery from "../../components/checkoutForms/checkout-delivery";
+import checkoutPayment from "../../components/checkoutForms/checkout-payment";
+import checkoutOrder from "../../components/checkoutForms/checkout-order";
+import checkoutSignIn from "../../components/checkoutForms/checkout-sign-in";
 
 const checkoutPage = {
   steps: {

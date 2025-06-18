@@ -1,4 +1,4 @@
-import localStorageObj from "../../../models/localstorage";
+import localStorageObj from "../../../models/local-storage";
 import { getProducts } from "../../../models/products";
 import { createOrder } from "../../../models/order";
 import "./placeOrder.css";

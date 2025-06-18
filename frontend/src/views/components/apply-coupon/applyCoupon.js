@@ -1,6 +1,6 @@
 import reRender from "../../../controllers/reRender";
 import { showMessage } from "../../../controllers/showMessage";
-import localStorageObj from "../../../models/localstorage";
+import localStorageObj from "../../../models/local-storage";
 import { validatePromocode } from "../../../models/promocode";
 import cartPage from "../../pages/cart-page/cartPage";
 import "./applyCoupon.css";

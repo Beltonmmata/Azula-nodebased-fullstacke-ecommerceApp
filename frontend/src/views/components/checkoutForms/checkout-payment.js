@@ -1,4 +1,4 @@
-import localStorageObj from "../../../models/localStorage";
+import localStorageObj from "../../../models/local-storage";
 import checkoutNav from "../../pages/checkout/checkoutNav";
 const checkoutPayment = {
   render() {

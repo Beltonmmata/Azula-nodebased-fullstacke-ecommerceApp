@@ -1,5 +1,5 @@
 //import products from "../../../data/products";
-import localStorageObj from "../../../models/localstorage";
+import localStorageObj from "../../../models/local-storage";
 import cart from "../../../models/cart";
 import reRender from "../../../controllers/reRender";
 import cartPage from "../../pages/cart-page/cartPage";

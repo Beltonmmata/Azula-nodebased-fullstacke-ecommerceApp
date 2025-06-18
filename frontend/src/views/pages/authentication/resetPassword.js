@@ -1,5 +1,5 @@
 import "./authenticator.css";
-import localStorageObj from "../../../models/localStorage";
+import localStorageObj from "../../../models/local-storage";
 import {
   forgotPassword,
   resetPassword as resetPasswordModel,

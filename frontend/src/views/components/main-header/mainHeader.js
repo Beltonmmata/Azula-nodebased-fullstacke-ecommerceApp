@@ -3,7 +3,7 @@ import {
   showUserMenu,
 } from "../../../controllers/userMenuOverlay";
 import cart from "../../../models/cart";
-import localStorageObj from "../../../models/localstorage";
+import localStorageObj from "../../../models/local-storage";
 
 import userProfilePreview from "../user-profile-preview/userProfilePreview";
 import "./mainHeader.css";

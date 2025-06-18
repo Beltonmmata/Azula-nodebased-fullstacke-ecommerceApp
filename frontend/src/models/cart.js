@@ -1,4 +1,4 @@
-import localStorageObj from "./localstorage";
+import localStorageObj from "./local-storage";
 
 const cart = {
   userCart: localStorageObj.getItem("cart") || [],

@@ -1,7 +1,7 @@
 import reRender from "../../../controllers/reRender";
 import homePage from "../../pages/home-page/homePage";
 import { hideUserMenu } from "../../../controllers/userMenuOverlay";
-import localStorageObj from "../../../models/localStorage";
+import localStorageObj from "../../../models/local-storage";
 import { logout } from "../../../models/user";
 import { showMessage } from "../../../controllers/showMessage";
 import { hideLoading, showLoading } from "../../../controllers/loading";

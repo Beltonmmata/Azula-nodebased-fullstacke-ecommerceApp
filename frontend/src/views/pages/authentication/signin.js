@@ -1,5 +1,5 @@
 import "./authenticator.css";
-import localStorageObj from "../../../models/localStorage";
+import localStorageObj from "../../../models/local-storage";
 import { login } from "../../../models/user";
 import { showMessage } from "../../../controllers/showMessage";
 import { hideLoading, showLoading } from "../../../controllers/loading";

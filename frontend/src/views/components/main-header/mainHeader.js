@@ -1,19 +1,14 @@
-import { showMessage } from "../../../controllers/showMessage";
 import {
   hideUserMenu,
   showUserMenu,
 } from "../../../controllers/userMenuOverlay";
 import cart from "../../../models/cart";
 import localStorageObj from "../../../models/localstorage";
-import searchBar from "../search-bar/searchbar";
 
 import userProfilePreview from "../user-profile-preview/userProfilePreview";
 import "./mainHeader.css";
 
 const mainHeader = {
-  afterRender() {
-    searchBar.afterRender();
-  },
   render() {
     const cartQty = cart.getCartQuantity();
     return `

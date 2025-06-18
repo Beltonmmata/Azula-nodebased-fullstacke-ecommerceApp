@@ -15,6 +15,38 @@ const trackOrder = {
 
     const { createdAt, orderStatus, orderItems } = order;
     const orderDate = dayjs(createdAt).format("MMM DD, YYYY");
+    const orderStatuses = [
+      {
+        status: Pending,
+        label: "Pending",
+        isActive: true,
+      },
+      {
+        status: Created,
+        label: "Created",
+        isActive: false,
+      },
+      {
+        status: Processing,
+        label: "Processing",
+        isActive: false,
+      },
+      {
+        status: Shipped,
+        label: "Shipped",
+        isActive: false,
+      },
+      {
+        status: Completed,
+        label: "Completed",
+        isActive: false,
+      },
+      {
+        status: Cancelled,
+        label: "Cancelled",
+        isActive: false,
+      },
+    ];
 
     return `
       <div class="track-order-wrapper">
@@ -31,12 +63,16 @@ const trackOrder = {
             <p><strong>Arriving on:</strong> Monday 25th 2055</p>
             <p class="order-status">Status: <span>${orderStatus}</span></p>
             <div class="progress-labels-container">
-              <div class="progress-label">Pending</div>
-              <div class="progress-label current-status">Created</div>
-              <div class="progress-label">Processing</div>
-              <div class="progress-label">Shipped</div>
-              <div class="progress-label current-status">Completed</div>
-              <div class="progress-label">Cancelled</div>
+              ${orderStatuses
+                .map((orderStatus) => {
+                  const { status, label, isActive } = orderStatus;
+                  return `
+                <div class='progress-label  ${
+                  isActive ? "current-status" : ""
+                }'>${label}</div>
+                `;
+                })
+                .join("")}
             </div>
             <div class="progress-bar">
               <div class="progress"></div>

@@ -2,16 +2,19 @@
   max-width: 1000px;
   margin: 20px auto;
   background-color: var(--color-primary-30);
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 4px 15px var(--shadow-color);
+  overflow: hidden;
 }
 
-/* Header */
+/* ==================== Header ==================== */
 .top-header-section {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .order-details,
@@ -23,9 +26,9 @@
 .delivery-details h3 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: var(--unit-l);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   color: var(--color-secondary-10);
 }
 
@@ -39,59 +42,64 @@
   color: var(--color-secondary-30);
 }
 
-.cancel-order {
-  margin-top: 12px;
-  padding: 8px 16px;
-}
-
-/* Progress */
+/* ==================== Progress Tracker ==================== */
 .progress-labels-container {
   display: flex;
   justify-content: space-between;
-  margin: 12px 0;
+  align-items: center;
   font-size: var(--unit-xs);
+  padding: 0 24px;
+  margin: 16px 0 8px;
+}
+
+.progress-label {
+  color: var(--color-secondary-50);
 }
 
 .current-status {
+  font-weight: var(--fw-600);
   color: var(--color-success);
 }
 
 .progress-bar {
-  height: 8px;
+  height: 10px;
   background-color: #e0e0e0;
-  border-radius: 4px;
-  position: relative;
+  margin: 0 24px 24px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .progress {
-  width: 0; /* Optionally set dynamically */
   height: 100%;
   background-color: var(--color-success);
+  width: 0%;
   transition: width 0.4s ease;
 }
 
-/* Items + Summary */
+/* ==================== Bottom Section ==================== */
 .bottom-details-section {
   display: grid;
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 1fr 340px;
   gap: 20px;
-  padding: 20px;
+  padding: 24px;
 }
 
-.items-list {
+.items-list,
+.order-summary {
   background-color: var(--color-primary-30);
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 10px;
+  padding: 20px;
   box-shadow: 0 2px 10px var(--shadow-color);
 }
 
-.items-list h3 {
+/* Items */
+.items-list h3,
+.order-summary h3 {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: var(--unit-m);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .item {
@@ -99,7 +107,7 @@
   align-items: center;
   gap: 12px;
   border-bottom: 1px solid var(--border-color);
-  padding: 10px 0;
+  padding: 12px 0;
 }
 
 .item:last-child {
@@ -109,8 +117,8 @@
 .image {
   width: 80px;
   height: 80px;
-  border-radius: 6px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .details p {
@@ -122,45 +130,38 @@
   margin-left: auto;
 }
 
-/* Summary Section */
-.order-summary {
-  background-color: var(--color-primary-30);
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 10px var(--shadow-color);
-}
-
-.order-summary h3 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: var(--unit-m);
-  margin-bottom: 12px;
-}
-
+/* Summary */
 .order-summary p {
-  margin: 8px 0;
   font-size: var(--unit-s);
+  margin: 10px 0;
 }
 
 .order-summary hr {
-  margin: 12px 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 16px 0;
 }
 
-/* Buttons */
+/* ==================== Buttons ==================== */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 5px;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: var(--unit-s);
   font-weight: var(--fw-600);
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .primary-btn {
   background-color: var(--color-call-to-action);
-  color: white;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background-color: var(--color-call-to-action-hover, #006e3d);
 }
 
 .secondary-btn {
@@ -168,9 +169,34 @@
   color: var(--color-secondary-60);
 }
 
-/* Responsive adjustments */
+.secondary-btn:hover {
+  background-color: var(--color-primary-20);
+}
+
+/* Cancel button */
+.cancel-order {
+  margin-top: 16px;
+}
+
+/* ==================== Responsive ==================== */
 @media (max-width: 900px) {
   .bottom-details-section {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .progress-labels-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .top-header-section {
+    padding: 16px;
+  }
+
+  .bottom-details-section {
+    padding: 16px;
   }
 }

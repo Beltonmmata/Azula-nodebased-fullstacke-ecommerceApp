@@ -1,6 +1,5 @@
-import axios from "axios";
-import backendUrl from "./backendUrl";
 import { showMessage } from "../controllers/showMessage";
+import api from "./api";
 
 export const createOrder = async (
   orderItems,
@@ -10,24 +9,14 @@ export const createOrder = async (
   promoCode
 ) => {
   try {
-    const { data } = await axios.post(
-      `${backendUrl}/orders`,
-      {
-        orderItems,
-        deliveryOption,
-        shipping,
-        paymentMethod,
-        promoCode,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      }
-    );
+    const { data } = await api.post("/orders", {
+      orderItems,
+      deliveryOption,
+      shipping,
+      paymentMethod,
+      promoCode,
+    });
     showMessage("Order created successfully", "success");
-
     return data;
   } catch (err) {
     const msg =
@@ -40,12 +29,7 @@ export const createOrder = async (
 
 export const getAllOrders = async () => {
   try {
-    const { data } = await axios.get(`${backendUrl}/orders`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
+    const { data } = await api.get("/orders");
     return data.data;
   } catch (err) {
     const msg =
@@ -60,12 +44,7 @@ export const getAllOrders = async () => {
 
 export const getOrders = async (id) => {
   try {
-    const { data } = await axios.get(`${backendUrl}/orders/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/orders/${id}`);
     return data.data;
   } catch (err) {
     const msg =

@@ -37,7 +37,7 @@ const orderSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ["Pay On Delivery", "Pay On Order"],
+      enum: ["pay-on-delivery", "pay-on-order"],
       default: "Pay On Order",
     },
     paymentResults: {

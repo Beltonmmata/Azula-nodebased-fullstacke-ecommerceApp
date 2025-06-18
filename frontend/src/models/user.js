@@ -1,17 +1,15 @@
-import axios from "axios";
-import backendUrl from "./backendUrl";
 import localStorageObj from "../models/localStorage";
 import { showMessage } from "../controllers/showMessage";
+import api from "./api";
 
 // ✅ SIGNUP
 export const signup = async (name, email, password) => {
   try {
-    const { data } = await axios.post(
-      `${backendUrl}/authentication/signup`,
-      { name, email, password },
-      { headers: { "Content-Type": "application/json" } }
-    );
-
+    const { data } = await api.post("/authentication/signup", {
+      name,
+      email,
+      password,
+    });
     const user = data.data;
     localStorageObj.setItem("user", user);
     showMessage("Signup successful", "success");
@@ -25,12 +23,10 @@ export const signup = async (name, email, password) => {
 // ✅ LOGIN
 export const login = async (email, password) => {
   try {
-    const { data } = await axios.post(
-      `${backendUrl}/authentication/login`,
-      { email, password },
-      { headers: { "Content-Type": "application/json" }, withCredentials: true }
-    );
-
+    const { data } = await api.post("/authentication/login", {
+      email,
+      password,
+    });
     const user = data.data;
     localStorageObj.setItem("user", user);
     showMessage("Login successful", "success");
@@ -43,14 +39,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
-    await axios.post(
-      `${backendUrl}/authentication/logout`,
-      {},
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
+    await api.post("/authentication/logout", {});
     localStorageObj.removeItem("user");
     localStorageObj.removeItem("promoCode");
     localStorageObj.removeItem("cart");
@@ -61,15 +50,11 @@ export const logout = async () => {
   }
 };
 
-// ✅ FORGOT PASSWORD
 export const forgotPassword = async (email) => {
   try {
-    const { data } = await axios.post(
-      `${backendUrl}/authentication/forgot-password`,
-      { email },
-      { headers: { "Content-Type": "application/json" } }
-    );
-
+    const { data } = await api.post("/authentication/forgot-password", {
+      email,
+    });
     showMessage("OTP sent to email", "success");
     return data;
   } catch (err) {
@@ -78,15 +63,12 @@ export const forgotPassword = async (email) => {
   }
 };
 
-// ✅ RESET PASSWORD
 export const resetPassword = async (otp, password) => {
   try {
-    const { data } = await axios.post(
-      `${backendUrl}/authentication/reset-password`,
-      { otp, password },
-      { headers: { "Content-Type": "application/json" } }
-    );
-
+    const { data } = await api.post("/authentication/reset-password", {
+      otp,
+      password,
+    });
     const user = data.data;
     localStorageObj.setItem("user", user);
     showMessage("Password reset successful", "success");
@@ -99,9 +81,7 @@ export const resetPassword = async (otp, password) => {
 
 export const getCurrentUser = async () => {
   try {
-    const { data } = await axios.get(
-      `${backendUrl}/authentication/current-user`
-    );
+    const { data } = await api.get("/authentication/current-user");
     const user = data.data;
     localStorageObj.setItem("user", user);
     return user;

@@ -5,7 +5,7 @@ const checkoutPayment = {
     const paymentMethods = [
       {
         id: "1",
-        option: "payment-method",
+        option: "pay-on-delivery",
         label: "Pay On Delivery",
         text: "Once your order is marked as delivered you will receive an email to be able to make payments",
       },

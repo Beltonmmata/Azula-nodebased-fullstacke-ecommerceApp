@@ -50,7 +50,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 // CORS config (allow frontend to send cookies)
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://azula-ecomerce.netlify.app"],
     credentials: true,
   })
 );

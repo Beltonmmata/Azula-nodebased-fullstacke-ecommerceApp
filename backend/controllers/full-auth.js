@@ -21,11 +21,12 @@ const sendTokenResponse = (
   message = "Authentication successful"
 ) => {
   const token = generateToken(user._id);
+  const oneWeek = 7 * 24 * 60 * 60 * 1000;
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    expires: new Date(Date.now() + oneWeek),
+    signed: true,
   });
   res.status(StatusCodes.OK).json({
     success: true,
@@ -51,7 +52,7 @@ const registerUser = async (req, res) => {
   let counter = 1;
 
   while (await User.findOne({ promoCode })) {
-    promoCode = `${basePromo}${counter}`;
+    promoCode = `${basePromo}_${counter}`;
     counter++;
   }
 
@@ -64,6 +65,12 @@ const registerUser = async (req, res) => {
   });
 
   sendTokenResponse(res, user, "User registered successfully");
+  await sendEmail({
+    to: user.email,
+    subject: "User account creation",
+    text: `Welcome to Azula Ecomerce`,
+    html: `<div>Hello,${user.name}</div> <p>Welcome to Azula Ecomerce Store. Your account was created successful.</p>`,
+  });
 };
 
 const loginUser = async (req, res) => {

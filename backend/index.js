@@ -4,6 +4,7 @@ require("express-async-errors");
 
 const app = express();
 
+app.set("trust proxy", 1);
 // Core middlewares
 const cors = require("cors");
 const helmet = require("helmet");

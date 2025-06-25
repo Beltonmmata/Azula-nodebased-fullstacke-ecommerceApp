@@ -13,6 +13,11 @@ const validateObjectId = require("../utils/validateObjectId");
 
 const initiatePayment = async (req, res) => {
   const { orderId, phone } = req.body;
+
+  if (!/^(2547\d{8})$/.test(phone)) {
+    throw new BadRequestError("Invalid phone number format");
+  }
+
   const order = await Order.findById({ _id: orderId });
   const amount = order.totalPrice;
   validateObjectId(orderId, "order");

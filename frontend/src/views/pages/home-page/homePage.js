@@ -24,10 +24,7 @@ const homePage = {
       <section class="promise-section" >
       ${promiseComponent.render()}
       </section>
-      <section id='newsletter-section'>
-          ${newsletter.render()}
-      </section>
-      
+    
     </main>
     <footer>
        ${footer.render()}

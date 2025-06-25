@@ -15,6 +15,8 @@ export const payWithMpesa = async (phoneNumber, orderId) => {
       phone: phoneNumber,
       orderId,
     });
+    console.log(data);
+
     showMessage("Payment succeded", "success");
     return data;
   } catch (err) {

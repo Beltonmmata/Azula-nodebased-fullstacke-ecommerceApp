@@ -24,11 +24,10 @@ const sendTokenResponse = (
   const oneWeek = 7 * 24 * 60 * 60 * 1000;
 
   res.cookie("token", token, {
+    expires: new Date(Date.now() + oneWeek),
     httpOnly: true,
     secure: true,
     sameSite: "None",
-    expires: new Date(Date.now() + oneWeek),
-    signed: true,
   });
 
   res.status(StatusCodes.OK).json({

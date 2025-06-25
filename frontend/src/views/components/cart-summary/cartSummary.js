@@ -56,7 +56,10 @@ const cartSummary = {
             </li>
         </ul>
         <div class="procede-to-checkout-btn">
-          <button id="procede-to-checkout-btn">Procede To Checkout</button>      
+          <button id="procede-to-checkout-btn">
+          <ion-icon name="bag-check-outline"></ion-icon>
+          Procede To Checkout
+          </button>      
           
         </div>
         `;

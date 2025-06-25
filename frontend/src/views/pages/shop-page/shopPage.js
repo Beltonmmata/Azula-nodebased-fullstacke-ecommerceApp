@@ -18,9 +18,7 @@ const shopPage = {
       <section id='products-section'>
           ${await shopProducts.render(query)}
       </section>
-      <section id='newsletter-section'>
-          ${newsletter.render()}
-      </section>
+     
     </main>
     <footer>
        ${footer.render()}

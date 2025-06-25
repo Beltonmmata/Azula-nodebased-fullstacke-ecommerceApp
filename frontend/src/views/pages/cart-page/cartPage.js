@@ -29,7 +29,7 @@ const cartPage = {
        ${mainHeader.render()} 
     </header>
     <main>
-      <section id='cart-container '>
+      <section class="cart-container"id='cart-container '>
           <!-- cartPage main content -->
           
         <h2 class="container cart-page-header cart-page-content">
@@ -55,9 +55,7 @@ const cartPage = {
           </div>
         </div>
       </section>
-       <section id='newsletter-section'>
-          ${newsletter.render()}
-      </section>
+       
     </main>
     <footer>
        ${footer.render()}

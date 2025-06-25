@@ -13,10 +13,12 @@ export function showMessage(message, status) {
   }
 
   messageContainer.innerHTML = `
-    <ion-icon class="message-icon" style="color:${statusColor} ;" name="${icon}"></ion-icon>
-    <span class="message-text">${message}</span>
-    <span class="close-btn" onclick="hideMessage()">&times;</span>
-  `;
+  <div class="message-container-wrapper">
+      <ion-icon class="message-icon" style="color:${statusColor} ;" name="${icon}"></ion-icon>
+      <span class="message-text">${message}</span>
+      <span class="close-btn" onclick="hideMessage()">&times;</span>
+    </div>
+    `;
   messageContainer.style.borderLeft = `5px solid ${statusColor}`;
   messageContainer.classList.add("active");
 

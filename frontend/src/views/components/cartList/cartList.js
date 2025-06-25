@@ -41,22 +41,22 @@ const cartList = {
             </div>
             <div class="cart-product-details-container">
               <div class="top cart-product-name-container">
-                <p>${name}</p>
+                <p class="cart-item-name">${name}</p>
               </div>
-              <div class="bottom">
+              <div class="left-container-item-bottom bottom">
                 <div class="quantity-container">
-                  <p><strong>Quantity:</strong></p>    
+                  <p>Quantity:</p>    
                   <select class="cart-quantity" data-product-id="${id}">
                     ${quantityOptions}
                   </select>
                 </div>
-                <div class="price">
-                  <span><strong>Price:</strong> ksh.</span>
+                <div class="cart-item-price price">
+                  <span>Each: ksh.</span>
                   <span>${priceIs}</span>
                 </div>
                 
               </div>
-              <div class="item-total-price"><strong>Total:</strong> ksh.${totalPrice}</div>
+              <div class="cart-item-total-price">Total: ksh.${totalPrice}</div>
             </div>
             <div class="remove-from-cart">
               <button class="remove-from-cart-btn" data-product-id="${id}">

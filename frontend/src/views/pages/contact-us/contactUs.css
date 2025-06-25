@@ -5,6 +5,9 @@
   flex-direction: column;
   width: 100%;
 }
+.faqs-subtitle {
+  font-size: var(--unit-xl);
+}
 .question-answers {
   display: flex;
   align-items: center;
@@ -17,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 600px;
+  width: 700px;
   flex-direction: column;
 }
 .question-answers-ul li {
@@ -25,8 +28,8 @@
   flex-direction: column;
   list-style: none;
   background-color: var(--color-primary-30);
-  padding: var(--unit-xxxs);
-  margin-bottom: var(--unit-xxxs);
+  padding: var(--unit-xs);
+  margin-bottom: var(--unit-xs);
   border-radius: var(--unit-xxxs);
   width: 100%;
 }
@@ -34,7 +37,8 @@
   display: flex;
 
   justify-content: space-between;
-  font-size: calc(var(--unit-l)+5px);
+  color: var(--color-secondary-60);
+  font-size: var(--unit-xl);
   font-weight: var(--fw-600);
   button {
     display: flex;
@@ -49,11 +53,55 @@
 }
 .answer {
   display: none;
+  font-size: var(--unit-l);
+  color: var(--color-secondary-30);
+  transition: all 0.3s ease;
 }
 .answer-active {
   display: flex;
 }
+@media (max-width: 800px) {
+  .question-answers-ul {
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .question-answers {
+    margin: 10px;
+  }
+  .question-answers-ul {
+    max-width: 600px;
+    flex-direction: column;
+  }
+  .question-answers-ul li {
+    padding: var(--unit-xxxs);
+    margin-bottom: var(--unit-xxxs);
+    border-radius: var(--unit-xxxs);
+    width: 100%;
+  }
+  .question {
+    display: flex;
 
+    font-size: calc(var(--unit-l)+5px);
+    font-weight: var(--fw-600);
+    button {
+      display: flex;
+      color: var(--color-call-to-action);
+      border: none;
+      outline: none;
+      padding: 3px;
+      cursor: pointer;
+      height: var(--unit-xl);
+      background: transparent;
+    }
+  }
+  .answer {
+    display: none;
+  }
+  .answer-active {
+    display: flex;
+  }
+}
 /* contact-us-section */
 
 /* Contact Section Styles */
@@ -62,6 +110,9 @@
   background: white;
 }
 
+.get-in-touch-subtitle {
+  font-size: var(--unit-xl);
+}
 /* Container Layout */
 .content-container {
   display: grid;
@@ -80,15 +131,14 @@
   text-align: left;
   font-size: 16px;
   line-height: 1.8;
-  color: #333;
 }
 
 .left p {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 500;
-  color: #444;
+  font-weight: var(--fw-400);
+  color: var(--color-secondary-10);
   margin: 10px 0;
 }
 
@@ -138,6 +188,23 @@
 
 .contact-form button:hover {
   background: var(--hover-color-call-to-action);
+}
+.contact-message {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  padding: 10px;
+  border-radius: 4px;
+  display: none;
+}
+
+.contact-message.success {
+  display: block;
+  color: var(--color-success);
+}
+
+.contact-message.error {
+  display: block;
+  color: var(--color-danger);
 }
 
 /* Responsive Design */

@@ -35,9 +35,7 @@ const productPage = {
       </section>
       
 
-      <section id='newsletter-section'>
-          ${newsletter.render()} 
-      </section>
+     
     </main>
     <footer>
        ${footer.render()}

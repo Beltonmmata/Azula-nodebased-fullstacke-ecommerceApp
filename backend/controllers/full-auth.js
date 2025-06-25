@@ -22,12 +22,15 @@ const sendTokenResponse = (
 ) => {
   const token = generateToken(user._id);
   const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
   res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
+    sameSite: "None",
     expires: new Date(Date.now() + oneWeek),
     signed: true,
   });
+
   res.status(StatusCodes.OK).json({
     success: true,
     message,

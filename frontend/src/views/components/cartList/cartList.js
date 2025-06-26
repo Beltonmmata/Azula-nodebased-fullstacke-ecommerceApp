@@ -34,27 +34,25 @@ const cartList = {
           .join("");
 
         return `
-        <ul>
-          <li>
+        
+          <li class="shadow-lg">
             <div class="cart-product-image-container">
               <img src="${imageUrl}" alt="${name} image" />
             </div>
             <div class="cart-product-details-container">
-              <div class="top cart-product-name-container">
+              <div class="cart-product-name-container">
                 <p class="cart-item-name">${name}</p>
               </div>
-              <div class="left-container-item-bottom bottom">
-                <div class="quantity-container">
-                  <p>Quantity:</p>    
-                  <select class="cart-quantity" data-product-id="${id}">
-                    ${quantityOptions}
-                  </select>
-                </div>
-                <div class="cart-item-price price">
-                  <span>Each: ksh.</span>
-                  <span>${priceIs}</span>
-                </div>
-                
+    
+              <div class=" cart-product-quantity-container">
+                <p>Quantity:</p>
+                <select class="cart-quantity" data-product-id="${id}">
+                  ${quantityOptions}
+                </select>
+              </div>
+              <div class="cart-item-price price">
+                <span>Each: ksh.</span>
+                <span>${priceIs}</span>
               </div>
               <div class="cart-item-total-price">Total: ksh.${totalPrice}</div>
             </div>
@@ -64,7 +62,7 @@ const cartList = {
               </button>
             </div>
           </li>
-           </ul>
+      
         `;
       })
       .join("");

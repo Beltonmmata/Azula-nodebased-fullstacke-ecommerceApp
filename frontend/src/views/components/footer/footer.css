@@ -149,7 +149,6 @@
 @media (max-width: 768px) {
   .footer-grid {
     grid-template-columns: 1fr;
-    text-align: center;
   }
   .newsletter-form {
     flex-direction: column;

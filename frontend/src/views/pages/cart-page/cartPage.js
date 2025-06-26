@@ -1,9 +1,7 @@
-import applyCoupon from "../../components/apply-coupon/applyCoupon";
 import cartSummary from "../../components/cart-summary/cartSummary";
 import cartList from "../../components/cartList/cartList";
 import footer from "../../components/footer/footer";
 import mainHeader from "../../components/main-header/mainHeader";
-import newsletter from "../../components/newsletter/newsletter";
 import cart from "../../../models/cart";
 import "./cartPage.css";
 import { hideLoading } from "../../../controllers/loading";
@@ -32,26 +30,31 @@ const cartPage = {
       <section class="cart-container"id='cart-container '>
           <!-- cartPage main content -->
           
-        <h2 class="container cart-page-header cart-page-content">
-        ${cart.userCart.length === 1 ? "Your Cart Item" : "Your Cart Items"}
         
-        </h2>
-        <div class="cart-page-main-container">
+        <div class="container cart-page-main-container">
+       
           <div class="left-container cart-items-list">
-            
+
+              <h2 class="cart-page-header">
+              ${
+                cart.userCart.length === 1
+                  ? "Your Cart Item"
+                  : "Your Cart Items"
+              }
+              </h2>
               <!-- render the cart list component -->
+              <ul>
                ${await cartList.render()}
-           
+              </ul>
+              <div class="continue-shopping">
+                <a href="/#/shop">
+                  <ion-icon name="arrow-back-outline"></ion-icon>
+                  <span>Continue shopping</span>
+                </a>
+              </div>
           </div>
-          <div class="right-container cart-summary-details">
-            <div class="apply-copun-container">
-              <!-- render the apply coupon component -->
-              ${applyCoupon.render()}
-            </div>
-            <div class="container-cart-summary">
-              <!-- render the cart summary -->
-              ${await cartSummary.render()}
-            </div>
+          <div class="right-container cart-summary-details shadow-lg">
+          ${await cartSummary.render()}
           </div>
         </div>
       </section>
@@ -67,7 +70,6 @@ const cartPage = {
     mainHeader.afterRender();
     cartList.afterRender();
     cartSummary.afterRender();
-    applyCoupon.afterRender();
   },
 };
 export default cartPage;

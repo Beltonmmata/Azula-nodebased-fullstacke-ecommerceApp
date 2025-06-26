@@ -1,16 +1,18 @@
-//import products from "../../../data/products";
+// import dependencies
 import ratingComponent from "../ratingComponent/ratingComponent";
 import "./productsDetails.css";
 import cart from "../../../models/cart";
 import reRender from "../../../controllers/reRender";
 import productPage from "../../pages/product-page/productPage";
 import { getProduct } from "../../../models/products";
+import { showMessage } from "../../../controllers/showMessage";
+
 const productsDetails = {
   render: async (id) => {
     const productID = id;
-    let itemObj = await getProduct(productID);
-    //let itemObj = products.find((product) => productID === product.id);
-    let {
+    const itemObj = await getProduct(productID);
+
+    const {
       imageUrl,
       rating,
       name,
@@ -19,30 +21,25 @@ const productsDetails = {
       likes,
       priceWas,
       priceIs,
+      countInStock,
     } = itemObj;
-    let { avarageRating, count } = rating;
-    let noOfReviews = reviews.length;
 
-    const productQuontity = (productID) => {
-      const item = cart.userCart.find(
-        (cartItem) => cartItem.productId === productID
-      );
+    const { avarageRating, count } = rating;
+    const noOfReviews = reviews.length;
 
-      return item ? item.quantity : 0;
-    };
+    const currentQuantity =
+      cart.userCart.find((item) => item.productId === productID)?.quantity || 1;
 
     return `
-        
       <div class="single-product-container">
         <div class="image-container">
-          <img src="${imageUrl}" />
+          <img src="${imageUrl}" alt="${name}" />
         </div>
-        <!-- details starts -->
+
         <div class="details-container">
-          <h2 class="product-name details-container-child">${name}</h2>
-          <p class="product-description details-container-child">
-           ${description}
-          </p>
+          <h2 class="single-product-name details-container-child">${name}</h2>
+          <p class="single-product-description details-container-child">${description}</p>
+
           <div class="product-price-container details-container-child">
             <div class="product-price">
               <div class="price-is">ksh<span>${priceIs}</span></div>
@@ -50,9 +47,11 @@ const productsDetails = {
               <div class="price-off">(-<span>10</span>)</div>
             </div>
           </div>
+
           <div class="ratting-component l-font details-container-child">
-               ${ratingComponent.render(avarageRating, count)}
+            ${ratingComponent.render(avarageRating, count)}
           </div>
+
           <div class="products-review-container details-container-child">
             <div class="products-review">
               <div class="reviews">
@@ -61,53 +60,86 @@ const productsDetails = {
               </div>
               <div class="likes">
                 <ion-icon name="heart-outline"></ion-icon>
-                0 likes
+                ${likes || 0} likes
               </div>
             </div>
           </div>
 
           <div class="add-to-cart-products-container details-container-child">
             <div class="increment-decrement-quontity flex-center-container">
-              <div class="minus flex-center-container">
+              <div class="minus flex-center-container" data-action="minus">
                 <ion-icon name="remove-circle-outline"></ion-icon>
               </div>
               <div class="quantity flex-center-container">
-                <p>${productQuontity(productID)}</p>
+                <p id="product-quantity">${currentQuantity}</p>
               </div>
-              <div class="plus flex-center-container">
+              <div class="plus flex-center-container" data-action="plus">
                 <ion-icon name="add-circle-outline"></ion-icon>
               </div>
             </div>
+
             <div class="buy-product-action flex-center-container">
-              <button
-                class="add-to-cart-btn flex-center-container"
-                data-product-id="{id}"
-              >
+              <button class="product-add-to-cart-btn flex-center-container" data-product-id="${productID}" data-max="${countInStock}">
                 Add To Cart
               </button>
-
-              <button class="buy-now-btn">Buy Now</button>
+              <button class="product-buy-now-btn flex-center-container" data-product-id="${productID}" data-max="${countInStock}">
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
-        <!-- details ends-->
       </div>
-    
-        
-        `;
+    `;
   },
+
   afterRender() {
-    document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
-      let productId = button.dataset.productId;
+    const qtyElement = document.getElementById("product-quantity");
+    let quantity = parseInt(qtyElement.textContent);
+    const maxQty = parseInt(
+      document.querySelector(".product-add-to-cart-btn").dataset.max
+    );
 
-      button.addEventListener("click", () => {
-        cart.addToCart(productId);
-
-        reRender(productPage);
-      });
+    // Quantity buttons
+    document.querySelector(".minus").addEventListener("click", () => {
+      if (quantity > 1) {
+        quantity--;
+        qtyElement.textContent = quantity;
+      }
     });
 
-    console.log("render btn event");
+    document.querySelector(".plus").addEventListener("click", () => {
+      if (quantity < maxQty) {
+        quantity++;
+        qtyElement.textContent = quantity;
+      } else {
+        showMessage("Reached max stock", "warning");
+      }
+    });
+
+    // ADD TO CART
+    document
+      .querySelector(".product-add-to-cart-btn")
+      .addEventListener("click", () => {
+        const productId = document.querySelector(".product-add-to-cart-btn")
+          .dataset.productId;
+        cart.addToCart(productId, quantity);
+        showMessage("Added to cart", "success");
+        reRender(productPage);
+      });
+
+    // BUY NOW
+    document
+      .querySelector(".product-buy-now-btn")
+      .addEventListener("click", () => {
+        const productId = document.querySelector(".product-buy-now-btn").dataset
+          .productId;
+        cart.addToCart(productId, quantity);
+        showMessage("Redirecting to cart...", "success");
+        location.hash = "#/cart";
+      });
+
+    console.log("Product details interactive buttons ready.");
   },
 };
+
 export default productsDetails;

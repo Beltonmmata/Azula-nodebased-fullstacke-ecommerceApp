@@ -21,7 +21,7 @@ const mainHeader = {
         <a href="/#/about-us">About Us</a>
       </div>
     </div>
-    <div class="header-container-bottom">
+    <div class="header-container-bottom shadow-lg">
       <a href="/">
         <div class="logo">
           <span>A</span>

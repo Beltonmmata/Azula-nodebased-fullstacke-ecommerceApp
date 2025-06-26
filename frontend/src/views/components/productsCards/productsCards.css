@@ -15,15 +15,12 @@
   min-width: 20rem;
   border-radius: 8px;
 }
-.product-card:hover {
-  box-shadow: 0 2px 5px var(--shadow-color);
-}
+
 .product-image {
   width: 100%;
   max-height: 40vh;
   border-radius: 8px 8px 0 0;
   padding: 10px;
-  box-shadow: 0 0 20px 0 var(--shadow-color);
 }
 .product-image img {
   object-fit: contain;

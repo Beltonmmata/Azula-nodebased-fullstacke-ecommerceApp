@@ -1,74 +1,98 @@
-.sarch-box-form-container {
+/* Base layout */
+.searchbar-container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
-  margin: 20px auto;
-}
-#sarch-box-form-container {
-  display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
 }
-.category-search-filter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 400px;
+
+/* Inputs + Buttons */
+.searchbar-category select,
+.searchbar-sort select,
+.searchbar-form input,
+.searchbar-form button {
   height: 40px;
-  border: 1px solid var(--border-color);
   border-radius: 5px;
-  overflow: hidden; /* Prevents content from overflowing */
+  border: 1px solid var(--border-color);
+  padding: 0 10px;
+  font-size: 14px;
+  background-color: var(--color-primary-10);
+  color: var(--color-secondary-60);
 }
 
-.category-filter {
+.searchbar-form {
   display: flex;
   align-items: center;
-  padding: 0 5px;
-  border-right: 1px solid var(--border-color); /* Add separation between dropdown and input */
+  flex-wrap: nowrap;
+  flex: 1;
 }
 
-.category-filter select {
-  border: none;
-  background-color: var(--bg-color);
-  padding: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
+.searchbar-form input {
+  border-right: none;
+  border-radius: 5px 0 0 5px;
 }
 
-#search-bar-input {
-  flex: 1; /* Take remaining space */
-  padding: 10px;
-  outline: none;
-  border: none;
-  font-size: 16px;
-  background-color: var(--bg-color);
-}
-
-#searchbar-btn {
+.searchbar-form button {
   background-color: var(--color-call-to-action);
-  height: 100%;
-  width: 40px;
+  color: var(--color-primary-30);
   border-radius: 0 5px 5px 0;
-  cursor: pointer;
+  border-left: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  cursor: pointer;
 }
 
-#searchbar-btn:hover {
+.searchbar-form button:hover {
   background-color: var(--hover-color-call-to-action);
 }
 
-#sort-selector {
+/* Lower filters container (wrap category + sort) */
+.lower-filters {
   display: flex;
+  gap: 10px;
+}
 
-  border: none;
-  background-color: var(--bg-color);
-  padding: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
+/* Responsive for mobile */
+@media (max-width: 566px) {
+  .searchbar-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+    background-color: var(--color-primary-30);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+  }
+
+  .searchbar-form {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .searchbar-form input {
+    flex: 1;
+    width: 100%;
+  }
+
+  .searchbar-form button {
+    width: 60px;
+  }
+
+  .lower-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .searchbar-category,
+  .searchbar-sort {
+    flex-basis: 48%;
+  }
+
+  .searchbar-category select,
+  .searchbar-sort select {
+    width: 100%;
+  }
 }

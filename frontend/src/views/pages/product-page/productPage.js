@@ -2,10 +2,7 @@ import "./productPage.css";
 import { parseRequestUrl } from "../../../controllers/browserRouter";
 import mainHeader from "../../components/main-header/mainHeader";
 import relatedProducts from "../../components/related-products/relatedProducts";
-// import products from "../../../data/products";
-import pageNav from "../../components/pageNav/pageNav";
 import productsDetails from "../../components/products-details/productDetails";
-import newsletter from "../../components/newsletter/newsletter";
 import footer from "../../components/footer/footer";
 
 const productPage = {
@@ -24,15 +21,23 @@ const productPage = {
     <main>
      
       <section class="container" id='navigator-section'>
-          ${pageNav.render()}
+      <div class="product-page-navigation">
+      <a href="/">home</a>/
+      <a href="#/shop">shop</a>
+      / product name
+    </div>
       </section>
      
       <section class="container" id='container products-details-section'>
           ${await productsDetails.render(id)}
       </section>
-      <section class="container" id='container products-details-section'>
-          ${relatedProducts.render()}
+      <section class="container review-section" id='container products-details-section'>
+          
       </section>
+      <section class="container" id='products-details-section'>
+          ${await relatedProducts.render()}
+      </section>
+
       
 
      

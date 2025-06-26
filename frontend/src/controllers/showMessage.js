@@ -13,19 +13,34 @@ export function showMessage(message, status) {
   }
 
   messageContainer.innerHTML = `
-  <div class="message-container-wrapper">
-      <ion-icon class="message-icon" style="color:${statusColor} ;" name="${icon}"></ion-icon>
-      <span class="message-text">${message}</span>
-      <span class="close-btn" onclick="hideMessage()">&times;</span>
-    </div>
-    `;
-  messageContainer.style.borderLeft = `5px solid ${statusColor}`;
+  <div class="azula-message-wrapper">
+    <ion-icon class="azula-message-icon" style="color:${statusColor};" name="${icon}"></ion-icon>
+    <span class="azula-message-text">${message}</span>
+    <span class="azula-close-btn"  id="azula-close-btn" >&times;</span>
+  </div>
+`;
+
+  const messageContainerWrapper = document.querySelector(
+    ".azula-message-wrapper"
+  );
+  if (messageContainerWrapper) {
+    messageContainerWrapper.style.borderLeft = `5px solid ${statusColor}`;
+  }
+
   messageContainer.classList.add("active");
+
+  const closeBtn = document.getElementById("azula-close-btn");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      messageContainer.classList.remove("active");
+    });
+  }
 
   setTimeout(hideMessage, 3000);
 }
+
 function hideMessage() {
-  const messageContainer = document.querySelector(".message-container");
+  const messageContainer = document.getElementById("show-message-overlay");
   if (messageContainer) {
     messageContainer.classList.remove("active");
   }

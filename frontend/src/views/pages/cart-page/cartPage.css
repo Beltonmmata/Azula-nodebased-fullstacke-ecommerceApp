@@ -15,6 +15,7 @@
 .left-container {
   display: flex;
   flex-direction: column;
+  width: 450px;
 }
 .cart-page-header {
   font-size: 25px;
@@ -24,7 +25,7 @@
 .left-container ul {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 100%;
 }
 
 .left-container ul li {
@@ -32,7 +33,7 @@
   display: grid;
   grid-template-columns: 70px 1fr 50px;
   gap: 10px;
-  max-width: 450px;
+  width: 100%;
   padding: var(--unit-xxxs);
   margin-bottom: var(--unit-xxs);
   background-color: var(--color-primary-10);
@@ -347,7 +348,6 @@
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 800px) {
   .cart-page-main-container {
-    padding: 10px 5%;
     gap: 10px;
   }
 

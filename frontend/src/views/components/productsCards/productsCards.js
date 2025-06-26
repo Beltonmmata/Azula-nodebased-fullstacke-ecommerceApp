@@ -21,7 +21,7 @@ const productsCards = {
         let priceOff = Math.trunc(((priceWas - priceIs) / priceWas) * 100);
 
         return `
-          <div class="product-card">
+          <div class="product-card shadow-md">
             <div class="product-image">
               <img src="${imageUrl}" alt="Product image" />
             </div>

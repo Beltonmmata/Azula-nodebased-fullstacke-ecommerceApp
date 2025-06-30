@@ -30,9 +30,7 @@ const mainHeader = {
       </a> 
        
       <div class="header-end-container">
-        <div class="search-small-screens" id="search-small-screens">
-        <ion-icon name="search-outline"></ion-icon>  
-        </div>
+       
         <div class="profile" id="profile-icon">
         <ion-icon name="person-outline"></ion-icon>  
         </div>
@@ -63,15 +61,35 @@ const mainHeader = {
   },
   afterRender() {
     const isLoggedIn = localStorageObj.getItem("user");
+
+    // Profile toggle
     document.getElementById("profile-icon").addEventListener("click", () => {
       isLoggedIn ? showUserMenu() : (document.location.hash = "/signin");
     });
+
     document.getElementById("close-user-menu").addEventListener("click", () => {
       hideUserMenu();
     });
-    document
-      .getElementById("search-small-screens")
-      .addEventListener("click", () => {});
+
+    // 💡 Dark mode toggle logic
+    const modeToggleBtn = document.querySelector(".mode-setting");
+    const body = document.body;
+
+    // Optional: persist theme using localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      body.classList.add("dark-mode");
+    } else {
+      body.classList.remove("dark-mode");
+    }
+
+    modeToggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+
+      // Save preference
+      const isDark = body.classList.contains("dark-mode");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
 
     userProfilePreview.afterRender();
   },

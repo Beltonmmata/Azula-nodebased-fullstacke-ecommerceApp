@@ -1,17 +1,16 @@
 import shopProducts from "../../components/shop-products/shopProducts";
 import footer from "../../components/footer/footer";
 
-import newsletter from "../../components/newsletter/newsletter";
-
 import "./shopPage.css";
-import shopPageHeader from "../../components/main-header/shopPageHeader";
+
 import searchBar from "../../components/search-bar/searchbar";
+import mainHeader from "../../components/main-header/mainHeader";
 
 const shopPage = {
   render: async (query) => {
     return `
     <header>
-       ${shopPageHeader.render()} 
+       ${mainHeader.render()} 
     </header>
     <main>
        <div class="sarch-box-form-container">${searchBar.render()}</div>
@@ -26,7 +25,7 @@ const shopPage = {
    `;
   },
   afterRender() {
-    shopPageHeader.afterRender();
+    mainHeader.afterRender();
     searchBar.afterRender();
     shopProducts.afterRender();
   },

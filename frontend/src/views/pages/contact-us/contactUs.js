@@ -1,7 +1,8 @@
 import { hideLoading, showLoading } from "../../../controllers/loading";
 import backendUrl from "../../../models/backendUrl";
 import footer from "../../components/footer/footer";
-import shopPageHeader from "../../components/main-header/shopPageHeader";
+import mainHeader from "../../components/main-header/mainHeader";
+
 import "./contactUs.css";
 import axios from "axios";
 
@@ -47,7 +48,7 @@ const contactUs = {
 
     return `
     <header>
-       ${shopPageHeader.render()} 
+       ${mainHeader.render()} 
     </header>
     <main>
       <section class="container">
@@ -115,7 +116,7 @@ const contactUs = {
   },
 
   afterRender() {
-    shopPageHeader.afterRender();
+    mainHeader.afterRender();
     // FAQ Toggle
     document.querySelectorAll(".show-faq-answer").forEach((button) => {
       button.addEventListener("click", (event) => {

@@ -151,3 +151,10 @@
   background-color: var(--hover-color-call-to-action);
   color: var(--color-primary-30);
 }
+
+@media (max-width: 400px) {
+  .product-card {
+    max-width: 100%;
+    margin: 3px;
+  }
+}

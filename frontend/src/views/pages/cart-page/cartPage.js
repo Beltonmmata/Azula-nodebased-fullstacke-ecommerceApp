@@ -1,3 +1,5 @@
+//       DOMNode.SacrollInToView()
+
 import cartSummary from "../../components/cart-summary/cartSummary";
 import cartList from "../../components/cartList/cartList";
 import footer from "../../components/footer/footer";

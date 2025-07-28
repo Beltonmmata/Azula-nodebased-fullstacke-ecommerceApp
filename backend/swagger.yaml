@@ -5,640 +5,309 @@ info:
   description: Enhanced OpenAPI documentation for Azula eCommerce API
 servers:
   - url: https://azula-api.onrender.com/api/v1
+
 paths:
   /products:
     get:
-      summary: getting all products
-      tags:
-        - products
+      summary: Get all products
+      tags: [products]
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         "200":
-          description: Successful operation
+          description: Products retrieved
           content:
             application/json:
-              schema: &id001
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: object
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
     post:
-      summary: create a product
-      tags:
-        - products
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
+      summary: Create a new product
+      tags: [products]
       requestBody:
         required: true
         content:
           application/json:
-            schema: &id002
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-                priceIs:
-                  type: number
-                priceWas:
-                  type: number
-                keywords:
-                  type: string
-                category:
-                  type: string
-                countInStock:
-                  type: integer
-                avarageRating:
-                  type: number
-                featured:
-                  type: boolean
-                count:
-                  type: integer
-                brand:
-                  type: string
-              required:
-                - name
-                - description
-                - priceIs
-                - category
-                - countInStock
-  /products/67bd9babe8dc7733b4d2aaab:
-    get:
-      summary: get a single product
-      tags:
-        - products
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      security:
+        - bearerAuth: []
       responses:
         "200":
-          description: Successful operation
+          description: Product created
           content:
             application/json:
-              schema: *id001
-  /products?category=men&search=jacket&sort=price-desc:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /products/{productId}:
     get:
-      summary: search,sort and filter products
-      tags:
-        - products
+      summary: Get single product
+      tags: [products]
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
-          description: Successful operation
+          description: Product retrieved
           content:
             application/json:
-              schema: *id001
-  /products/67fdaa16f34c145afad5a5e1:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
     patch:
-      summary: update product
-      tags:
-        - products
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
+      summary: Update a product
+      tags: [products]
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
-            schema: *id002
-    delete:
-      summary: delete product
-      tags:
-        - products
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
+            schema:
+              $ref: "#/components/schemas/ProductInput"
       security:
         - bearerAuth: []
+      responses:
+        "200":
+          description: Product updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+    delete:
+      summary: Delete a product
+      tags: [products]
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Product deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
   /authentication/signup:
     post:
-      summary: signup user
-      tags:
-        - authentication
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
+      summary: Signup a new user
+      tags: [authentication]
       requestBody:
         required: true
         content:
           application/json:
-            schema: *id002
+            schema:
+              $ref: "#/components/schemas/UserInput"
+      responses:
+        "200":
+          description: Signup successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
   /authentication/login:
     post:
-      summary: login admin user
-      tags:
-        - authentication
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
+      summary: Login user
+      tags: [authentication]
       requestBody:
         required: true
         content:
           application/json:
-            schema: *id002
-  /authentication/resetpassword:
-    post:
-      summary: reset password
-      tags:
-        - authentication
+            schema:
+              $ref: "#/components/schemas/UserInput"
       responses:
         "200":
-          description: Successful operation
+          description: Login successful
           content:
             application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
   /authentication/forgetpassword:
     post:
-      summary: forget password
-      tags:
-        - authentication
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
+      summary: Request password reset
+      tags: [authentication]
       requestBody:
         required: true
         content:
           application/json:
-            schema: *id002
-  /authentication/logout:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required: [email]
+      responses:
+        "200":
+          description: Email sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /authentication/resetpassword:
     post:
-      summary: logout
-      tags:
-        - authentication
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
+      summary: Reset password
+      tags: [authentication]
       requestBody:
         required: true
         content:
           application/json:
-            schema: *id002
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                newPassword:
+                  type: string
+              required: [token, newPassword]
+      responses:
+        "200":
+          description: Password reset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
   /users:
     get:
-      summary: getAllUsers
-      tags:
-        - users
+      summary: Get all users
+      tags: [users]
+      security:
+        - bearerAuth: []
       responses:
         "200":
-          description: Successful operation
+          description: Users retrieved
           content:
             application/json:
-              schema: *id001
-  /users/67c699503b405da1ad1b09f7:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /users/{userId}:
     get:
-      summary: getSingleUser
-      tags:
-        - users
+      summary: Get user by ID
+      tags: [users]
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
-          description: Successful operation
+          description: User data
           content:
             application/json:
-              schema: *id001
-  /users/67fd9b86c532bd7b719b471e:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
     delete:
-      summary: deleteUser
-      tags:
-        - users
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
+      summary: Delete user
+      tags: [users]
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
       security:
         - bearerAuth: []
-  /users/me/delete:
-    delete:
-      summary: delete own account
-      tags:
-        - users
       responses:
         "200":
-          description: Successful operation
+          description: User deleted
           content:
             application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-  /users/me/update:
-    patch:
-      summary: UpdateOwnAccount
-      tags:
-        - users
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /orders:
-    post:
-      summary: createOrder
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-    get:
-      summary: getAllOrders
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-  /orders/67fd820cc3e999aaf0d0b8a0:
-    get:
-      summary: getSingleOrder
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-  /orders/67e7cc9b58719e6c08dadbd8:
-    delete:
-      summary: deleteOrder
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-  /orders/67fd758229ac2dfa73640269:
-    patch:
-      summary: update an order
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /orders/67fd820cc3e999aaf0d0b8a0/status:
-    patch:
-      summary: update order status
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /orders/67fd758229ac2dfa73640269/cancel:
-    patch:
-      summary: cancel an order
-      tags:
-        - orders
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /deliveryOption:
-    get:
-      summary: getAllDeliveryOptions
-      tags:
-        - deliveryOptions
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-    post:
-      summary: createDeliveryOption
-      tags:
-        - deliveryOptions
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /deliveryOption/67fb9d49e6e3eba6795057ab:
-    get:
-      summary: getSingleDeliveryOption
-      tags:
-        - deliveryOptions
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-  /deliveryOption/67fda08c6a7a9284c2547944:
-    patch:
-      summary: update delivery option
-      tags:
-        - deliveryOptions
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-    delete:
-      summary: delete delivery option
-      tags:
-        - deliveryOptions
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-  /reviews:
-    post:
-      summary: " createReview"
-      tags:
-        - reviews
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /reviews/67f4e3a9e34696db5e21deba:
-    patch:
-      summary: update review
-      tags:
-        - reviews
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-    delete:
-      summary: delete a review
-      tags:
-        - reviews
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-  /orderpayment/lipanampesa:
-    post:
-      summary: lipanampesa
-      tags:
-        - lipa na mpesa
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /orderpayment/lipanampesa/callback:
-    post:
-      summary: lipanampesa callback
-      tags:
-        - lipa na mpesa
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-  /validate-promocode/testpromocreation1:
-    get:
-      summary: Validating Promocode
-      tags:
-        - promotion code
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-  /likes/67bd9babe8dc7733b4d2aaab:
-    post:
-      summary: like a product
-      tags:
-        - likes
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-    delete:
-      summary: dislike a product
-      tags:
-        - likes
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-  /newsletter:
-    post:
-      summary: subscribe to newsletter
-      tags:
-        - newsletter
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-    get:
-      summary: get all subscribers
-      tags:
-        - newsletter
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-  /contact:
-    post:
-      summary: contact us
-      tags:
-        - contactUs
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: *id002
-    get:
-      summary: get all contact messages
-      tags:
-        - contactUs
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema: *id001
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: object
+
+    ProductInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        priceCurrent:
+          type: number
+        priceOriginal:
+          type: number
+        keywords:
+          type: string
+        category:
+          type: string
+        countInStock:
+          type: integer
+        averageRating:
+          type: number
+        featured:
+          type: boolean
+        count:
+          type: integer
+        brand:
+          type: string
+      required:
+        - name
+        - description
+        - priceCurrent
+        - category
+        - countInStock
+
+    UserInput:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+      required:
+        - email
+        - password

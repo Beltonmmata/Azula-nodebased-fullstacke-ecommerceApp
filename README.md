@@ -34,7 +34,8 @@ Key features include:
 
 ## ✨ Live Demo
 
-🔗 Frontend: [https://azula.netlify.app](https://azula.netlify.app)
+🔗 Frontend: [https://azula.netlify.app](https://azula-ecomerce.netlify.app/)
+🔗 backend: [https://azula-api.onrender.com/api/v1](https://azula-api.onrender.com/api/v1)
 
 ---
 
